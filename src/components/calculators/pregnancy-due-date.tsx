@@ -1,0 +1,172 @@
+
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { addDays, format, parse, subDays } from "date-fns";
+import { Input } from "@/components/ui/input";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+
+export function PregnancyDueDate() {
+  const [lmpDate, setLmpDate] = useState<Date | undefined>(undefined);
+  const [showResults, setShowResults] = useState(false);
+  
+  const handleCalculate = () => {
+    if (lmpDate) {
+      setShowResults(true);
+    }
+  };
+  
+  const calculateDueDate = (): Date | null => {
+    if (!lmpDate) return null;
+    
+    // Pregnancy is typically 40 weeks (280 days) from the first day of the last menstrual period
+    return addDays(lmpDate, 280);
+  };
+  
+  const calculateConceptionDate = (): Date | null => {
+    if (!lmpDate) return null;
+    
+    // Conception typically occurs around 14 days after the start of the last period
+    return addDays(lmpDate, 14);
+  };
+  
+  const calculateFirstTrimester = (): [Date, Date] | null => {
+    if (!lmpDate) return null;
+    
+    // First trimester: Weeks 1-12 (days 0-84)
+    return [lmpDate, addDays(lmpDate, 84)];
+  };
+  
+  const calculateSecondTrimester = (): [Date, Date] | null => {
+    if (!lmpDate) return null;
+    
+    // Second trimester: Weeks 13-27 (days 85-189)
+    return [addDays(lmpDate, 85), addDays(lmpDate, 189)];
+  };
+  
+  const calculateThirdTrimester = (): [Date, Date] | null => {
+    if (!lmpDate) return null;
+    
+    // Third trimester: Weeks 28-40 (days 190-280)
+    return [addDays(lmpDate, 190), addDays(lmpDate, 280)];
+  };
+  
+  const formatDateRange = (range: [Date, Date] | null): string => {
+    if (!range) return "";
+    return `${format(range[0], 'MMM d, yyyy')} - ${format(range[1], 'MMM d, yyyy')}`;
+  };
+  
+  const dueDate = calculateDueDate();
+  const conceptionDate = calculateConceptionDate();
+  const firstTrimester = calculateFirstTrimester();
+  const secondTrimester = calculateSecondTrimester();
+  const thirdTrimester = calculateThirdTrimester();
+  
+  return (
+    <div className="space-y-6">
+      <Card>
+        <CardContent className="pt-6">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="lmp-date">First day of last menstrual period</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !lmpDate && "text-muted-foreground"
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {lmpDate ? format(lmpDate, "PPP") : "Select a date"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={lmpDate}
+                    onSelect={setLmpDate}
+                    initialFocus
+                    disabled={(date) => date > new Date()}
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+            
+            <Button className="w-full mt-4" onClick={handleCalculate} disabled={!lmpDate}>
+              Calculate Due Date
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+      
+      {showResults && dueDate && (
+        <CalculatorResult title="Pregnancy Due Date Results">
+          <div className="space-y-4">
+            <div className="p-6 bg-muted rounded-lg text-center">
+              <h3 className="text-lg font-medium">Estimated Due Date</h3>
+              <p className="text-4xl font-bold mt-2">{format(dueDate, 'MMMM d, yyyy')}</p>
+            </div>
+            
+            <div className="space-y-3">
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-3 bg-blue-50 border border-blue-100 rounded-lg">
+                  <p className="text-sm font-medium text-gray-500">Conception Date (Estimated)</p>
+                  <p className="text-lg font-semibold">{conceptionDate ? format(conceptionDate, 'MMM d, yyyy') : 'N/A'}</p>
+                </div>
+                
+                <div className="p-3 bg-green-50 border border-green-100 rounded-lg">
+                  <p className="text-sm font-medium text-gray-500">Current Gestation</p>
+                  <p className="text-lg font-semibold">
+                    {lmpDate ? 
+                      (() => {
+                        const diffTime = Math.abs(new Date().getTime() - lmpDate.getTime());
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                        const weeks = Math.floor(diffDays / 7);
+                        const days = diffDays % 7;
+                        return diffDays <= 280 ? 
+                          `${weeks} weeks, ${days} days` : 
+                          "Due date has passed";
+                      })() : 
+                      'N/A'
+                    }
+                  </p>
+                </div>
+              </div>
+              
+              <div className="space-y-3 mt-4">
+                <h3 className="font-medium">Trimester Dates</h3>
+                <div className="grid gap-3">
+                  <div className="p-3 bg-pink-50 border border-pink-100 rounded-lg">
+                    <p className="text-sm font-medium text-gray-500">First Trimester (Weeks 1-12)</p>
+                    <p className="text-base font-semibold">{formatDateRange(firstTrimester)}</p>
+                  </div>
+                  
+                  <div className="p-3 bg-purple-50 border border-purple-100 rounded-lg">
+                    <p className="text-sm font-medium text-gray-500">Second Trimester (Weeks 13-27)</p>
+                    <p className="text-base font-semibold">{formatDateRange(secondTrimester)}</p>
+                  </div>
+                  
+                  <div className="p-3 bg-indigo-50 border border-indigo-100 rounded-lg">
+                    <p className="text-sm font-medium text-gray-500">Third Trimester (Weeks 28-40)</p>
+                    <p className="text-base font-semibold">{formatDateRange(thirdTrimester)}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="text-sm text-muted-foreground">
+              <p>Note: This calculation is based on a 28-day menstrual cycle and assumes that ovulation occurs on day 14. The actual due date may vary by approximately two weeks before or after the calculated date.</p>
+            </div>
+          </div>
+        </CalculatorResult>
+      )}
+    </div>
+  );
+}

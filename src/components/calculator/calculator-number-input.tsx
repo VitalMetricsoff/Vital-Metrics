@@ -1,0 +1,78 @@
+
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ChangeEvent, useId } from "react";
+import { cn } from "@/lib/utils";
+
+interface CalculatorNumberInputProps {
+  label: string;
+  value: number | string;
+  onChange: (value: number) => void;
+  min?: number;
+  max?: number;
+  step?: number;
+  unit?: string;
+  placeholder?: string;
+  className?: string;
+  required?: boolean;
+  disabled?: boolean;
+  description?: string;
+}
+
+export function CalculatorNumberInput({
+  label,
+  value,
+  onChange,
+  min,
+  max,
+  step = 1,
+  unit,
+  placeholder,
+  className,
+  required = false,
+  disabled = false,
+  description,
+}: CalculatorNumberInputProps) {
+  const id = useId();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.valueAsNumber;
+    if (!isNaN(newValue)) {
+      onChange(newValue);
+    } else {
+      onChange(0);
+    }
+  };
+
+  return (
+    <div className={cn("space-y-2", className)}>
+      <div className="flex justify-between">
+        <Label htmlFor={id} className="text-sm font-medium">
+          {label}
+          {required && <span className="text-destructive ml-1">*</span>}
+        </Label>
+        {description && <span className="text-xs text-muted-foreground">{description}</span>}
+      </div>
+      <div className="relative">
+        <Input
+          id={id}
+          type="number"
+          value={value}
+          onChange={handleChange}
+          min={min}
+          max={max}
+          step={step}
+          placeholder={placeholder}
+          required={required}
+          disabled={disabled}
+          className={unit ? "pr-12" : ""}
+        />
+        {unit && (
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-muted-foreground">
+            {unit}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

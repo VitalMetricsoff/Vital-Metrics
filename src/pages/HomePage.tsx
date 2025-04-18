@@ -1,0 +1,334 @@
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ArrowRight, Activity, HeartPulse, Scale, Apple, Brain, Calculator, ChevronRight } from "lucide-react";
+import { categoryLabels, Category } from "@/types/calculator";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { calculators } from "@/data/calculators";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
+export default function HomePage() {
+  const isMobile = useIsMobile();
+  
+  // Get most popular calculators (first 8)
+  const popularCalculators = calculators.slice(0, 8);
+
+  // Function to get a subset of calculators by category
+  const getCalculatorsByCategory = (category: Category) => {
+    return calculators.filter(calculator => calculator.category === category).slice(0, 4);
+  };
+
+  const featuredCategories: Category[] = [
+    "body-metrics",
+    "fitness-metabolism",
+    "cardio-vitals",
+    "nutrition-metabolic",
+    "mental-sleep"
+  ];
+
+  const getCategoryIcon = (category: Category) => {
+    switch (category) {
+      case "body-metrics": return <Scale className="h-5 w-5" />;
+      case "fitness-metabolism": return <Activity className="h-5 w-5" />;
+      case "cardio-vitals": return <HeartPulse className="h-5 w-5" />;
+      case "nutrition-metabolic": return <Apple className="h-5 w-5" />;
+      case "mental-sleep": return <Brain className="h-5 w-5" />;
+      default: return <Activity className="h-5 w-5" />;
+    }
+  };
+
+  const getCategoryColor = (category: Category): string => {
+    switch (category) {
+      case "body-metrics": return "bg-blue-100 text-blue-600";
+      case "fitness-metabolism": return "bg-green-100 text-green-600";
+      case "cardio-vitals": return "bg-red-100 text-red-600";
+      case "nutrition-metabolic": return "bg-orange-100 text-orange-600";
+      case "mental-sleep": return "bg-purple-100 text-purple-600";
+      default: return "bg-gray-100 text-gray-600";
+    }
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
+      <section className="py-12 md:py-20 lg:py-24 hero-gradient text-white">
+        <div className="container px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-6">
+              <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm">
+                <span className="animate-pulse-slow mr-2">●</span> 50+ Health Calculators
+              </div>
+              <h1 className="font-heading font-bold tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                Your Complete Health <br className="hidden md:inline" /> Calculator Suite
+              </h1>
+              <p className="text-lg text-white/80 max-w-[600px]">
+                From BMI and body fat percentage to heart rate zones and nutrition planning — all the health calculators you need in one place.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/calculators">
+                  <Button size={isMobile ? "default" : "lg"} className="w-full sm:w-auto bg-white text-primary hover:bg-white/90">
+                    Browse All Calculators
+                    <ChevronRight className="ml-1 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link to="/calculator/bmi-calculator">
+                  <Button size={isMobile ? "default" : "lg"} variant="outline" className="w-full sm:w-auto border-white/30 bg-white/10 text-white hover:bg-white/20">
+                    Try BMI Calculator
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="hidden md:flex justify-end">
+              <div className="relative">
+                <div className="absolute -top-6 -left-6">
+                  <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg shadow-lg">
+                    <HeartPulse className="h-12 w-12 text-white" />
+                  </div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-white/20">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <p className="text-white/60 text-sm">Body Mass Index</p>
+                      <p className="text-2xl font-bold">23.4</p>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-white/60 text-sm">Heart Rate</p>
+                      <p className="text-2xl font-bold">72 bpm</p>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-white/60 text-sm">Body Fat</p>
+                      <p className="text-2xl font-bold">18%</p>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-white/60 text-sm">Daily Calories</p>
+                      <p className="text-2xl font-bold">2,345</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute -bottom-6 -right-6">
+                  <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg shadow-lg">
+                    <Activity className="h-12 w-12 text-white" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-12 border-b">
+        <div className="container px-4 md:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold text-primary">50+</p>
+              <p className="text-sm md:text-base text-muted-foreground">Health Calculators</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold text-primary">7</p>
+              <p className="text-sm md:text-base text-muted-foreground">Health Categories</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold text-primary">100%</p>
+              <p className="text-sm md:text-base text-muted-foreground">Free Access</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold text-primary">24/7</p>
+              <p className="text-sm md:text-base text-muted-foreground">Available Online</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Calculators */}
+      <section className="py-14 md:py-20">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center space-y-4 text-center mb-10">
+            <Badge className="px-3.5 py-1.5" variant="outline">Most Used Tools</Badge>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight">
+              Popular Health Calculators
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-[700px]">
+              Our most frequently used calculators to help you monitor, analyze, and improve your health.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {popularCalculators.map((calculator) => (
+              <Link 
+                key={calculator.id} 
+                to={`/calculator/${calculator.slug}`}
+                className="group"
+              >
+                <Card className="h-full transition-all duration-200 hover:shadow-md hover:border-primary/30 overflow-hidden group-hover:translate-y-[-3px]">
+                  <CardContent className="p-6">
+                    <div className="mb-4">
+                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${getCategoryColor(calculator.category)}`}>
+                        {getCategoryIcon(calculator.category)}
+                      </div>
+                    </div>
+                    <h3 className="font-medium text-lg mb-2 group-hover:text-primary transition-colors">{calculator.name}</h3>
+                    <p className="text-sm text-muted-foreground">{calculator.description}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link to="/calculators">
+              <Button className="gap-2">
+                View All Calculators <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="py-14 md:py-20 bg-muted/50">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center space-y-4 text-center mb-10">
+            <Badge className="px-3.5 py-1.5" variant="outline">Organized By Type</Badge>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight">
+              Browse by Category
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-[700px]">
+              Explore our comprehensive collection of health calculators organized by category.
+            </p>
+          </div>
+          <div className="space-y-16">
+            {featuredCategories.map((category) => (
+              <div key={category} className="space-y-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${getCategoryColor(category)}`}>
+                    {getCategoryIcon(category)}
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-heading font-bold">
+                    {categoryLabels[category]}
+                  </h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                  {getCalculatorsByCategory(category).map((calculator) => (
+                    <Link
+                      key={calculator.id}
+                      to={`/calculator/${calculator.slug}`}
+                      className="group"
+                    >
+                      <Card className="h-full transition-all duration-200 hover:shadow-md hover:border-primary/30 overflow-hidden group-hover:translate-y-[-3px]">
+                        <CardContent className="p-6">
+                          <h4 className="font-medium text-lg mb-2 group-hover:text-primary transition-colors">{calculator.name}</h4>
+                          <p className="text-sm text-muted-foreground">{calculator.description}</p>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+                <div className="text-center">
+                  <Link to={`/calculators?category=${category}`}>
+                    <Button variant="outline" className="gap-2">
+                      View All {categoryLabels[category]} <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Section */}
+      <section className="py-14 md:py-20">
+        <div className="container px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <Badge className="px-3.5 py-1.5" variant="outline">Why Choose Us</Badge>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight">
+                Accurate, Easy-to-Use Health Tools
+              </h2>
+              <p className="text-muted-foreground text-lg">
+                Vital Metrics provides reliable health calculators based on medical formulas and industry standards to help you make informed decisions.
+              </p>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400 rounded-full p-1 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-base dark:text-white">Evidence-Based Calculations</h4>
+                    <p className="text-sm text-muted-foreground dark:text-gray-300">All our health calculators are based on scientific formulas used by healthcare professionals.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400 rounded-full p-1 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-base dark:text-white">User Privacy Focused</h4>
+                    <p className="text-sm text-muted-foreground dark:text-gray-300">Your health data never leaves your device – all calculations are performed locally.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400 rounded-full p-1 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-base dark:text-white">Comprehensive & Informative</h4>
+                    <p className="text-sm text-muted-foreground dark:text-gray-300">Clear explanations help you understand what your results mean for your health.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <div className="feature-card feature-blue-card bg-blue-50 p-6 rounded-xl shadow-sm dark:shadow-blue-900/10">
+                  <Calculator className="h-8 w-8 text-blue-600 dark:text-blue-400 mb-4" />
+                  <h4 className="font-medium text-lg mb-2">Body Metrics</h4>
+                  <p className="text-sm text-muted-foreground">Calculate and track key body measurements and ratios.</p>
+                </div>
+                <div className="feature-card feature-orange-card bg-orange-50 p-6 rounded-xl shadow-sm dark:shadow-orange-900/10">
+                  <Apple className="h-8 w-8 text-orange-600 dark:text-orange-400 mb-4" />
+                  <h4 className="font-medium text-lg mb-2">Nutrition Tools</h4>
+                  <p className="text-sm text-muted-foreground">Plan your diet and track nutritional needs.</p>
+                </div>
+              </div>
+              <div className="space-y-4 mt-8">
+                <div className="feature-card feature-green-card bg-green-50 p-6 rounded-xl shadow-sm dark:shadow-green-900/10">
+                  <Activity className="h-8 w-8 text-green-600 dark:text-green-400 mb-4" />
+                  <h4 className="font-medium text-lg mb-2">Fitness Calculators</h4>
+                  <p className="text-sm text-muted-foreground">Optimize your workouts and monitor progress.</p>
+                </div>
+                <div className="feature-card feature-purple-card bg-purple-50 p-6 rounded-xl shadow-sm dark:shadow-purple-900/10">
+                  <HeartPulse className="h-8 w-8 text-purple-600 dark:text-purple-400 mb-4" />
+                  <h4 className="font-medium text-lg mb-2">Heart Health</h4>
+                  <p className="text-sm text-muted-foreground">Monitor vital cardiovascular metrics.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-14 md:py-20 bg-primary text-primary-foreground">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center space-y-6 text-center max-w-3xl mx-auto">
+            <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm">
+              <span className="animate-pulse-slow mr-2">●</span> Start Your Health Journey
+            </div>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+              Track, Monitor, and Improve Your Wellness
+            </h2>
+            <p className="text-lg text-white/80 max-w-[700px]">
+              Access all 50+ health calculators to gain valuable insights into your health metrics and make informed decisions.
+            </p>
+            <Link to="/calculators">
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90">
+                Explore All Calculators
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
