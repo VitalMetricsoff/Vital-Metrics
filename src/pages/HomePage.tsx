@@ -1,30 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Activity, HeartPulse, Scale, Apple, Brain, Calculator, ChevronRight } from "lucide-react";
-import { categoryLabels, Category } from "@/types/calculator";
+import { ArrowRight, Activity, HeartPulse, Scale, Apple, Brain, Calculator, ChevronRight, GraduationCap, Stethoscope, Users } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { calculators } from "@/data/calculators";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
 
 export default function HomePage() {
   const isMobile = useIsMobile();
+  const [imageError, setImageError] = useState(false);
   
   // Get most popular calculators (first 8)
   const popularCalculators = calculators.slice(0, 8);
-
-  // Function to get a subset of calculators by category
-  const getCalculatorsByCategory = (category: Category) => {
-    return calculators.filter(calculator => calculator.category === category).slice(0, 4);
-  };
-
-  const featuredCategories: Category[] = [
-    "body-metrics",
-    "fitness-metabolism",
-    "cardio-vitals",
-    "nutrition-metabolic",
-    "mental-sleep"
-  ];
 
   const getCategoryIcon = (category: Category) => {
     switch (category) {
@@ -183,54 +171,92 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-14 md:py-20 bg-muted/50">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center mb-10">
-            <Badge className="px-3.5 py-1.5" variant="outline">Organized By Type</Badge>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight">
-              Browse by Category
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-[700px]">
-              Explore our comprehensive collection of health calculators organized by category.
-            </p>
-          </div>
-          <div className="space-y-16">
-            {featuredCategories.map((category) => (
-              <div key={category} className="space-y-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${getCategoryColor(category)}`}>
-                    {getCategoryIcon(category)}
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-heading font-bold">
-                    {categoryLabels[category]}
-                  </h3>
+      {/* New Founder Section */}
+      <section className="py-20 bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-grid-slate-200 dark:bg-grid-white/[0.02] bg-[size:30px_30px]" />
+        
+        <div className="container px-4 md:px-6 relative">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              {/* Image Column */}
+              <div className="relative">
+                <div className="aspect-square rounded-2xl overflow-hidden bg-white dark:bg-slate-900 p-1 shadow-lg">
+                  {!imageError ? (
+                    <div className="relative w-full h-full">
+                      <img
+                        src={import.meta.env.BASE_URL + 'founder.jpg'}
+                        alt="Dr. Aravind Kumar"
+                        className="w-full h-full object-cover rounded-2xl"
+                        onError={(e) => {
+                          console.error('Image failed to load:', e);
+                          setImageError(true);
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-slate-900 dark:text-white">
+                      Image loading error. Path: {import.meta.env.BASE_URL + 'founder.jpg'}
+                    </div>
+                  )}
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                  {getCalculatorsByCategory(category).map((calculator) => (
-                    <Link
-                      key={calculator.id}
-                      to={`/calculator/${calculator.slug}`}
-                      className="group"
-                    >
-                      <Card className="h-full transition-all duration-200 hover:shadow-md hover:border-primary/30 overflow-hidden group-hover:translate-y-[-3px]">
-                        <CardContent className="p-6">
-                          <h4 className="font-medium text-lg mb-2 group-hover:text-primary transition-colors">{calculator.name}</h4>
-                          <p className="text-sm text-muted-foreground">{calculator.description}</p>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  ))}
+              </div>
+
+              {/* Content Column */}
+              <div className="space-y-6">
+                <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-white backdrop-blur-sm">
+                  <Users className="h-4 w-4 mr-2" />
+                  Built by a Doctor, for Healthcare Professionals
                 </div>
-                <div className="text-center">
-                  <Link to={`/calculators?category=${category}`}>
-                    <Button variant="outline" className="gap-2">
-                      View All {categoryLabels[category]} <ArrowRight className="h-4 w-4" />
+                
+                <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
+                  Meet Dr. Aravind Kumar
+                </h2>
+                
+                <div className="space-y-4">
+                  <p className="text-lg text-slate-700 dark:text-slate-300">
+                    From the challenging days of medical school to pioneering VitalMetrics, 
+                    Dr. Aravind's journey reflects a deep commitment to improving healthcare 
+                    through technology.
+                  </p>
+                  <p className="text-lg text-slate-700 dark:text-slate-300">
+                    His vision has transformed into a comprehensive platform that serves 
+                    healthcare professionals worldwide with precise, reliable medical calculations.
+                  </p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link to="/founder">
+                    <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-white/90">
+                      Read Full Story
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </Link>
+                  <Link to="/calculators">
+                    <Button size="lg" variant="outline" className="border-slate-200 dark:border-white/10 bg-white/50 dark:bg-white/5 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10">
+                      Explore Tools
+                      <Calculator className="ml-2 h-5 w-5" />
                     </Button>
                   </Link>
                 </div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200 dark:border-white/10">
+                  <div>
+                    <p className="text-3xl font-bold text-slate-900 dark:text-white">50+</p>
+                    <p className="text-slate-600 dark:text-slate-400">Medical Calculators</p>
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-slate-900 dark:text-white">7+</p>
+                    <p className="text-slate-600 dark:text-slate-400">Health Categories</p>
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-slate-900 dark:text-white">24/7</p>
+                    <p className="text-slate-600 dark:text-slate-400">Online Access</p>
+                  </div>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>

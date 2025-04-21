@@ -1,4 +1,3 @@
-
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -14,6 +13,7 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import FounderPage from "./pages/FounderPage";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +33,7 @@ const App = () => (
               <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
               <Route path="/contact" element={<ContactUsPage />} />
               <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+              <Route path="/founder" element={<FounderPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </MainLayout>
