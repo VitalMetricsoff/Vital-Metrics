@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -36,36 +35,6 @@
     --ring: 221 83% 53%;
 
     --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 160 84% 39%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 262 83% 58%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
   }
 }
 
@@ -180,35 +149,6 @@
   
   .subtle-hover {
     @apply transition-all duration-300 hover:bg-muted/50;
-  }
-
-  /* Dark mode enhancements */
-  .dark .feature-card {
-    @apply border border-white/10 bg-white/5 backdrop-blur-sm;
-  }
-
-  .dark .feature-card h4 {
-    @apply text-white;
-  }
-
-  .dark .feature-card p {
-    @apply text-white/80;
-  }
-
-  .dark .feature-blue-card {
-    @apply bg-blue-950/40 border-blue-700/30;
-  }
-
-  .dark .feature-green-card {
-    @apply bg-green-950/40 border-green-700/30;
-  }
-
-  .dark .feature-orange-card {
-    @apply bg-orange-950/40 border-orange-700/30;
-  }
-
-  .dark .feature-purple-card {
-    @apply bg-purple-950/40 border-purple-700/30;
   }
 
   /* Mobile optimizations */
