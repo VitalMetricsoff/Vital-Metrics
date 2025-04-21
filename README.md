@@ -121,4 +121,4 @@ For internal inquiries and support, please contact the development team directly
 
 ---
 
-© 2024 Vital Metrics. All rights reserved. Private and Confidential.
+© 2025 Vital Metrics. All rights reserved. Private and Confidential.
