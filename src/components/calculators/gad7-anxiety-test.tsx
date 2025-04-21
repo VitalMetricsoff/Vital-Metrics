@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorResult, ResultAlert } from "@/components/calculator/calculator-result";
@@ -13,7 +12,14 @@ const questions = [
   "Trouble relaxing",
   "Being so restless that it's hard to sit still",
   "Becoming easily annoyed or irritable",
-  "Feeling afraid, as if something awful might happen"
+  "Feeling afraid as if something awful might happen"
+];
+
+const answerOptions = [
+  "Not at all",
+  "Several days",
+  "More than half the days",
+  "Nearly every day"
 ];
 
 export function GAD7AnxietyTest() {
@@ -21,9 +27,9 @@ export function GAD7AnxietyTest() {
   const [showResults, setShowResults] = useState(false);
   const [functionalImpairment, setFunctionalImpairment] = useState<number>(-1);
   
-  const handleAnswer = (questionIndex: number, value: number) => {
+  const handleAnswerChange = (index: number, value: number) => {
     const newAnswers = [...answers];
-    newAnswers[questionIndex] = value;
+    newAnswers[index] = value;
     setAnswers(newAnswers);
   };
   
@@ -34,15 +40,17 @@ export function GAD7AnxietyTest() {
   };
   
   const calculateScore = () => {
-    return answers.reduce((sum, answer) => sum + answer, 0);
+    return answers.reduce((sum, answer) => sum + (answer >= 0 ? answer : 0), 0);
   };
   
-  const getAnxietySeverity = (score: number) => {
-    if (score < 5) return { level: "Minimal", class: "success" };
-    if (score < 10) return { level: "Mild", class: "warning" };
-    if (score < 15) return { level: "Moderate", class: "warning" };
-    return { level: "Severe", class: "error" };
+  const getSeverityDescription = (score: number): string => {
+    if (score >= 15) return "Severe anxiety";
+    if (score >= 10) return "Moderate anxiety";
+    if (score >= 5) return "Mild anxiety";
+    return "Minimal anxiety";
   };
+  
+  const totalScore = calculateScore();
   
   const getFunctionalImpairmentText = (level: number) => {
     switch (level) {
@@ -53,9 +61,6 @@ export function GAD7AnxietyTest() {
       default: return "";
     }
   };
-  
-  const score = calculateScore();
-  const severity = getAnxietySeverity(score);
   
   const getRecommendation = (score: number) => {
     if (score < 5) {
@@ -84,29 +89,28 @@ export function GAD7AnxietyTest() {
             </div>
             
             {questions.map((question, index) => (
-              <div key={index} className="space-y-3">
-                <Label className="text-base">{index + 1}. {question}</Label>
+              <div key={index} className="space-y-2">
+                <Label className="text-base dark:text-white">{question}</Label>
                 <RadioGroup
                   value={answers[index].toString()}
-                  onValueChange={(value) => handleAnswer(index, parseInt(value))}
-                  className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-4"
+                  onValueChange={(value) => handleAnswerChange(index, parseInt(value))}
+                  className="grid grid-cols-4 gap-2"
                 >
-                  <div className="flex items-center space-x-2 rounded-md border p-2">
-                    <RadioGroupItem value="0" id={`q${index}-0`} />
-                    <Label htmlFor={`q${index}-0`} className="flex-grow">Not at all</Label>
-                  </div>
-                  <div className="flex items-center space-x-2 rounded-md border p-2">
-                    <RadioGroupItem value="1" id={`q${index}-1`} />
-                    <Label htmlFor={`q${index}-1`} className="flex-grow">Several days</Label>
-                  </div>
-                  <div className="flex items-center space-x-2 rounded-md border p-2">
-                    <RadioGroupItem value="2" id={`q${index}-2`} />
-                    <Label htmlFor={`q${index}-2`} className="flex-grow">More than half the days</Label>
-                  </div>
-                  <div className="flex items-center space-x-2 rounded-md border p-2">
-                    <RadioGroupItem value="3" id={`q${index}-3`} />
-                    <Label htmlFor={`q${index}-3`} className="flex-grow">Nearly every day</Label>
-                  </div>
+                  {answerOptions.map((option, optionIndex) => (
+                    <div key={optionIndex} className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value={optionIndex.toString()}
+                        id={`question-${index}-option-${optionIndex}`}
+                        className="dark:border-slate-600 dark:bg-slate-800"
+                      />
+                      <Label
+                        htmlFor={`question-${index}-option-${optionIndex}`}
+                        className="text-sm dark:text-slate-300"
+                      >
+                        {option}
+                      </Label>
+                    </div>
+                  ))}
                 </RadioGroup>
               </div>
             ))}
@@ -139,7 +143,11 @@ export function GAD7AnxietyTest() {
               </RadioGroup>
             </div>
             
-            <Button className="w-full mt-4" onClick={handleCalculate} disabled={!isValid}>
+            <Button
+              className="w-full mt-4"
+              onClick={handleCalculate}
+              disabled={!isValid}
+            >
               Submit Questionnaire
             </Button>
             
@@ -152,13 +160,35 @@ export function GAD7AnxietyTest() {
       
       {showResults && (
         <CalculatorResult title="GAD-7 Anxiety Screening Results">
-          <div className="space-y-6">
-            <div className="p-6 bg-muted rounded-lg text-center">
-              <h3 className="text-lg font-medium">Anxiety Severity Score</h3>
-              <p className="text-4xl font-bold mt-2">{score}</p>
-              <p className={`mt-2 text-lg font-semibold text-${severity.class}-600`}>
-                {severity.level} Anxiety
+          <div className="space-y-4">
+            <div className="p-6 bg-blue-50 dark:bg-blue-950 border border-blue-100 dark:border-blue-800 rounded-lg text-center">
+              <h3 className="text-lg font-medium dark:text-blue-100">Your Score</h3>
+              <p className="text-4xl font-bold mt-2 dark:text-blue-50">{totalScore}</p>
+              <p className="text-sm text-muted-foreground dark:text-blue-200 mt-2">
+                {getSeverityDescription(totalScore)}
               </p>
+            </div>
+            
+            <div className="p-6 bg-purple-50 dark:bg-purple-950 border border-purple-100 dark:border-purple-800 rounded-lg">
+              <h3 className="text-lg font-medium mb-4 dark:text-purple-100">Severity Levels</h3>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between p-2 bg-muted dark:bg-slate-800 rounded">
+                  <span className="dark:text-white">0-4</span>
+                  <span className="dark:text-slate-300">Minimal anxiety</span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-muted dark:bg-slate-800 rounded">
+                  <span className="dark:text-white">5-9</span>
+                  <span className="dark:text-slate-300">Mild anxiety</span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-muted dark:bg-slate-800 rounded">
+                  <span className="dark:text-white">10-14</span>
+                  <span className="dark:text-slate-300">Moderate anxiety</span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-muted dark:bg-slate-800 rounded">
+                  <span className="dark:text-white">15-21</span>
+                  <span className="dark:text-slate-300">Severe anxiety</span>
+                </div>
+              </div>
             </div>
             
             <div className="p-4 bg-blue-50 border border-blue-100 rounded-lg">
@@ -172,37 +202,15 @@ export function GAD7AnxietyTest() {
             </div>
             
             <ResultAlert
-              type={score >= 10 ? (score >= 15 ? "error" : "warning") : "info"}
+              type={totalScore >= 10 ? (totalScore >= 15 ? "error" : "warning") : "info"}
               title="Recommendation"
             >
-              {getRecommendation(score)}
+              {getRecommendation(totalScore)}
             </ResultAlert>
             
             <div className="space-y-2 mt-4">
-              <h3 className="text-lg font-medium">Anxiety Severity Categories</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                <div className="p-2 rounded-lg bg-green-50 border border-green-100">
-                  <p className="font-semibold">Minimal: 0-4</p>
-                  <p className="text-sm">Minimal anxiety symptoms</p>
-                </div>
-                <div className="p-2 rounded-lg bg-yellow-50 border border-yellow-100">
-                  <p className="font-semibold">Mild: 5-9</p>
-                  <p className="text-sm">Mild anxiety symptoms</p>
-                </div>
-                <div className="p-2 rounded-lg bg-orange-50 border border-orange-100">
-                  <p className="font-semibold">Moderate: 10-14</p>
-                  <p className="text-sm">Moderate anxiety symptoms</p>
-                </div>
-                <div className="p-2 rounded-lg bg-red-50 border border-red-100">
-                  <p className="font-semibold">Severe: 15-21</p>
-                  <p className="text-sm">Severe anxiety symptoms</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="space-y-2 mt-4">
-              <h3 className="text-lg font-medium">Anxiety Management Strategies</h3>
-              <ul className="list-disc list-inside space-y-1">
+              <h3 className="text-lg font-medium dark:text-white">Anxiety Management Strategies</h3>
+              <ul className="list-disc list-inside space-y-1 dark:text-slate-200">
                 <li>Practice deep breathing and relaxation techniques</li>
                 <li>Engage in regular physical activity</li>
                 <li>Maintain a regular sleep schedule</li>
@@ -214,9 +222,9 @@ export function GAD7AnxietyTest() {
               </ul>
             </div>
             
-            <div className="text-sm text-muted-foreground mt-4">
-              <p><strong>Important:</strong> The GAD-7 is a screening tool and not a diagnostic instrument. This questionnaire is not a substitute for professional diagnosis and treatment. If you are concerned about your mental health, please consult a healthcare professional.</p>
-              <p className="mt-2"><strong>Confidentiality:</strong> Your answers are confidential and are not being stored or shared. This calculation happens entirely in your browser.</p>
+            <div className="text-sm text-muted-foreground dark:text-slate-300 mt-4">
+              <p><strong className="dark:text-white">Important:</strong> The GAD-7 is a screening tool and not a diagnostic instrument. This questionnaire is not a substitute for professional diagnosis and treatment. If you are concerned about your mental health, please consult a healthcare professional.</p>
+              <p className="mt-2"><strong className="dark:text-white">Confidentiality:</strong> Your answers are confidential and are not being stored or shared. This calculation happens entirely in your browser.</p>
             </div>
           </div>
         </CalculatorResult>

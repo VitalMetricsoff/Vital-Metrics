@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -171,67 +170,70 @@ export function IdealSleepDurationCalculator() {
       </Card>
 
       {idealDuration !== null && recommendedDuration && (
-        <CalculatorResult title="Your Ideal Sleep Duration">
-          <div className="space-y-4">
-            <div className="flex justify-center items-center mb-4">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary mb-2">
-                  {idealDuration} hours
-                </div>
-                <p className="text-muted-foreground">
-                  Recommended range: {recommendedDuration.min} - {recommendedDuration.max} hours
+        <CalculatorResult title="Sleep Duration Analysis">
+          <div className="space-y-6">
+            <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+              <h3 className="text-lg font-medium dark:text-slate-200">Recommended Sleep Duration</h3>
+              <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">
+                {Math.floor(recommendedDuration.min)} - {Math.ceil(recommendedDuration.max)} hours
+              </p>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">per night</p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="p-4 bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800 rounded-lg">
+                <p className="text-sm font-medium text-indigo-900 dark:text-indigo-100">Ideal Bedtime</p>
+                <p className="text-2xl font-bold text-indigo-950 dark:text-indigo-50">
+                  {format(new Date(0, 0, 0, ...bedtime.split(':').map(Number)), 'hh:mm a')}
+                </p>
+                <p className="text-sm text-indigo-700 dark:text-indigo-300">
+                  For your target wake time
+                </p>
+              </div>
+
+              <div className="p-4 bg-purple-50 dark:bg-purple-950/50 border border-purple-200 dark:border-purple-800 rounded-lg">
+                <p className="text-sm font-medium text-purple-900 dark:text-purple-100">Sleep Cycles</p>
+                <p className="text-2xl font-bold text-purple-950 dark:text-purple-50">
+                  {Math.floor(recommendedDuration.min * 60 / 90)} - {Math.ceil(recommendedDuration.max * 60 / 90)}
+                </p>
+                <p className="text-sm text-purple-700 dark:text-purple-300">
+                  Complete 90-minute cycles
                 </p>
               </div>
             </div>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-md flex">
-                <MoonStar className="h-10 w-10 text-blue-400 dark:text-blue-300 mr-4" />
-                <div>
-                  <h4 className="font-medium">Bedtime</h4>
-                  <p className="text-xl font-semibold">{bedtime}</p>
-                </div>
-              </div>
-              
-              <div className="bg-yellow-50 dark:bg-yellow-950 p-4 rounded-md flex">
-                <Sun className="h-10 w-10 text-yellow-500 dark:text-yellow-400 mr-4" />
-                <div>
-                  <h4 className="font-medium">Wake Time</h4>
-                  <p className="text-xl font-semibold">{wakeupTime}</p>
-                </div>
+
+            <div className="space-y-4">
+              <h3 className="font-medium text-slate-900 dark:text-slate-100">Sleep Schedule Options</h3>
+              <div className="grid gap-3">
+                {Array.from({ length: 5 }, (_, index) => {
+                  const duration = recommendedDuration.min + index * 0.5;
+                  const wakeTime = addMinutes(new Date(0, 0, 0, ...bedtime.split(':').map(Number)), Math.round(duration * 60));
+                  return (
+                    <div 
+                      key={index}
+                      className="p-4 bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 rounded-lg"
+                    >
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <p className="text-sm font-medium text-blue-900 dark:text-blue-100">
+                            Option {index + 1}
+                          </p>
+                          <p className="text-2xl font-bold text-blue-950 dark:text-blue-50">
+                            {format(new Date(0, 0, 0, ...bedtime.split(':').map(Number)), 'hh:mm a')} - {format(wakeTime, 'hh:mm a')}
+                          </p>
+                        </div>
+                        <div className="text-sm text-blue-700 dark:text-blue-300">
+                          {Math.round(duration * 60 / 90)} cycles
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-            
-            <ResultAlert 
-              type="info" 
-              title="Sleep Cycles"
-            >
-              <p>
-                A complete sleep cycle lasts about 90 minutes. For optimal rest, try to sleep for a multiple of 90 minutes (e.g., 7.5 hours = 5 cycles).
-              </p>
-              <p className="mt-2">
-                Based on your ideal duration of {idealDuration} hours, you would complete approximately {Math.round(idealDuration / 1.5)} full sleep cycles.
-              </p>
-            </ResultAlert>
-            
-            <div className="mt-4 bg-muted p-4 rounded-md">
-              <div className="flex items-start">
-                <Info className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0 text-muted-foreground" />
-                <div className="space-y-2 text-sm">
-                  <p className="font-medium">Age-Based Sleep Recommendations:</p>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Newborns (0-3 months): 14-17 hours</li>
-                    <li>Infants (4-12 months): 12-16 hours</li>
-                    <li>Toddlers (1-2 years): 11-14 hours</li>
-                    <li>Preschoolers (3-5 years): 10-13 hours</li>
-                    <li>School-age children (6-12 years): 9-12 hours</li>
-                    <li>Teenagers (13-17 years): 8-10 hours</li>
-                    <li>Adults (18-64 years): 7-9 hours</li>
-                    <li>Older adults (65+ years): 7-8 hours</li>
-                  </ul>
-                  <p className="mt-2">Remember that individual needs may vary. Pay attention to how you feel after different amounts of sleep.</p>
-                </div>
-              </div>
+
+            <div className="text-sm text-slate-600 dark:text-slate-300">
+              <p>Note: These recommendations are based on your age, activity level, and sleep quality factors. Individual sleep needs may vary.</p>
             </div>
           </div>
         </CalculatorResult>

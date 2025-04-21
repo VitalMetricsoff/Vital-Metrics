@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -196,74 +195,75 @@ export function CholesterolRatioCalculator() {
       </Card>
 
       {showResults && (
-        <CalculatorResult 
-          title="Cholesterol Ratio Results" 
-          description="Analysis of your cholesterol profile"
-        >
+        <CalculatorResult title="Cholesterol Ratio Results">
           <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 border rounded-lg">
-                <h4 className="font-medium text-sm text-muted-foreground">Total Cholesterol to HDL Ratio</h4>
-                <p className="text-3xl font-bold mt-1">{tcHdlRatio}:1</p>
-                <div className="mt-2">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getRiskStyling(getRiskLevel("tcHdl", tcHdlRatio))}`}>
-                    {getRiskLevel("tcHdl", tcHdlRatio)} Risk
-                  </span>
-                </div>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Ideal: &lt; 3.5:1 | Average: 3.5-5:1 | High Risk: &gt; 5:1
-                </p>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+                <h3 className="text-lg font-medium dark:text-slate-200">Total/HDL Ratio</h3>
+                <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">{tcHdlRatio}</p>
+                <ResultAlert
+                  type={tcHdlRatio <= 3.5 ? "success" : tcHdlRatio <= 5 ? "info" : "warning"}
+                  title={tcHdlRatio <= 3.5 ? "Optimal" : tcHdlRatio <= 5 ? "Normal" : "Elevated"}
+                >
+                  {tcHdlRatio <= 3.5 
+                    ? "Your ratio is in the optimal range"
+                    : tcHdlRatio <= 5
+                    ? "Your ratio is within normal limits"
+                    : "Your ratio is above recommended levels"}
+                </ResultAlert>
               </div>
-              
-              <div className="p-4 border rounded-lg">
-                <h4 className="font-medium text-sm text-muted-foreground">LDL to HDL Ratio</h4>
-                <p className="text-3xl font-bold mt-1">{ldlHdlRatio}:1</p>
-                <div className="mt-2">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getRiskStyling(getRiskLevel("ldlHdl", ldlHdlRatio))}`}>
-                    {getRiskLevel("ldlHdl", ldlHdlRatio)} Risk
-                  </span>
-                </div>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Ideal: &lt; 2:1 | Average: 2-3.5:1 | High Risk: &gt; 3.5:1
-                </p>
-              </div>
-              
-              <div className="p-4 border rounded-lg">
-                <h4 className="font-medium text-sm text-muted-foreground">Non-HDL Cholesterol</h4>
-                <p className="text-3xl font-bold mt-1">{nonHdl} mg/dL</p>
-                <div className="mt-2">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getRiskStyling(getRiskLevel("nonHdl", nonHdl))}`}>
-                    {getRiskLevel("nonHdl", nonHdl)}
-                  </span>
-                </div>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Optimal: &lt; 130 | Above Optimal: 130-159 | Borderline High: 160-189 | High: ≥ 190
-                </p>
-              </div>
-              
-              <div className="p-4 border rounded-lg">
-                <h4 className="font-medium text-sm text-muted-foreground">Triglycerides to HDL Ratio</h4>
-                <p className="text-3xl font-bold mt-1">{triglyceridesHdlRatio}:1</p>
-                <div className="mt-2">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getRiskStyling(getRiskLevel("trigHdl", triglyceridesHdlRatio))}`}>
-                    {getRiskLevel("trigHdl", triglyceridesHdlRatio)}
-                  </span>
-                </div>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Ideal: &lt; 2:1 | Good: 2-4:1 | High Risk: &gt; 4:1
-                </p>
+
+              <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+                <h3 className="text-lg font-medium dark:text-slate-200">LDL/HDL Ratio</h3>
+                <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">{ldlHdlRatio}</p>
+                <ResultAlert
+                  type={ldlHdlRatio <= 2.3 ? "success" : ldlHdlRatio <= 3.3 ? "info" : "warning"}
+                  title={ldlHdlRatio <= 2.3 ? "Optimal" : ldlHdlRatio <= 3.3 ? "Normal" : "Elevated"}
+                >
+                  {ldlHdlRatio <= 2.3
+                    ? "Your ratio indicates good cardiovascular health"
+                    : ldlHdlRatio <= 3.3
+                    ? "Your ratio is within acceptable limits"
+                    : "Your ratio suggests increased cardiovascular risk"}
+                </ResultAlert>
               </div>
             </div>
-            
-            {tcHdlRatio > 5 || ldlHdlRatio > 3.5 || nonHdl > 160 || triglyceridesHdlRatio > 4 ? (
-              <ResultAlert type="warning" title="Elevated Risk Factors">
-                Some of your cholesterol ratios indicate an increased risk for cardiovascular disease. Consider discussing these results with a healthcare provider.
-              </ResultAlert>
-            ) : (
-              <ResultAlert type="info" title="Understanding Your Results">
-                Cholesterol ratios can provide a more complete picture of cardiovascular risk than individual cholesterol numbers. Work with your healthcare provider to interpret these results in the context of your overall health.
-              </ResultAlert>
-            )}
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+                <h3 className="text-lg font-medium dark:text-slate-200">Non-HDL Cholesterol</h3>
+                <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">{nonHdl} mg/dL</p>
+                <ResultAlert
+                  type={nonHdl < 130 ? "success" : nonHdl < 160 ? "info" : "warning"}
+                  title={nonHdl < 130 ? "Optimal" : nonHdl < 160 ? "Near Optimal" : "Elevated"}
+                >
+                  {nonHdl < 130
+                    ? "Your non-HDL cholesterol is in the optimal range"
+                    : nonHdl < 160
+                    ? "Your non-HDL cholesterol is near optimal"
+                    : "Your non-HDL cholesterol is above recommended levels"}
+                </ResultAlert>
+              </div>
+
+              <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+                <h3 className="text-lg font-medium dark:text-slate-200">Triglycerides/HDL Ratio</h3>
+                <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">{triglyceridesHdlRatio}</p>
+                <ResultAlert
+                  type={triglyceridesHdlRatio <= 2 ? "success" : triglyceridesHdlRatio <= 4 ? "info" : "warning"}
+                  title={triglyceridesHdlRatio <= 2 ? "Optimal" : triglyceridesHdlRatio <= 4 ? "Normal" : "Elevated"}
+                >
+                  {triglyceridesHdlRatio <= 2
+                    ? "Your ratio indicates good metabolic health"
+                    : triglyceridesHdlRatio <= 4
+                    ? "Your ratio is within normal limits"
+                    : "Your ratio suggests increased metabolic risk"}
+                </ResultAlert>
+              </div>
+            </div>
+
+            <div className="text-sm text-slate-600 dark:text-slate-300">
+              <p>Note: These ratios are important indicators of cardiovascular health. Consult with your healthcare provider for personalized interpretation of your results.</p>
+            </div>
           </div>
         </CalculatorResult>
       )}

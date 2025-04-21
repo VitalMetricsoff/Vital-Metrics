@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,6 +7,7 @@ import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { InfoIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type FormulaType = "brzycki" | "epley" | "lander" | "lombardi" | "average";
 
@@ -173,45 +173,85 @@ export function OneRepMaxCalculator() {
         </CardContent>
       </Card>
 
-      {showResults && result !== null && (
-        <CalculatorResult 
-          title="One Rep Max (1RM) Results" 
-          description="Your estimated maximum lift"
-        >
+      {showResults && result && (
+        <CalculatorResult title="One Rep Max Results">
           <div className="space-y-6">
-            <div className="text-center">
-              <p className="text-4xl font-bold">{result} lbs</p>
-              <p className="text-lg text-muted-foreground">Estimated 1RM</p>
+            <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+              <h3 className="text-lg font-medium dark:text-slate-200">Estimated One Rep Max</h3>
+              <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">{result} lbs</p>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Using {formula === "average" ? "averaged formulas" : `${formula} formula`}</p>
             </div>
-            
-            <div className="space-y-2">
-              <h4 className="font-medium">Training Percentages</h4>
-              <p className="text-sm text-muted-foreground">Common training intensities based on your 1RM:</p>
-              
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 border rounded-lg mt-2">
-                  <thead className="bg-muted">
-                    <tr>
-                      <th className="px-3 py-2 text-left text-xs font-medium text-muted-foreground tracking-wider">Percentage</th>
-                      <th className="px-3 py-2 text-left text-xs font-medium text-muted-foreground tracking-wider">Weight (lbs)</th>
-                      <th className="px-3 py-2 text-left text-xs font-medium text-muted-foreground tracking-wider">Training Focus</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-card divide-y divide-gray-200">
-                    {Object.entries(percentages).map(([percent, weight]) => (
-                      <tr key={percent}>
-                        <td className="px-3 py-2 whitespace-nowrap text-sm">{percent}%</td>
-                        <td className="px-3 py-2 whitespace-nowrap text-sm font-medium">{weight} lbs</td>
-                        <td className="px-3 py-2 whitespace-nowrap text-sm">
-                          {parseInt(percent) >= 90 ? "Strength / Power" : 
-                           parseInt(percent) >= 75 ? "Strength / Hypertrophy" : 
-                           parseInt(percent) >= 60 ? "Hypertrophy" : "Endurance"}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+
+            <div className="space-y-4">
+              <h3 className="font-medium text-slate-900 dark:text-slate-100">Training Percentages</h3>
+              <div className="grid gap-3">
+                {Object.entries(percentages).map(([percent, weight]) => (
+                  <div 
+                    key={percent}
+                    className={cn(
+                      "p-4 rounded-lg border",
+                      parseInt(percent) >= 90 
+                        ? "bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-800" 
+                        : parseInt(percent) >= 80
+                        ? "bg-orange-50 dark:bg-orange-950/50 border-orange-200 dark:border-orange-800"
+                        : parseInt(percent) >= 70
+                        ? "bg-yellow-50 dark:bg-yellow-950/50 border-yellow-200 dark:border-yellow-800"
+                        : "bg-green-50 dark:bg-green-950/50 border-green-200 dark:border-green-800"
+                    )}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className={cn(
+                          "text-sm font-medium",
+                          parseInt(percent) >= 90 
+                            ? "text-red-900 dark:text-red-100" 
+                            : parseInt(percent) >= 80
+                            ? "text-orange-900 dark:text-orange-100"
+                            : parseInt(percent) >= 70
+                            ? "text-yellow-900 dark:text-yellow-100"
+                            : "text-green-900 dark:text-green-100"
+                        )}>
+                          {percent}% of 1RM
+                        </p>
+                        <p className={cn(
+                          "text-2xl font-bold",
+                          parseInt(percent) >= 90 
+                            ? "text-red-950 dark:text-red-50" 
+                            : parseInt(percent) >= 80
+                            ? "text-orange-950 dark:text-orange-50"
+                            : parseInt(percent) >= 70
+                            ? "text-yellow-950 dark:text-yellow-50"
+                            : "text-green-950 dark:text-green-50"
+                        )}>
+                          {weight} lbs
+                        </p>
+                      </div>
+                      <div className={cn(
+                        "text-sm",
+                        parseInt(percent) >= 90 
+                          ? "text-red-700 dark:text-red-300" 
+                          : parseInt(percent) >= 80
+                          ? "text-orange-700 dark:text-orange-300"
+                          : parseInt(percent) >= 70
+                          ? "text-yellow-700 dark:text-yellow-300"
+                          : "text-green-700 dark:text-green-300"
+                      )}>
+                        {parseInt(percent) >= 90 
+                          ? "Max Effort" 
+                          : parseInt(percent) >= 80
+                          ? "Heavy"
+                          : parseInt(percent) >= 70
+                          ? "Moderate"
+                          : "Light"}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
+            </div>
+
+            <div className="text-sm text-slate-600 dark:text-slate-300">
+              <p>Note: These calculations are estimates based on your performance with submaximal weights. Actual maximal strength may vary.</p>
             </div>
           </div>
         </CalculatorResult>

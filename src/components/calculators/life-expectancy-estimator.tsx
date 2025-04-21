@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { CalculatorNumberInput } from "@/components/calculator/calculator-number-input";
-import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { CalculatorResult, ResultAlert } from "@/components/calculator/calculator-result";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { CalendarIcon } from "lucide-react";
@@ -240,42 +239,42 @@ export function LifeExpectancyEstimator() {
         <CalculatorResult title="Life Expectancy Estimation">
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-6 bg-blue-50 border border-blue-100 rounded-lg text-center">
-                <h3 className="text-lg font-medium">Estimated Life Expectancy</h3>
-                <p className="text-4xl font-bold mt-2">{result.totalLifeExpectancy} <span className="text-xl">years</span></p>
-                <p className="text-sm text-muted-foreground mt-1">
+              <div className="p-6 bg-blue-50 dark:bg-blue-950 border border-blue-100 dark:border-blue-800 rounded-lg text-center">
+                <h3 className="text-lg font-medium dark:text-blue-100">Estimated Life Expectancy</h3>
+                <p className="text-4xl font-bold mt-2 dark:text-blue-50">{result.totalLifeExpectancy} <span className="text-xl">years</span></p>
+                <p className="text-sm text-muted-foreground dark:text-blue-200 mt-1">
                   Living to approximately {format(addYears(new Date(), result.remainingYears), 'yyyy')}
                 </p>
               </div>
               
-              <div className="p-6 bg-green-50 border border-green-100 rounded-lg text-center">
-                <h3 className="text-lg font-medium">Estimated Remaining Years</h3>
-                <p className="text-4xl font-bold mt-2">{result.remainingYears} <span className="text-xl">years</span></p>
+              <div className="p-6 bg-green-50 dark:bg-green-950 border border-green-100 dark:border-green-800 rounded-lg text-center">
+                <h3 className="text-lg font-medium dark:text-green-100">Estimated Remaining Years</h3>
+                <p className="text-4xl font-bold mt-2 dark:text-green-50">{result.remainingYears} <span className="text-xl">years</span></p>
                 <div className="flex items-center justify-center mt-1">
-                  <CalendarIcon className="h-4 w-4 mr-1 text-muted-foreground" />
-                  <p className="text-sm text-muted-foreground">Based on your current age and health factors</p>
+                  <CalendarIcon className="h-4 w-4 mr-1 text-muted-foreground dark:text-green-200" />
+                  <p className="text-sm text-muted-foreground dark:text-green-200">Based on your current age and health factors</p>
                 </div>
               </div>
             </div>
             
             {impacts.length > 0 && (
               <div className="mt-6">
-                <h3 className="text-lg font-medium mb-4">Lifestyle Impact Analysis</h3>
+                <h3 className="text-lg font-medium mb-4 dark:text-white">Lifestyle Impact Analysis</h3>
                 <div className="space-y-3">
                   {impacts.map((impact, index) => (
-                    <div key={index} className="p-3 bg-muted rounded-lg">
-                      <p className="font-semibold">{impact.factor}</p>
-                      <p className="text-sm text-red-500">{impact.impact}</p>
-                      <p className="text-sm text-green-600 mt-1">{impact.recommendation}</p>
+                    <div key={index} className="p-3 bg-muted dark:bg-slate-800 rounded-lg">
+                      <p className="font-semibold dark:text-white">{impact.factor}</p>
+                      <p className="text-sm text-red-500 dark:text-red-400">{impact.impact}</p>
+                      <p className="text-sm text-green-600 dark:text-green-400 mt-1">{impact.recommendation}</p>
                     </div>
                   ))}
                 </div>
               </div>
             )}
             
-            <div className="text-sm text-muted-foreground mt-6">
-              <p className="font-semibold mb-2">Important Disclaimer:</p>
-              <ul className="list-disc list-inside space-y-1">
+            <div className="text-sm text-muted-foreground dark:text-slate-300 mt-6">
+              <p className="font-semibold mb-2 dark:text-white">Important Disclaimer:</p>
+              <ul className="list-disc list-inside space-y-1 dark:text-slate-200">
                 <li>This calculator provides only a rough estimation based on statistical averages and simplified assumptions.</li>
                 <li>Life expectancy depends on many factors beyond those captured in this tool, including genetics, environmental factors, access to healthcare, and random events.</li>
                 <li>The calculations are based on generalized population data and should not be considered as personalized medical advice.</li>

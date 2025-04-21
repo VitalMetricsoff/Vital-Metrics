@@ -1,5 +1,7 @@
+
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Search, Menu, X, Activity } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -64,6 +66,7 @@ export function Header() {
                 <span className="sr-only">Search</span>
               </Button>
             </Link>
+            <ThemeToggle />
           </div>
         </nav>
 
@@ -106,6 +109,7 @@ export function Header() {
                     <span>Search Calculators</span>
                   </Button>
                 </Link>
+                <ThemeToggle />
               </div>
             </nav>
           </div>

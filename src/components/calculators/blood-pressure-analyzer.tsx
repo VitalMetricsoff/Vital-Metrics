@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -262,80 +261,74 @@ export function BloodPressureAnalyzer() {
       </Card>
 
       {showResults && category && (
-        <CalculatorResult 
-          title="Blood Pressure Analysis" 
-          description={`${systolic}/${diastolic} mmHg`}
-        >
+        <CalculatorResult title="Blood Pressure Analysis">
           <div className="space-y-6">
-            <div className="flex items-center justify-center">
-              <div className="bg-muted rounded-full p-4">
-                <HeartPulseIcon className="h-10 w-10 text-red-500" />
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+                <h3 className="text-lg font-medium dark:text-slate-200">Blood Pressure Category</h3>
+                <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">
+                  {category.name}
+                </p>
+                <ResultAlert
+                  type={category.type}
+                  title={category.name}
+                >
+                  {category.description}
+                </ResultAlert>
+              </div>
+
+              <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+                <h3 className="text-lg font-medium dark:text-slate-200">Mean Arterial Pressure</h3>
+                <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">
+                  {meanArterialPressure} mmHg
+                </p>
+                <ResultAlert
+                  type={meanArterialPressure >= 70 && meanArterialPressure <= 100 ? "success" : "warning"}
+                  title={meanArterialPressure >= 70 && meanArterialPressure <= 100 ? "Normal" : "Outside Normal Range"}
+                >
+                  {meanArterialPressure >= 70 && meanArterialPressure <= 100
+                    ? "Your mean arterial pressure is within the normal range"
+                    : "Your mean arterial pressure is outside the normal range of 70-100 mmHg"}
+                </ResultAlert>
               </div>
             </div>
-            
-            <ResultAlert type={category.type} title={category.name}>
-              {category.description}
-            </ResultAlert>
-            
-            <div className="grid md:grid-cols-3 gap-4 mt-4">
-              <div className="bg-muted rounded-md p-4 text-center">
-                <p className="text-xs text-muted-foreground">Blood Pressure</p>
-                <p className="text-xl font-semibold">{systolic}/{diastolic} mmHg</p>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+                <h3 className="text-lg font-medium dark:text-slate-200">Pulse Pressure</h3>
+                <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">
+                  {pulsePressure} mmHg
+                </p>
+                <ResultAlert
+                  type={pulsePressure >= 40 && pulsePressure <= 60 ? "success" : "warning"}
+                  title={pulsePressure >= 40 && pulsePressure <= 60 ? "Normal" : "Outside Normal Range"}
+                >
+                  {pulsePressure >= 40 && pulsePressure <= 60
+                    ? "Your pulse pressure is within the normal range"
+                    : "Your pulse pressure is outside the normal range of 40-60 mmHg"}
+                </ResultAlert>
               </div>
-              
-              <div className="bg-muted rounded-md p-4 text-center">
-                <p className="text-xs text-muted-foreground">Mean Arterial Pressure</p>
-                <p className="text-xl font-semibold">{meanArterialPressure} mmHg</p>
-              </div>
-              
-              <div className="bg-muted rounded-md p-4 text-center">
-                <p className="text-xs text-muted-foreground">Pulse Pressure</p>
-                <p className="text-xl font-semibold">{pulsePressure} mmHg</p>
-              </div>
+
+              {pulseRate && (
+                <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+                  <h3 className="text-lg font-medium dark:text-slate-200">Pulse Rate</h3>
+                  <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">
+                    {pulseRate} bpm
+                  </p>
+                  <ResultAlert
+                    type={pulseRate >= 60 && pulseRate <= 100 ? "success" : "warning"}
+                    title={pulseRate >= 60 && pulseRate <= 100 ? "Normal" : "Outside Normal Range"}
+                  >
+                    {pulseRate >= 60 && pulseRate <= 100
+                      ? "Your pulse rate is within the normal range"
+                      : "Your pulse rate is outside the normal range of 60-100 bpm"}
+                  </ResultAlert>
+                </div>
+              )}
             </div>
-            
-            <div className="pt-2">
-              <h4 className="font-medium mb-2">Recommendations:</h4>
-              {category.name === "Normal" && (
-                <ul className="list-disc pl-5 space-y-1 text-sm">
-                  <li>Continue maintaining a healthy lifestyle</li>
-                  <li>Regular exercise and balanced diet</li>
-                  <li>Regular blood pressure checks</li>
-                </ul>
-              )}
-              
-              {(category.name === "Elevated" || category.name === "Hypertension Stage 1") && (
-                <ul className="list-disc pl-5 space-y-1 text-sm">
-                  <li>Reduce sodium intake</li>
-                  <li>Maintain a healthy weight</li>
-                  <li>Regular physical activity</li>
-                  <li>Limit alcohol consumption</li>
-                  <li>Consult with a healthcare provider</li>
-                </ul>
-              )}
-              
-              {(category.name === "Hypertension Stage 2" || category.name === "Hypertensive Crisis") && (
-                <ul className="list-disc pl-5 space-y-1 text-sm">
-                  <li>Seek medical attention</li>
-                  <li>Medication is likely necessary</li>
-                  <li>Lifestyle modifications are essential</li>
-                  <li>Regular monitoring of blood pressure</li>
-                </ul>
-              )}
-              
-              {category.name === "Low Blood Pressure" && (
-                <ul className="list-disc pl-5 space-y-1 text-sm">
-                  <li>Stay hydrated</li>
-                  <li>Eat smaller, more frequent meals</li>
-                  <li>Limit alcohol consumption</li>
-                  <li>Stand up slowly to prevent dizziness</li>
-                  <li>Consult with a healthcare provider if symptomatic</li>
-                </ul>
-              )}
-              
-              <div className="mt-4 bg-muted p-3 rounded-md">
-                <p className="text-xs"><strong>Note:</strong> This analysis is based on American Heart Association guidelines. Individual recommendations may vary. Always consult with a healthcare provider for personalized advice.</p>
-              </div>
+
+            <div className="text-sm text-slate-600 dark:text-slate-300">
+              <p>Note: These measurements provide important information about your cardiovascular health. Regular monitoring and consultation with healthcare providers is recommended for managing blood pressure.</p>
             </div>
           </div>
         </CalculatorResult>

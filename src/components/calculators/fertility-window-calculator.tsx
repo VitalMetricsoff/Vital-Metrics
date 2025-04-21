@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
@@ -152,50 +151,50 @@ export function FertilityWindowCalculator() {
       {showResults && ovulationDate && (
         <CalculatorResult title="Fertility Window Results">
           <div className="space-y-4">
-            <div className="p-6 bg-green-50 border border-green-100 rounded-lg">
+            <div className="p-6 bg-green-50 dark:bg-green-950 border border-green-100 dark:border-green-800 rounded-lg">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-lg font-medium">Current Fertility Window</h3>
+                <h3 className="text-lg font-medium dark:text-green-100">Current Fertility Window</h3>
                 <HoverCard>
                   <HoverCardTrigger>
-                    <InfoIcon className="h-4 w-4 text-muted-foreground" />
+                    <InfoIcon className="h-4 w-4 text-muted-foreground dark:text-green-300" />
                   </HoverCardTrigger>
-                  <HoverCardContent className="w-80">
-                    <p className="text-sm">
+                  <HoverCardContent className="w-80 dark:bg-slate-800 dark:border-slate-700">
+                    <p className="text-sm dark:text-slate-200">
                       The fertility window includes the 5 days before ovulation and the day of ovulation. 
                       Sperm can survive up to 5 days in a woman's body, while an egg lives for about 24 hours after release.
                     </p>
                   </HoverCardContent>
                 </HoverCard>
               </div>
-              <p className="text-xl font-semibold">{formatDateRange(fertileWindow)}</p>
-              <p className="text-sm text-muted-foreground mt-2">
+              <p className="text-xl font-semibold dark:text-green-50">{formatDateRange(fertileWindow)}</p>
+              <p className="text-sm text-muted-foreground dark:text-green-200 mt-2">
                 These days have the highest chance of conception if you're trying to get pregnant.
               </p>
             </div>
             
-            <div className="p-4 bg-yellow-50 border border-yellow-100 rounded-lg text-center">
-              <h3 className="text-lg font-medium">Estimated Ovulation Day</h3>
-              <p className="text-2xl font-bold mt-1">{format(ovulationDate, 'MMMM d, yyyy')}</p>
+            <div className="p-4 bg-yellow-50 dark:bg-yellow-950 border border-yellow-100 dark:border-yellow-800 rounded-lg text-center">
+              <h3 className="text-lg font-medium dark:text-yellow-100">Estimated Ovulation Day</h3>
+              <p className="text-2xl font-bold mt-1 dark:text-yellow-50">{format(ovulationDate, 'MMMM d, yyyy')}</p>
             </div>
             
-            <div className="mt-6">
-              <h3 className="text-lg font-medium mb-4">Your Next 3 Cycles</h3>
+            <div>
+              <h3 className="text-lg font-medium dark:text-white mb-4">Your Next 3 Cycles</h3>
               <div className="space-y-4">
                 {nextThreeCycles.map((cycle, index) => (
-                  <div key={index} className="p-4 bg-muted rounded-lg">
-                    <h4 className="font-medium text-center mb-2">Cycle {index + 1}</h4>
+                  <div key={index} className="p-4 bg-muted dark:bg-slate-800 rounded-lg">
+                    <h4 className="font-medium text-center mb-2 dark:text-white">Cycle {index + 1}</h4>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                      <div className="p-2 bg-pink-50 rounded border border-pink-100 text-center">
-                        <p className="text-xs text-muted-foreground">Period Start</p>
-                        <p className="font-medium">{format(cycle.periodStart, 'MMM d, yyyy')}</p>
+                      <div className="p-2 bg-pink-50 dark:bg-pink-950 rounded border border-pink-100 dark:border-pink-800 text-center">
+                        <p className="text-xs text-muted-foreground dark:text-pink-200">Period Start</p>
+                        <p className="font-medium dark:text-pink-100">{format(cycle.periodStart, 'MMM d, yyyy')}</p>
                       </div>
-                      <div className="p-2 bg-green-50 rounded border border-green-100 text-center">
-                        <p className="text-xs text-muted-foreground">Fertile Window</p>
-                        <p className="font-medium">{format(cycle.fertilityWindow[0], 'MMM d')} - {format(cycle.fertilityWindow[1], 'MMM d')}</p>
+                      <div className="p-2 bg-green-50 dark:bg-green-950 rounded border border-green-100 dark:border-green-800 text-center">
+                        <p className="text-xs text-muted-foreground dark:text-green-200">Fertile Window</p>
+                        <p className="font-medium dark:text-green-100">{format(cycle.fertilityWindow[0], 'MMM d')} - {format(cycle.fertilityWindow[1], 'MMM d')}</p>
                       </div>
-                      <div className="p-2 bg-yellow-50 rounded border border-yellow-100 text-center">
-                        <p className="text-xs text-muted-foreground">Ovulation</p>
-                        <p className="font-medium">{format(cycle.ovulation, 'MMM d, yyyy')}</p>
+                      <div className="p-2 bg-yellow-50 dark:bg-yellow-950 rounded border border-yellow-100 dark:border-yellow-800 text-center">
+                        <p className="text-xs text-muted-foreground dark:text-yellow-200">Ovulation</p>
+                        <p className="font-medium dark:text-yellow-100">{format(cycle.ovulation, 'MMM d, yyyy')}</p>
                       </div>
                     </div>
                   </div>
@@ -203,19 +202,19 @@ export function FertilityWindowCalculator() {
               </div>
             </div>
             
-            <div className="mt-6">
+            <div>
               <div className="mb-2 flex items-center space-x-2">
-                <span className="inline-block w-3 h-3 bg-pink-200 rounded-full"></span>
-                <span className="text-sm">Period Start</span>
-                <span className="inline-block w-3 h-3 bg-yellow-200 rounded-full ml-4"></span>
-                <span className="text-sm">Ovulation</span>
-                <span className="inline-block w-3 h-3 bg-green-200 rounded-full ml-4"></span>
-                <span className="text-sm">Fertile Window</span>
+                <span className="inline-block w-3 h-3 bg-pink-200 dark:bg-pink-500 rounded-full"></span>
+                <span className="text-sm dark:text-white">Period Start</span>
+                <span className="inline-block w-3 h-3 bg-yellow-200 dark:bg-yellow-500 rounded-full ml-4"></span>
+                <span className="text-sm dark:text-white">Ovulation</span>
+                <span className="inline-block w-3 h-3 bg-green-200 dark:bg-green-500 rounded-full ml-4"></span>
+                <span className="text-sm dark:text-white">Fertile Window</span>
               </div>
             </div>
             
-            <div className="text-sm text-muted-foreground mt-4">
-              <p><strong>Note:</strong> This calculator provides estimates based on averages and the information you provided. Many factors can affect ovulation timing, including stress, illness, and hormonal fluctuations. For higher accuracy, consider additional tracking methods like basal body temperature or ovulation prediction kits.</p>
+            <div className="text-sm text-muted-foreground dark:text-slate-300 mt-4">
+              <p><strong className="dark:text-white">Note:</strong> This calculator provides estimates based on averages and the information you provided. Many factors can affect ovulation timing, including stress, illness, and hormonal fluctuations. For higher accuracy, consider additional tracking methods like basal body temperature or ovulation prediction kits.</p>
             </div>
           </div>
         </CalculatorResult>

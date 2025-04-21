@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -294,45 +293,108 @@ export function FraminghamRiskScore() {
       </Card>
 
       {showResults && (
-        <CalculatorResult 
-          title="Framingham Risk Score Results" 
-          description="10-year cardiovascular disease risk assessment"
-        >
+        <CalculatorResult title="Framingham Risk Score Results">
           <div className="space-y-6">
-            <div className="text-center">
-              <p className="text-4xl font-bold">{riskScore}%</p>
-              <p className="text-lg text-muted-foreground">10-Year Risk</p>
-              <div className="mt-2">
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  riskCategory === "Low Risk" ? "bg-green-100 text-green-800" : 
-                  riskCategory === "Intermediate Risk" ? "bg-yellow-100 text-yellow-800" : 
-                  "bg-red-100 text-red-800"
-                }`}>
+            <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+              <h3 className="text-lg font-medium dark:text-slate-200">10-Year CVD Risk</h3>
+              <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">{riskScore}%</p>
+              <ResultAlert
+                type={
+                  riskScore < 10 ? "success" :
+                  riskScore < 20 ? "warning" : "error"
+                }
+                title={
+                  riskScore < 10 ? "Low Risk" :
+                  riskScore < 20 ? "Intermediate Risk" : "High Risk"
+                }
+              >
+                {riskScore < 10 
+                  ? "Your 10-year risk of cardiovascular disease is low"
+                  : riskScore < 20
+                  ? "Your risk is intermediate, consider lifestyle modifications"
+                  : "Your risk is high, consult with a healthcare provider"}
+              </ResultAlert>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="p-4 bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 rounded-lg">
+                <p className="text-sm font-medium text-blue-900 dark:text-blue-100">Heart Age</p>
+                <p className="text-2xl font-bold text-blue-950 dark:text-blue-50">
+                  {heartAge} years
+                </p>
+                <p className="text-sm text-blue-700 dark:text-blue-300">
+                  {heartAge > age ? `${heartAge - age} years older than your actual age` : 
+                   heartAge < age ? `${age - heartAge} years younger than your actual age` :
+                   "Same as your actual age"}
+                </p>
+              </div>
+
+              <div className="p-4 bg-green-50 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-lg">
+                <p className="text-sm font-medium text-green-900 dark:text-green-100">Risk Category</p>
+                <p className="text-2xl font-bold text-green-950 dark:text-green-50">
                   {riskCategory}
-                </span>
+                </p>
+                <p className="text-sm text-green-700 dark:text-green-300">
+                  Based on your risk factors
+                </p>
               </div>
             </div>
-            
-            <div className="space-y-2">
-              <h4 className="font-medium">Estimated Heart Age</h4>
-              <p className="text-2xl font-semibold">{heartAge} years</p>
-              {heartAge > age && (
-                <ResultAlert type="warning" title="Heart Age Warning">
-                  Your estimated heart age is {heartAge - age} years older than your actual age, which suggests elevated cardiovascular risk.
-                </ResultAlert>
-              )}
+
+            <div className="space-y-4">
+              <h3 className="font-medium text-slate-900 dark:text-slate-100">Risk Factors Analysis</h3>
+              <div className="grid gap-3">
+                <div className="p-4 bg-yellow-50 dark:bg-yellow-950/50 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-sm font-medium text-yellow-900 dark:text-yellow-100">
+                        Cholesterol Profile
+                      </p>
+                      <p className="text-lg font-bold text-yellow-950 dark:text-yellow-50">
+                        Total: {totalCholesterol} mg/dL | HDL: {hdlCholesterol} mg/dL
+                      </p>
+                    </div>
+                    <div className="text-sm text-yellow-700 dark:text-yellow-300">
+                      {totalCholesterol < 200 ? "Optimal" : totalCholesterol < 240 ? "Borderline" : "High"}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-orange-50 dark:bg-orange-950/50 border border-orange-200 dark:border-orange-800 rounded-lg">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-sm font-medium text-orange-900 dark:text-orange-100">
+                        Blood Pressure
+                      </p>
+                      <p className="text-lg font-bold text-orange-950 dark:text-orange-50">
+                        {systolicBP} mmHg
+                      </p>
+                    </div>
+                    <div className="text-sm text-orange-700 dark:text-orange-300">
+                      {systolicBP < 120 ? "Normal" : systolicBP < 140 ? "Elevated" : "High"}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800 rounded-lg">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-sm font-medium text-red-900 dark:text-red-100">
+                        Additional Risk Factors
+                      </p>
+                      <p className="text-lg font-bold text-red-950 dark:text-red-50">
+                        {[
+                          smoker === "yes" ? "Smoker" : null,
+                          diabetes === "yes" ? "Diabetes" : null
+                        ].filter(Boolean).join(", ") || "None"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            
-            <div className="space-y-2 bg-muted p-4 rounded-lg">
-              <h4 className="font-medium">Recommendations</h4>
-              <ul className="list-disc pl-5 space-y-1 text-sm">
-                {riskScore >= 10 && <li>Consider discussing your results with a healthcare provider</li>}
-                {totalCholesterol > 200 && <li>Work on lowering your total cholesterol levels</li>}
-                {hdlCholesterol < 40 && <li>Consider strategies to increase your HDL ("good") cholesterol</li>}
-                {systolicBP > 130 && <li>Monitor your blood pressure regularly</li>}
-                {smoker === "yes" && <li>Quitting smoking can significantly reduce your cardiovascular risk</li>}
-                <li>Maintain a healthy diet and regular physical activity</li>
-              </ul>
+
+            <div className="text-sm text-slate-600 dark:text-slate-300">
+              <p>Note: The Framingham Risk Score estimates your 10-year risk of developing cardiovascular disease. This tool should be used in consultation with healthcare providers for proper interpretation and recommendations.</p>
             </div>
           </div>
         </CalculatorResult>

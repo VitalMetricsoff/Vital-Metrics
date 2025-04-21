@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
@@ -122,61 +121,61 @@ export function OvulationTracker() {
         <CalculatorResult title="Ovulation Tracker Results">
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-6 bg-pink-50 border border-pink-100 rounded-lg text-center">
-                <h3 className="text-lg font-medium">Estimated Ovulation Date</h3>
-                <p className="text-2xl font-bold mt-2">{format(ovulationDate, 'MMMM d, yyyy')}</p>
+              <div className="p-6 bg-pink-50 dark:bg-pink-950 border border-pink-100 dark:border-pink-800 rounded-lg text-center">
+                <h3 className="text-lg font-medium dark:text-pink-100">Estimated Ovulation Date</h3>
+                <p className="text-2xl font-bold mt-2 dark:text-pink-50">{format(ovulationDate, 'MMMM d, yyyy')}</p>
               </div>
               
-              <div className="p-6 bg-purple-50 border border-purple-100 rounded-lg text-center">
-                <h3 className="text-lg font-medium">Next Period Start</h3>
-                <p className="text-2xl font-bold mt-2">{nextPeriod ? format(nextPeriod, 'MMMM d, yyyy') : 'N/A'}</p>
+              <div className="p-6 bg-purple-50 dark:bg-purple-950 border border-purple-100 dark:border-purple-800 rounded-lg text-center">
+                <h3 className="text-lg font-medium dark:text-purple-100">Next Period Start</h3>
+                <p className="text-2xl font-bold mt-2 dark:text-purple-50">{nextPeriod ? format(nextPeriod, 'MMMM d, yyyy') : 'N/A'}</p>
               </div>
             </div>
             
-            <div className="p-6 bg-blue-50 border border-blue-100 rounded-lg">
-              <h3 className="text-lg font-medium mb-2">Fertile Window</h3>
-              <p className="text-xl font-semibold">{formatDateRange(fertileWindow)}</p>
-              <p className="text-sm text-muted-foreground mt-2">
+            <div className="p-6 bg-blue-50 dark:bg-blue-950 border border-blue-100 dark:border-blue-800 rounded-lg">
+              <h3 className="text-lg font-medium mb-2 dark:text-blue-100">Fertile Window</h3>
+              <p className="text-xl font-semibold dark:text-blue-50">{formatDateRange(fertileWindow)}</p>
+              <p className="text-sm text-muted-foreground dark:text-blue-200 mt-2">
                 These are your most fertile days. If you're trying to conceive, these are the best days for sexual intercourse.
               </p>
             </div>
             
-            <div className="space-y-2 mt-4">
-              <h3 className="font-medium">Your Cycle At a Glance</h3>
+            <div>
+              <h3 className="font-medium dark:text-white">Your Cycle At a Glance</h3>
               <div className="grid gap-2">
-                <div className="p-3 bg-muted rounded-lg">
+                <div className="p-3 bg-muted dark:bg-slate-800 rounded-lg">
                   <div className="flex justify-between items-center">
                     <div>
-                      <span className="font-semibold">Follicular Phase</span>
-                      <p className="text-xs text-muted-foreground">From period start to ovulation</p>
+                      <span className="font-semibold dark:text-white">Follicular Phase</span>
+                      <p className="text-xs text-muted-foreground dark:text-slate-300">From period start to ovulation</p>
                     </div>
-                    <div className="text-lg font-bold">{cycleLength - lutealPhase} <span className="text-sm">days</span></div>
+                    <div className="text-lg font-bold dark:text-white">{cycleLength - lutealPhase} <span className="text-sm dark:text-slate-300">days</span></div>
                   </div>
                 </div>
                 
-                <div className="p-3 bg-muted rounded-lg">
+                <div className="p-3 bg-muted dark:bg-slate-800 rounded-lg">
                   <div className="flex justify-between items-center">
                     <div>
-                      <span className="font-semibold">Luteal Phase</span>
-                      <p className="text-xs text-muted-foreground">From ovulation to next period</p>
+                      <span className="font-semibold dark:text-white">Luteal Phase</span>
+                      <p className="text-xs text-muted-foreground dark:text-slate-300">From ovulation to next period</p>
                     </div>
-                    <div className="text-lg font-bold">{lutealPhase} <span className="text-sm">days</span></div>
+                    <div className="text-lg font-bold dark:text-white">{lutealPhase} <span className="text-sm dark:text-slate-300">days</span></div>
                   </div>
                 </div>
                 
-                <div className="p-3 bg-muted rounded-lg">
+                <div className="p-3 bg-muted dark:bg-slate-800 rounded-lg">
                   <div className="flex justify-between items-center">
                     <div>
-                      <span className="font-semibold">Total Cycle Length</span>
+                      <span className="font-semibold dark:text-white">Total Cycle Length</span>
                     </div>
-                    <div className="text-lg font-bold">{cycleLength} <span className="text-sm">days</span></div>
+                    <div className="text-lg font-bold dark:text-white">{cycleLength} <span className="text-sm dark:text-slate-300">days</span></div>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="text-sm text-muted-foreground mt-4">
-              <p><strong>Note:</strong> This is an estimation based on averages. Ovulation can vary based on many factors including stress, illness, travel, and lifestyle changes. For the most accurate tracking, consider using ovulation prediction kits or basal body temperature charting.</p>
+            <div className="text-sm text-muted-foreground dark:text-slate-300">
+              <p><strong className="dark:text-white">Note:</strong> This is an estimation based on averages. Ovulation can vary based on many factors including stress, illness, travel, and lifestyle changes. For the most accurate tracking, consider using ovulation prediction kits or basal body temperature charting.</p>
             </div>
           </div>
         </CalculatorResult>

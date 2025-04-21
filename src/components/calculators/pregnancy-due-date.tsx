@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
@@ -109,21 +108,23 @@ export function PregnancyDueDate() {
       {showResults && dueDate && (
         <CalculatorResult title="Pregnancy Due Date Results">
           <div className="space-y-4">
-            <div className="p-6 bg-muted rounded-lg text-center">
-              <h3 className="text-lg font-medium">Estimated Due Date</h3>
-              <p className="text-4xl font-bold mt-2">{format(dueDate, 'MMMM d, yyyy')}</p>
+            <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+              <h3 className="text-lg font-medium dark:text-slate-200">Estimated Due Date</h3>
+              <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">{format(dueDate, 'MMMM d, yyyy')}</p>
             </div>
             
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 bg-blue-50 border border-blue-100 rounded-lg">
-                  <p className="text-sm font-medium text-gray-500">Conception Date (Estimated)</p>
-                  <p className="text-lg font-semibold">{conceptionDate ? format(conceptionDate, 'MMM d, yyyy') : 'N/A'}</p>
+                <div className="p-4 bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 rounded-lg">
+                  <p className="text-sm font-medium text-blue-900 dark:text-blue-100">Conception Date (Estimated)</p>
+                  <p className="text-lg font-semibold text-blue-950 dark:text-blue-50">
+                    {conceptionDate ? format(conceptionDate, 'MMM d, yyyy') : 'N/A'}
+                  </p>
                 </div>
                 
-                <div className="p-3 bg-green-50 border border-green-100 rounded-lg">
-                  <p className="text-sm font-medium text-gray-500">Current Gestation</p>
-                  <p className="text-lg font-semibold">
+                <div className="p-4 bg-green-50 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-lg">
+                  <p className="text-sm font-medium text-green-900 dark:text-green-100">Current Gestation</p>
+                  <p className="text-lg font-semibold text-green-950 dark:text-green-50">
                     {lmpDate ? 
                       (() => {
                         const diffTime = Math.abs(new Date().getTime() - lmpDate.getTime());
@@ -141,27 +142,27 @@ export function PregnancyDueDate() {
               </div>
               
               <div className="space-y-3 mt-4">
-                <h3 className="font-medium">Trimester Dates</h3>
+                <h3 className="font-medium text-slate-900 dark:text-slate-100">Trimester Dates</h3>
                 <div className="grid gap-3">
-                  <div className="p-3 bg-pink-50 border border-pink-100 rounded-lg">
-                    <p className="text-sm font-medium text-gray-500">First Trimester (Weeks 1-12)</p>
-                    <p className="text-base font-semibold">{formatDateRange(firstTrimester)}</p>
+                  <div className="p-4 bg-pink-50 dark:bg-pink-950/50 border border-pink-200 dark:border-pink-800 rounded-lg">
+                    <p className="text-sm font-medium text-pink-900 dark:text-pink-100">First Trimester (Weeks 1-12)</p>
+                    <p className="text-base font-semibold text-pink-950 dark:text-pink-50">{formatDateRange(firstTrimester)}</p>
                   </div>
                   
-                  <div className="p-3 bg-purple-50 border border-purple-100 rounded-lg">
-                    <p className="text-sm font-medium text-gray-500">Second Trimester (Weeks 13-27)</p>
-                    <p className="text-base font-semibold">{formatDateRange(secondTrimester)}</p>
+                  <div className="p-4 bg-purple-50 dark:bg-purple-950/50 border border-purple-200 dark:border-purple-800 rounded-lg">
+                    <p className="text-sm font-medium text-purple-900 dark:text-purple-100">Second Trimester (Weeks 13-27)</p>
+                    <p className="text-base font-semibold text-purple-950 dark:text-purple-50">{formatDateRange(secondTrimester)}</p>
                   </div>
                   
-                  <div className="p-3 bg-indigo-50 border border-indigo-100 rounded-lg">
-                    <p className="text-sm font-medium text-gray-500">Third Trimester (Weeks 28-40)</p>
-                    <p className="text-base font-semibold">{formatDateRange(thirdTrimester)}</p>
+                  <div className="p-4 bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800 rounded-lg">
+                    <p className="text-sm font-medium text-indigo-900 dark:text-indigo-100">Third Trimester (Weeks 28-40)</p>
+                    <p className="text-base font-semibold text-indigo-950 dark:text-indigo-50">{formatDateRange(thirdTrimester)}</p>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-slate-600 dark:text-slate-300">
               <p>Note: This calculation is based on a 28-day menstrual cycle and assumes that ovulation occurs on day 14. The actual due date may vary by approximately two weeks before or after the calculated date.</p>
             </div>
           </div>

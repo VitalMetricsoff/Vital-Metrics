@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorNumberInput } from "@/components/calculator/calculator-number-input";
@@ -174,114 +173,62 @@ export function SmokingRiskCalculator() {
       </Card>
       
       {showResults && (
-        <CalculatorResult title="Smoking Health Risk Assessment">
-          <div className="space-y-4">
-            {smokerStatus !== "never" && (
-              <div className="p-6 bg-blue-50 border border-blue-100 rounded-lg text-center">
-                <h3 className="text-lg font-medium">Pack-Years</h3>
-                <p className="text-4xl font-bold mt-2">{packYears.toFixed(1)}</p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  A pack-year is equivalent to smoking one pack (20 cigarettes) per day for one year
-                </p>
-              </div>
-            )}
-            
-            {smokerStatus !== "never" && (
-              <div className={`p-6 bg-${riskLevel.color}-50 border border-${riskLevel.color}-200 rounded-lg`}>
-                <h3 className="text-lg font-medium mb-2">Overall Risk Level</h3>
-                <div className="flex items-center space-x-4">
-                  <div className={`w-12 h-12 rounded-full bg-${riskLevel.color}-500 flex items-center justify-center text-white font-bold`}>
-                    {riskLevel.level.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-xl">{riskLevel.level} Risk</p>
-                    <p className="text-sm text-muted-foreground">Based on your smoking history</p>
-                  </div>
-                </div>
-              </div>
-            )}
-            
-            <div className="mt-6">
-              <h3 className="text-lg font-medium mb-4">Disease Risk Factors</h3>
-              <div className="space-y-3">
-                <div className="p-3 bg-muted rounded-lg">
-                  <div className="flex justify-between items-center">
-                    <span>Lung Cancer</span>
-                    <span className={`font-bold ${lungCancerRisk > 1.5 ? "text-red-500" : "text-green-500"}`}>
-                      {lungCancerRisk}x
-                    </span>
-                  </div>
-                  <p className="text-xs text-muted-foreground">Compared to a non-smoker</p>
-                </div>
-                
-                <div className="p-3 bg-muted rounded-lg">
-                  <div className="flex justify-between items-center">
-                    <span>COPD (Emphysema/Bronchitis)</span>
-                    <span className={`font-bold ${copdRisk > 1.5 ? "text-red-500" : "text-green-500"}`}>
-                      {copdRisk}x
-                    </span>
-                  </div>
-                  <p className="text-xs text-muted-foreground">Compared to a non-smoker</p>
-                </div>
-                
-                <div className="p-3 bg-muted rounded-lg">
-                  <div className="flex justify-between items-center">
-                    <span>Heart Disease</span>
-                    <span className={`font-bold ${heartDiseaseRisk > 1.5 ? "text-red-500" : "text-green-500"}`}>
-                      {heartDiseaseRisk}x
-                    </span>
-                  </div>
-                  <p className="text-xs text-muted-foreground">Compared to a non-smoker</p>
-                </div>
-                
-                <div className="p-3 bg-muted rounded-lg">
-                  <div className="flex justify-between items-center">
-                    <span>Stroke</span>
-                    <span className={`font-bold ${strokeRisk > 1.5 ? "text-red-500" : "text-green-500"}`}>
-                      {strokeRisk}x
-                    </span>
-                  </div>
-                  <p className="text-xs text-muted-foreground">Compared to a non-smoker</p>
-                </div>
-              </div>
+        <CalculatorResult title="Smoking Risk Assessment">
+          <div className="space-y-6">
+            <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+              <h3 className="text-lg font-medium dark:text-slate-200">Pack Years</h3>
+              <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">{calculatePackYears()}</p>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                {smokerStatus === "current" ? "Current Smoker" : smokerStatus === "former" ? "Former Smoker" : "Never Smoked"}
+              </p>
             </div>
-            
+
             {smokerStatus !== "never" && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                <h3 className="text-md font-medium mb-1">Estimated Life Years Lost</h3>
-                <p className="text-xl font-bold">
-                  {lifeYearsLost} years
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Estimated reduction in life expectancy compared to non-smokers
+              <div className="space-y-4">
+                <h3 className="font-medium text-slate-900 dark:text-slate-100">Risk Assessment</h3>
+                <div className="grid gap-3">
+                  <div className="p-4 bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800 rounded-lg">
+                    <p className="text-sm font-medium text-red-900 dark:text-red-100">Lung Cancer Risk</p>
+                    <p className="text-2xl font-bold text-red-950 dark:text-red-50">
+                      {calculatePackYears() < 20 ? "2-4x" : calculatePackYears() < 40 ? "4-8x" : "8-20x"}
+                    </p>
+                    <p className="text-sm text-red-700 dark:text-red-300">Higher than non-smokers</p>
+                  </div>
+
+                  <div className="p-4 bg-orange-50 dark:bg-orange-950/50 border border-orange-200 dark:border-orange-800 rounded-lg">
+                    <p className="text-sm font-medium text-orange-900 dark:text-orange-100">Heart Disease Risk</p>
+                    <p className="text-2xl font-bold text-orange-950 dark:text-orange-50">
+                      {calculatePackYears() < 20 ? "2-3x" : calculatePackYears() < 40 ? "3-5x" : "5-10x"}
+                    </p>
+                    <p className="text-sm text-orange-700 dark:text-orange-300">Higher than non-smokers</p>
+                  </div>
+
+                  <div className="p-4 bg-yellow-50 dark:bg-yellow-950/50 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                    <p className="text-sm font-medium text-yellow-900 dark:text-yellow-100">COPD Risk</p>
+                    <p className="text-2xl font-bold text-yellow-950 dark:text-yellow-50">
+                      {calculatePackYears() < 20 ? "3-5x" : calculatePackYears() < 40 ? "5-10x" : "10-15x"}
+                    </p>
+                    <p className="text-sm text-yellow-700 dark:text-yellow-300">Higher than non-smokers</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {smokerStatus === "former" && (
+              <div className="p-6 bg-green-50 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-lg">
+                <h3 className="text-lg font-medium text-green-900 dark:text-green-100">Risk Reduction</h3>
+                <p className="text-sm text-green-700 dark:text-green-300 mt-2">
+                  {yearsQuit < 5 
+                    ? "Your risk of heart disease and stroke starts decreasing. Within 1 year, your risk is half that of a smoker."
+                    : yearsQuit < 10
+                    ? "Your risk of lung cancer is about half that of a current smoker. Heart disease risk continues to decrease."
+                    : "Your risk of heart disease is similar to a non-smoker. Lung cancer risk is significantly reduced but remains higher than never-smokers."}
                 </p>
               </div>
             )}
-            
-            {smokerStatus === "current" && (
-              <ResultAlert type="warning" title="Benefits of Quitting">
-                <p>Quitting smoking at any age can significantly reduce your health risks:</p>
-                <ul className="list-disc list-inside mt-2 space-y-1">
-                  <li>Within 20 minutes: Your heart rate drops.</li>
-                  <li>Within 12 hours: Carbon monoxide levels in your blood drop to normal.</li>
-                  <li>Within 2 weeks to 3 months: Your circulation improves and lung function increases.</li>
-                  <li>Within 1 to 9 months: Coughing and shortness of breath decrease.</li>
-                  <li>Within 1 year: Your risk of coronary heart disease is about half that of a smoker's.</li>
-                  <li>Within 5 years: Your stroke risk is reduced to that of a nonsmoker.</li>
-                  <li>Within 10 years: Your lung cancer death rate is about half that of a smoker's.</li>
-                </ul>
-              </ResultAlert>
-            )}
-            
-            {smokerStatus === "former" && (
-              <ResultAlert type="success" title="Congratulations on Quitting!">
-                <p>By quitting smoking {yearsQuit} years ago, you've already reduced your health risks significantly.</p>
-                <p className="mt-2">Continue to maintain a healthy lifestyle to further improve your health outcomes.</p>
-              </ResultAlert>
-            )}
-            
-            <div className="text-sm text-muted-foreground mt-4">
-              <p><strong>Note:</strong> This calculator provides estimates based on population averages. Individual risks may vary based on genetics, environment, and other health factors. These results are not a substitute for medical advice. Consult with a healthcare provider for personalized risk assessment.</p>
+
+            <div className="text-sm text-slate-600 dark:text-slate-300">
+              <p>Note: These risk estimates are based on population studies and may vary for individuals. Quitting smoking at any age provides significant health benefits.</p>
             </div>
           </div>
         </CalculatorResult>

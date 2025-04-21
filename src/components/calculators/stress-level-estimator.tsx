@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { CalculatorResult, ResultAlert } from "@/components/calculator/calculator-result";
+import { cn } from "@/lib/utils";
 
 type Question = {
   id: number;
@@ -33,6 +33,7 @@ export function StressLevelEstimator() {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [result, setResult] = useState<number | null>(null);
   const [stressLevel, setStressLevel] = useState<string>("");
+  const [showResults, setShowResults] = useState(false);
 
   const handleAnswerChange = (questionId: number, value: number) => {
     const existingAnswerIndex = answers.findIndex(a => a.questionId === questionId);
@@ -69,6 +70,8 @@ export function StressLevelEstimator() {
     } else {
       setStressLevel("High");
     }
+
+    setShowResults(true);
   };
 
   const getProgressPercentage = () => {
@@ -135,34 +138,105 @@ export function StressLevelEstimator() {
         </CardContent>
       </Card>
 
-      {result !== null && (
-        <CalculatorResult title="Your Stress Level Result">
-          <div className="space-y-4">
-            <p className="text-center text-lg font-medium">
-              Your stress score is: <span className="text-primary font-semibold">{result} / 40</span>
-            </p>
-            
-            <ResultAlert 
-              type={stressLevel === "Low" ? "success" : stressLevel === "Moderate" ? "warning" : "error"}
-              title={`${stressLevel} Stress Level`}
-            >
-              <p className="mt-2">
-                {stressLevel === "Low" && "You're managing stress well. Continue with healthy coping strategies."}
-                {stressLevel === "Moderate" && "You're experiencing moderate stress. Consider stress management techniques."}
-                {stressLevel === "High" && "You're experiencing high levels of stress. Consider consulting with a healthcare professional."}
-              </p>
-            </ResultAlert>
-            
-            <div className="mt-4 bg-muted p-4 rounded-md">
-              <h4 className="font-medium mb-2">What to do next:</h4>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>Practice deep breathing exercises</li>
-                <li>Engage in regular physical activity</li>
-                <li>Maintain a consistent sleep schedule</li>
-                <li>Consider mindfulness meditation</li>
-                <li>Connect with supportive friends and family</li>
-                {stressLevel === "High" && <li className="font-medium">Consult with a healthcare professional</li>}
-              </ul>
+      {showResults && (
+        <CalculatorResult title="Stress Level Assessment">
+          <div className="space-y-6">
+            <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+              <h3 className="text-lg font-medium dark:text-slate-200">Your Stress Score</h3>
+              <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">{result} / 40</p>
+              <ResultAlert
+                type={
+                  result <= 10 ? "success" :
+                  result <= 20 ? "info" :
+                  result <= 30 ? "warning" : "error"
+                }
+                title={
+                  result <= 10 ? "Low Stress" :
+                  result <= 20 ? "Moderate Stress" :
+                  result <= 30 ? "High Stress" : "Severe Stress"
+                }
+              >
+                {result <= 10 
+                  ? "Your stress levels appear to be well-managed"
+                  : result <= 20
+                  ? "You're experiencing moderate stress levels"
+                  : result <= 30
+                  ? "Your stress levels are elevated"
+                  : "You're experiencing significant stress"
+                }
+              </ResultAlert>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="font-medium text-slate-900 dark:text-slate-100">Stress Categories</h3>
+              <div className="grid gap-3">
+                {Object.entries(categoryScores).map(([category, score]) => (
+                  <div 
+                    key={category}
+                    className={cn(
+                      "p-4 rounded-lg border",
+                      score <= 2 
+                        ? "bg-green-50 dark:bg-green-950/50 border-green-200 dark:border-green-800" 
+                        : score <= 4
+                        ? "bg-yellow-50 dark:bg-yellow-950/50 border-yellow-200 dark:border-yellow-800"
+                        : score <= 6
+                        ? "bg-orange-50 dark:bg-orange-950/50 border-orange-200 dark:border-orange-800"
+                        : "bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-800"
+                    )}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className={cn(
+                          "text-sm font-medium",
+                          score <= 2 
+                            ? "text-green-900 dark:text-green-100" 
+                            : score <= 4
+                            ? "text-yellow-900 dark:text-yellow-100"
+                            : score <= 6
+                            ? "text-orange-900 dark:text-orange-100"
+                            : "text-red-900 dark:text-red-100"
+                        )}>
+                          {category}
+                        </p>
+                        <p className={cn(
+                          "text-2xl font-bold",
+                          score <= 2 
+                            ? "text-green-950 dark:text-green-50" 
+                            : score <= 4
+                            ? "text-yellow-950 dark:text-yellow-50"
+                            : score <= 6
+                            ? "text-orange-950 dark:text-orange-50"
+                            : "text-red-950 dark:text-red-50"
+                        )}>
+                          {score} / 10
+                        </p>
+                      </div>
+                      <div className={cn(
+                        "text-sm",
+                        score <= 2 
+                          ? "text-green-700 dark:text-green-300" 
+                          : score <= 4
+                          ? "text-yellow-700 dark:text-yellow-300"
+                          : score <= 6
+                          ? "text-orange-700 dark:text-orange-300"
+                          : "text-red-700 dark:text-red-300"
+                      )}>
+                        {score <= 2 
+                          ? "Low" 
+                          : score <= 4
+                          ? "Moderate"
+                          : score <= 6
+                          ? "High"
+                          : "Severe"}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="text-sm text-slate-600 dark:text-slate-300">
+              <p>Note: This assessment provides a general indication of your stress levels. If you're experiencing persistent stress, consider consulting with a mental health professional.</p>
             </div>
           </div>
         </CalculatorResult>

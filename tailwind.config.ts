@@ -1,6 +1,8 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -75,6 +77,13 @@ export default {
           pink: '#ec4899',
           teal: '#14b8a6',
           indigo: '#6366f1',
+        },
+        // Adding enhanced dark mode colors
+        darkFeature: {
+          blue: 'rgba(59, 130, 246, 0.2)',
+          green: 'rgba(16, 185, 129, 0.2)',
+          orange: 'rgba(249, 115, 22, 0.2)',
+          purple: 'rgba(139, 92, 246, 0.2)',
         }
       },
       borderRadius: {

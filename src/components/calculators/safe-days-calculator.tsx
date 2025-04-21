@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorResult, ResultAlert } from "@/components/calculator/calculator-result";
@@ -148,68 +147,68 @@ export function SafeDaysCalculator() {
             </ResultAlert>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              <div className="p-4 bg-red-50 border border-red-100 rounded-lg">
-                <h3 className="text-lg font-medium mb-2 flex items-center">
-                  <AlertTriangleIcon className="h-5 w-5 mr-2 text-red-500" /> 
+              <div className="p-4 bg-red-50 dark:bg-red-950 border border-red-100 dark:border-red-800 rounded-lg">
+                <h3 className="text-lg font-medium mb-2 flex items-center dark:text-red-100">
+                  <AlertTriangleIcon className="h-5 w-5 mr-2 text-red-500 dark:text-red-400" /> 
                   Fertile Window
                 </h3>
-                <p className="text-base font-semibold">{formatDateRange(fertileWindow)}</p>
-                <p className="text-sm text-muted-foreground mt-2">
+                <p className="text-base font-semibold dark:text-red-50">{formatDateRange(fertileWindow)}</p>
+                <p className="text-sm text-muted-foreground dark:text-red-200 mt-2">
                   Highest risk of pregnancy. Avoid unprotected intercourse during these days.
                 </p>
               </div>
               
-              <div className="p-4 bg-yellow-50 border border-yellow-100 rounded-lg text-center">
-                <h3 className="text-lg font-medium mb-2">Estimated Ovulation Day</h3>
-                <p className="text-xl font-semibold">{format(ovulationDate, 'MMMM d, yyyy')}</p>
+              <div className="p-4 bg-yellow-50 dark:bg-yellow-950 border border-yellow-100 dark:border-yellow-800 rounded-lg text-center">
+                <h3 className="text-lg font-medium mb-2 dark:text-yellow-100">Estimated Ovulation Day</h3>
+                <p className="text-xl font-semibold dark:text-yellow-50">{format(ovulationDate, 'MMMM d, yyyy')}</p>
               </div>
             </div>
             
-            <div className="grid grid-cols-1 gap-4 mt-2">
-              <div className="p-4 bg-green-50 border border-green-100 rounded-lg">
-                <h3 className="text-lg font-medium mb-2">Potentially "Safe" Days (Lower Risk)</h3>
+            <div>
+              <div className="p-4 bg-green-50 dark:bg-green-950 border border-green-100 dark:border-green-800 rounded-lg">
+                <h3 className="text-lg font-medium mb-2 dark:text-green-100">Potentially "Safe" Days (Lower Risk)</h3>
                 
                 <div className="grid grid-cols-1 gap-3">
                   <div>
-                    <p className="font-medium">Early Phase:</p>
-                    <p className="font-semibold">{formatDateRange(safeDays.early)}</p>
-                    <p className="text-xs text-muted-foreground mt-1">Days after your period ends and before your fertile window starts</p>
+                    <p className="font-medium dark:text-green-200">Early Phase:</p>
+                    <p className="font-semibold dark:text-green-50">{formatDateRange(safeDays.early)}</p>
+                    <p className="text-xs text-muted-foreground dark:text-green-300 mt-1">Days after your period ends and before your fertile window starts</p>
                   </div>
                   
                   <div>
-                    <p className="font-medium">Late Phase:</p>
-                    <p className="font-semibold">{formatDateRange(safeDays.late)}</p>
-                    <p className="text-xs text-muted-foreground mt-1">Days after your fertile window ends and before your next period starts</p>
+                    <p className="font-medium dark:text-green-200">Late Phase:</p>
+                    <p className="font-semibold dark:text-green-50">{formatDateRange(safeDays.late)}</p>
+                    <p className="text-xs text-muted-foreground dark:text-green-300 mt-1">Days after your fertile window ends and before your next period starts</p>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="mt-4 p-4 bg-blue-50 border border-blue-100 rounded-lg">
-              <h3 className="text-lg font-medium mb-2">Your Cycle At a Glance</h3>
+            <div>
+              <h3 className="text-lg font-medium mb-2 dark:text-white">Your Cycle At a Glance</h3>
               <div className="grid gap-2">
                 <div className="grid grid-cols-3 gap-2">
-                  <div className="p-2 text-center bg-pink-100 rounded">
-                    <p className="text-xs">Period</p>
-                    <p className="font-semibold">{periodLength} days</p>
+                  <div className="p-2 text-center bg-pink-100 dark:bg-pink-950 rounded">
+                    <p className="text-xs dark:text-pink-200">Period</p>
+                    <p className="font-semibold dark:text-pink-100">{periodLength} days</p>
                   </div>
-                  <div className="p-2 text-center bg-green-100 rounded">
-                    <p className="text-xs">Potentially "Safe"</p>
-                    <p className="font-semibold">
+                  <div className="p-2 text-center bg-green-100 dark:bg-green-950 rounded">
+                    <p className="text-xs dark:text-green-200">Potentially "Safe"</p>
+                    <p className="font-semibold dark:text-green-100">
                       {safeDays.early ? Math.round((safeDays.early[1].getTime() - safeDays.early[0].getTime()) / (1000 * 60 * 60 * 24)) + 1 : 0} days
                     </p>
                   </div>
-                  <div className="p-2 text-center bg-red-100 rounded">
-                    <p className="text-xs">Fertile</p>
-                    <p className="font-semibold">
+                  <div className="p-2 text-center bg-red-100 dark:bg-red-950 rounded">
+                    <p className="text-xs dark:text-red-200">Fertile</p>
+                    <p className="font-semibold dark:text-red-100">
                       {fertileWindow ? Math.round((fertileWindow[1].getTime() - fertileWindow[0].getTime()) / (1000 * 60 * 60 * 24)) + 1 : 0} days
                     </p>
                   </div>
                 </div>
                 <div className="grid grid-cols-1">
-                  <div className="p-2 text-center bg-green-100 rounded">
-                    <p className="text-xs">Potentially "Safe"</p>
-                    <p className="font-semibold">
+                  <div className="p-2 text-center bg-green-100 dark:bg-green-950 rounded">
+                    <p className="text-xs dark:text-green-200">Potentially "Safe"</p>
+                    <p className="font-semibold dark:text-green-100">
                       {safeDays.late ? Math.round((safeDays.late[1].getTime() - safeDays.late[0].getTime()) / (1000 * 60 * 60 * 24)) + 1 : 0} days
                     </p>
                   </div>

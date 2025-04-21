@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorResult, ResultAlert } from "@/components/calculator/calculator-result";
@@ -18,14 +17,21 @@ const questions = [
   "Thoughts that you would be better off dead or of hurting yourself in some way"
 ];
 
+const answerOptions = [
+  "Not at all",
+  "Several days",
+  "More than half the days",
+  "Nearly every day"
+];
+
 export function PHQ9DepressionTest() {
   const [answers, setAnswers] = useState<number[]>(Array(questions.length).fill(-1));
   const [showResults, setShowResults] = useState(false);
   const [functionalImpairment, setFunctionalImpairment] = useState<number>(-1);
   
-  const handleAnswer = (questionIndex: number, value: number) => {
+  const handleAnswerChange = (index: number, value: number) => {
     const newAnswers = [...answers];
-    newAnswers[questionIndex] = value;
+    newAnswers[index] = value;
     setAnswers(newAnswers);
   };
   
@@ -36,16 +42,18 @@ export function PHQ9DepressionTest() {
   };
   
   const calculateScore = () => {
-    return answers.reduce((sum, answer) => sum + answer, 0);
+    return answers.reduce((sum, answer) => sum + (answer >= 0 ? answer : 0), 0);
   };
   
-  const getDepressionSeverity = (score: number) => {
-    if (score < 5) return { level: "Minimal or None", class: "success" };
-    if (score < 10) return { level: "Mild", class: "warning" };
-    if (score < 15) return { level: "Moderate", class: "warning" };
-    if (score < 20) return { level: "Moderately Severe", class: "error" };
-    return { level: "Severe", class: "error" };
+  const getSeverityDescription = (score: number): string => {
+    if (score >= 20) return "Severe depression";
+    if (score >= 15) return "Moderately severe depression";
+    if (score >= 10) return "Moderate depression";
+    if (score >= 5) return "Mild depression";
+    return "Minimal depression";
   };
+  
+  const totalScore = calculateScore();
   
   const getFunctionalImpairmentText = (level: number) => {
     switch (level) {
@@ -57,8 +65,15 @@ export function PHQ9DepressionTest() {
     }
   };
   
-  const score = calculateScore();
-  const severity = getDepressionSeverity(score);
+  const getDepressionSeverity = (score: number) => {
+    if (score < 5) return { level: "Minimal or None", class: "success" };
+    if (score < 10) return { level: "Mild", class: "warning" };
+    if (score < 15) return { level: "Moderate", class: "warning" };
+    if (score < 20) return { level: "Moderately Severe", class: "error" };
+    return { level: "Severe", class: "error" };
+  };
+  
+  const severity = getDepressionSeverity(totalScore);
   
   const getRecommendation = (score: number) => {
     if (score < 5) {
@@ -89,29 +104,28 @@ export function PHQ9DepressionTest() {
             </div>
             
             {questions.map((question, index) => (
-              <div key={index} className="space-y-3">
-                <Label className="text-base">{index + 1}. {question}</Label>
+              <div key={index} className="space-y-2">
+                <Label className="text-base dark:text-white">{question}</Label>
                 <RadioGroup
                   value={answers[index].toString()}
-                  onValueChange={(value) => handleAnswer(index, parseInt(value))}
-                  className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-4"
+                  onValueChange={(value) => handleAnswerChange(index, parseInt(value))}
+                  className="grid grid-cols-4 gap-2"
                 >
-                  <div className="flex items-center space-x-2 rounded-md border p-2">
-                    <RadioGroupItem value="0" id={`q${index}-0`} />
-                    <Label htmlFor={`q${index}-0`} className="flex-grow">Not at all</Label>
-                  </div>
-                  <div className="flex items-center space-x-2 rounded-md border p-2">
-                    <RadioGroupItem value="1" id={`q${index}-1`} />
-                    <Label htmlFor={`q${index}-1`} className="flex-grow">Several days</Label>
-                  </div>
-                  <div className="flex items-center space-x-2 rounded-md border p-2">
-                    <RadioGroupItem value="2" id={`q${index}-2`} />
-                    <Label htmlFor={`q${index}-2`} className="flex-grow">More than half the days</Label>
-                  </div>
-                  <div className="flex items-center space-x-2 rounded-md border p-2">
-                    <RadioGroupItem value="3" id={`q${index}-3`} />
-                    <Label htmlFor={`q${index}-3`} className="flex-grow">Nearly every day</Label>
-                  </div>
+                  {answerOptions.map((option, optionIndex) => (
+                    <div key={optionIndex} className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value={optionIndex.toString()}
+                        id={`question-${index}-option-${optionIndex}`}
+                        className="dark:border-slate-600 dark:bg-slate-800"
+                      />
+                      <Label
+                        htmlFor={`question-${index}-option-${optionIndex}`}
+                        className="text-sm dark:text-slate-300"
+                      >
+                        {option}
+                      </Label>
+                    </div>
+                  ))}
                 </RadioGroup>
               </div>
             ))}
@@ -157,74 +171,58 @@ export function PHQ9DepressionTest() {
       
       {showResults && (
         <CalculatorResult title="PHQ-9 Depression Screening Results">
-          <div className="space-y-6">
-            <div className="p-6 bg-muted rounded-lg text-center">
-              <h3 className="text-lg font-medium">Depression Severity Score</h3>
-              <p className="text-4xl font-bold mt-2">{score}</p>
-              <p className={`mt-2 text-lg font-semibold text-${severity.class}-600`}>
-                {severity.level} Depression
+          <div className="space-y-4">
+            <div className="p-6 bg-blue-50 dark:bg-blue-950 border border-blue-100 dark:border-blue-800 rounded-lg text-center">
+              <h3 className="text-lg font-medium dark:text-blue-100">Your Score</h3>
+              <p className="text-4xl font-bold mt-2 dark:text-blue-50">{totalScore}</p>
+              <p className="text-sm text-muted-foreground dark:text-blue-200 mt-2">
+                {getSeverityDescription(totalScore)}
               </p>
             </div>
             
-            <div className="p-4 bg-blue-50 border border-blue-100 rounded-lg">
-              <h3 className="text-lg font-medium mb-2">Functional Impact</h3>
-              <p className="text-xl font-medium">
-                {getFunctionalImpairmentText(functionalImpairment)}
-              </p>
-              <p className="text-sm text-muted-foreground mt-1">
-                Level of difficulty these problems have caused in your daily life
-              </p>
-            </div>
-            
-            <ResultAlert
-              type={score >= 10 ? (score >= 20 ? "error" : "warning") : "info"}
-              title="Recommendation"
-            >
-              {getRecommendation(score)}
-            </ResultAlert>
-            
-            {answers[8] > 0 && (
-              <ResultAlert type="error" title="Important Safety Notice">
-                <p className="font-medium">You indicated having thoughts that you would be better off dead or of hurting yourself.</p>
-                <p className="mt-2">If you're having thoughts of suicide or self-harm, please seek help immediately:</p>
-                <ul className="list-disc list-inside mt-1">
-                  <li>Call the National Suicide Prevention Lifeline: 988 or 1-800-273-8255</li>
-                  <li>Text HOME to the Crisis Text Line: 741741</li>
-                  <li>Go to your nearest emergency room</li>
-                  <li>Contact a mental health professional</li>
-                </ul>
-              </ResultAlert>
-            )}
-            
-            <div className="space-y-2 mt-4">
-              <h3 className="text-lg font-medium">Depression Severity Categories</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                <div className="p-2 rounded-lg bg-green-50 border border-green-100">
-                  <p className="font-semibold">Minimal or None: 0-4</p>
-                  <p className="text-sm">Minimal or no depressive symptoms</p>
+            <div className="p-6 bg-purple-50 dark:bg-purple-950 border border-purple-100 dark:border-purple-800 rounded-lg">
+              <h3 className="text-lg font-medium mb-4 dark:text-purple-100">Severity Levels</h3>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between p-2 bg-muted dark:bg-slate-800 rounded">
+                  <span className="dark:text-white">0-4</span>
+                  <span className="dark:text-slate-300">Minimal depression</span>
                 </div>
-                <div className="p-2 rounded-lg bg-yellow-50 border border-yellow-100">
-                  <p className="font-semibold">Mild: 5-9</p>
-                  <p className="text-sm">Mild depressive symptoms</p>
+                <div className="flex items-center justify-between p-2 bg-muted dark:bg-slate-800 rounded">
+                  <span className="dark:text-white">5-9</span>
+                  <span className="dark:text-slate-300">Mild depression</span>
                 </div>
-                <div className="p-2 rounded-lg bg-orange-50 border border-orange-100">
-                  <p className="font-semibold">Moderate: 10-14</p>
-                  <p className="text-sm">Moderate depressive symptoms</p>
+                <div className="flex items-center justify-between p-2 bg-muted dark:bg-slate-800 rounded">
+                  <span className="dark:text-white">10-14</span>
+                  <span className="dark:text-slate-300">Moderate depression</span>
                 </div>
-                <div className="p-2 rounded-lg bg-red-50 border border-red-100">
-                  <p className="font-semibold">Moderately Severe: 15-19</p>
-                  <p className="text-sm">Moderately severe depressive symptoms</p>
+                <div className="flex items-center justify-between p-2 bg-muted dark:bg-slate-800 rounded">
+                  <span className="dark:text-white">15-19</span>
+                  <span className="dark:text-slate-300">Moderately severe depression</span>
                 </div>
-                <div className="p-2 rounded-lg bg-red-50 border border-red-100 col-span-1 md:col-span-2">
-                  <p className="font-semibold">Severe: 20-27</p>
-                  <p className="text-sm">Severe depressive symptoms</p>
+                <div className="flex items-center justify-between p-2 bg-muted dark:bg-slate-800 rounded">
+                  <span className="dark:text-white">20-27</span>
+                  <span className="dark:text-slate-300">Severe depression</span>
                 </div>
               </div>
             </div>
             
-            <div className="text-sm text-muted-foreground mt-4">
-              <p><strong>Important:</strong> The PHQ-9 is a screening tool and not a diagnostic instrument. This questionnaire is not a substitute for professional diagnosis and treatment. If you are concerned about your mental health, please consult a healthcare professional.</p>
-              <p className="mt-2"><strong>Confidentiality:</strong> Your answers are confidential and are not being stored or shared. This calculation happens entirely in your browser.</p>
+            <div className="space-y-2 mt-4">
+              <h3 className="text-lg font-medium dark:text-white">Depression Management Strategies</h3>
+              <ul className="list-disc list-inside space-y-1 dark:text-slate-200">
+                <li>Practice regular physical activity</li>
+                <li>Maintain a consistent sleep schedule</li>
+                <li>Connect with friends and family</li>
+                <li>Consider therapy or counseling</li>
+                <li>Practice mindfulness and meditation</li>
+                <li>Set small, achievable goals</li>
+                <li>Limit alcohol and caffeine</li>
+                <li>Seek professional help if needed</li>
+              </ul>
+            </div>
+            
+            <div className="text-sm text-muted-foreground dark:text-slate-300 mt-4">
+              <p><strong className="dark:text-white">Important:</strong> The PHQ-9 is a screening tool and not a diagnostic instrument. This questionnaire is not a substitute for professional diagnosis and treatment. If you are concerned about your mental health, please consult a healthcare professional.</p>
+              <p className="mt-2"><strong className="dark:text-white">Confidentiality:</strong> Your answers are confidential and are not being stored or shared. This calculation happens entirely in your browser.</p>
             </div>
           </div>
         </CalculatorResult>

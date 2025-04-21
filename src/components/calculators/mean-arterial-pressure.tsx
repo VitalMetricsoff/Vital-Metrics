@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -156,62 +155,39 @@ export function MeanArterialPressure() {
       </Card>
 
       {showResults && (
-        <CalculatorResult 
-          title="Mean Arterial Pressure Results" 
-          description="Your calculated MAP and related metrics"
-        >
+        <CalculatorResult title="Mean Arterial Pressure Results">
           <div className="space-y-6">
-            <div className="text-center">
-              <p className="text-4xl font-bold">{map} mmHg</p>
-              <p className="text-lg text-muted-foreground">Mean Arterial Pressure</p>
-              <div className="mt-2">
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  category === "Low" ? "bg-blue-100 text-blue-800" : 
-                  category === "Normal" ? "bg-green-100 text-green-800" : 
-                  category === "Elevated" ? "bg-yellow-100 text-yellow-800" : 
-                  category === "High" ? "bg-orange-100 text-orange-800" : 
-                  "bg-red-100 text-red-800"
-                }`}>
-                  {category}
-                </span>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+                <h3 className="text-lg font-medium dark:text-slate-200">Mean Arterial Pressure</h3>
+                <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">{map} mmHg</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Calculated using {mapMethod}</p>
+                <ResultAlert
+                  type={map >= 70 && map <= 100 ? "success" : "warning"}
+                  title={map >= 70 && map <= 100 ? "Normal Range" : "Outside Normal Range"}
+                >
+                  {map >= 70 && map <= 100
+                    ? "Your mean arterial pressure is within normal limits"
+                    : "Your mean arterial pressure is outside the normal range of 70-100 mmHg"}
+                </ResultAlert>
+              </div>
+
+              <div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-lg text-center border border-slate-200 dark:border-slate-700">
+                <h3 className="text-lg font-medium dark:text-slate-200">Pulse Pressure</h3>
+                <p className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">{pulsePressure} mmHg</p>
+                <ResultAlert
+                  type={pulsePressure >= 40 && pulsePressure <= 60 ? "success" : "warning"}
+                  title={pulsePressure >= 40 && pulsePressure <= 60 ? "Normal Range" : "Outside Normal Range"}
+                >
+                  {pulsePressure >= 40 && pulsePressure <= 60
+                    ? "Your pulse pressure is within normal limits"
+                    : "Your pulse pressure is outside the normal range of 40-60 mmHg"}
+                </ResultAlert>
               </div>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 border rounded-lg">
-                <h4 className="font-medium text-sm text-muted-foreground">Calculation Method</h4>
-                <p className="text-lg font-medium mt-1">{mapMethod}</p>
-                <p className="text-xs text-muted-foreground mt-2">
-                  DBP + 1/3(SBP - DBP)
-                </p>
-              </div>
-              
-              <div className="p-4 border rounded-lg">
-                <h4 className="font-medium text-sm text-muted-foreground">Pulse Pressure</h4>
-                <p className="text-lg font-medium mt-1">{pulsePressure} mmHg</p>
-                <p className="text-xs text-muted-foreground mt-2">
-                  SBP - DBP (normal range: 40-60 mmHg)
-                </p>
-              </div>
-            </div>
-            
-            {category === "Low" ? (
-              <ResultAlert type="warning" title="Low MAP Warning">
-                Your MAP is below the normal range. A MAP below 70 mmHg may indicate inadequate blood perfusion to organs. Please consult with a healthcare professional.
-              </ResultAlert>
-            ) : category === "Normal" ? (
-              <ResultAlert type="success" title="Normal MAP">
-                Your MAP is within the normal range, indicating adequate blood flow to your organs.
-              </ResultAlert>
-            ) : (
-              <ResultAlert type="warning" title="Elevated MAP Warning">
-                Your MAP is above the normal range. Elevated MAP values may indicate hypertension. Please consult with a healthcare professional for proper evaluation.
-              </ResultAlert>
-            )}
-            
-            <div className="bg-muted p-4 rounded-lg text-sm">
-              <h4 className="font-medium">Clinical Context</h4>
-              <p className="mt-1">Mean Arterial Pressure represents the average pressure driving blood through the circulatory system during the cardiac cycle. In clinical settings, a minimum MAP of 65 mmHg is generally targeted to ensure adequate organ perfusion.</p>
+
+            <div className="text-sm text-slate-600 dark:text-slate-300">
+              <p>Note: Mean arterial pressure (MAP) represents the average pressure in your arteries during one cardiac cycle. Normal MAP typically ranges from 70 to 100 mmHg.</p>
             </div>
           </div>
         </CalculatorResult>

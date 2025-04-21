@@ -1,4 +1,3 @@
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChangeEvent, useId } from "react";
@@ -47,11 +46,15 @@ export function CalculatorNumberInput({
   return (
     <div className={cn("space-y-2", className)}>
       <div className="flex justify-between">
-        <Label htmlFor={id} className="text-sm font-medium">
+        <Label htmlFor={id} className="text-sm font-medium dark:text-slate-100">
           {label}
           {required && <span className="text-destructive ml-1">*</span>}
         </Label>
-        {description && <span className="text-xs text-muted-foreground">{description}</span>}
+        {description && (
+          <span className="text-xs text-muted-foreground dark:text-slate-300">
+            {description}
+          </span>
+        )}
       </div>
       <div className="relative">
         <Input
@@ -65,10 +68,17 @@ export function CalculatorNumberInput({
           placeholder={placeholder}
           required={required}
           disabled={disabled}
-          className={unit ? "pr-12" : ""}
+          className={cn(
+            unit ? "pr-12" : "",
+            "dark:bg-slate-800/90 dark:border-slate-600",
+            "dark:text-slate-100 dark:placeholder:text-slate-500",
+            "focus:dark:border-primary focus:dark:ring-primary/30",
+            "dark:hover:border-slate-500",
+            disabled && "dark:bg-slate-800/50 dark:text-slate-400"
+          )}
         />
         {unit && (
-          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-muted-foreground">
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-muted-foreground dark:text-slate-400">
             {unit}
           </div>
         )}
