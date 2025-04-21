@@ -1,14 +1,22 @@
 # Vital Metrics - Health Calculator Suite
 
-![Vital Metrics Logo](public/favicon.svg)
+## About
 
-## Overview
+Vital Metrics is a private medical calculator suite designed specifically for healthcare professionals. Our platform provides evidence-based calculators across various medical specialties, ensuring accurate and efficient clinical calculations.
 
-Vital Metrics is a comprehensive health and wellness calculator suite designed to help users monitor, analyze, and improve their health metrics. Our platform offers a wide range of calculators covering various health aspects including body metrics, fitness, nutrition, and more.
+## Founder
+
+Dr. Aravind Kumar Kalusivalingam
+- Founder of VitalMetrics.in
+- MD General Physician
+- Physician Technologist
+- Healthcare Innovator
+
+As a practicing physician, Dr. Aravind recognized the need for quick, reliable medical calculations in daily practice. VitalMetrics was born from this vision - to create a platform that simplifies complex medical calculations while ensuring accuracy and efficiency.
 
 ## Features
 
-- **Comprehensive Health Calculators**
+- **Comprehensive Medical Calculators**
   - Body Metrics (BMI, Body Fat, etc.)
   - Fitness & Metabolism
   - Cardio & Vitals
@@ -28,7 +36,7 @@ Vital Metrics is a comprehensive health and wellness calculator suite designed t
 - **Technical Features**
   - Progressive Web App (PWA) support
   - Offline capabilities
-  - Data privacy focused
+  - Enhanced data privacy and security
   - Cross-platform compatibility
 
 ## Technology Stack
@@ -48,19 +56,20 @@ Vital Metrics is a comprehensive health and wellness calculator suite designed t
   - TypeScript
   - Git
 
-## Getting Started
+## Development Setup
 
 ### Prerequisites
 
 - Node.js (v18 or higher)
 - npm or yarn
 - Git
+- Proper access credentials
 
 ### Installation
 
-1. Clone the repository:
+1. Clone the private repository:
    ```bash
-   git clone https://github.com/your-username/vital-metrics.git
+   git clone https://github.com/vitalmetrics/vital-metrics.git
    cd vital-metrics
    ```
 
@@ -102,31 +111,14 @@ vital-metrics/
 └── vite.config.ts     # Vite configuration
 ```
 
-## Contributing
+## Security Notice
 
-We welcome contributions! Please follow these steps:
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This is a private project. All code, documentation, and resources are confidential and proprietary. Unauthorized access, distribution, or reproduction is strictly prohibited.
 
 ## Contact
 
-For any questions or support, please visit our [Contact Page](https://vitalmetrics.com/contact).
-
-## Acknowledgments
-
-- [shadcn/ui](https://ui.shadcn.com/) for the component library
-- [Tailwind CSS](https://tailwindcss.com/) for the styling framework
-- [React](https://reactjs.org/) for the UI library
-- [Vite](https://vitejs.dev/) for the build tool
+For internal inquiries and support, please contact the development team directly.
 
 ---
 
-© 2024 Vital Metrics. All rights reserved.
+© 2024 Vital Metrics. All rights reserved. Private and Confidential.
