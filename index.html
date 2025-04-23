@@ -12,6 +12,12 @@
     <meta name="revisit-after" content="7 days" />
     <link rel="canonical" href="https://vitalmetrics.in" />
 
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/montserrat-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/icon-192.png" as="image" />
+    <link rel="preload" href="/icon-512.png" as="image" />
+
     <!-- Favicons -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -33,15 +39,17 @@
     <meta property="og:image" content="https://vitalmetrics.in/icon-512.png" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="VitalMetrics - Medical Calculator Suite" />
     <meta property="og:site_name" content="VitalMetrics" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://vitalmetrics.in" />
     <meta name="twitter:title" content="VitalMetrics.in | Professional Medical Calculator Suite" />
     <meta name="twitter:description" content="Evidence-based medical calculators for healthcare professionals. Quick, accurate clinical calculations for patient care." />
-    <meta name="twitter:image" content="https://vitalmetrics.in/icon-192.png" />
+    <meta name="twitter:image" content="https://vitalmetrics.in/icon-512.png" />
+    <meta name="twitter:image:alt" content="VitalMetrics - Medical Calculator Suite" />
     <meta name="twitter:creator" content="@vitalmetrics" />
 
     <!-- Additional Meta -->
@@ -81,6 +89,9 @@
         }
       }
     </script>
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="VitalMetrics Updates" href="/rss.xml" />
   </head>
 
   <body>

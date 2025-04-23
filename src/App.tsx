@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from 'react-helmet-async';
 import { MainLayout } from "./components/layout/main-layout";
 import HomePage from "./pages/HomePage";
 import CalculatorsPage from "./pages/CalculatorsPage";
@@ -18,29 +19,31 @@ import FounderPage from "./pages/FounderPage";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider defaultTheme="light">
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <MainLayout>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/calculators" element={<CalculatorsPage />} />
-              <Route path="/calculator/:slug" element={<CalculatorPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-              <Route path="/contact" element={<ContactUsPage />} />
-              <Route path="/terms-of-service" element={<TermsOfServicePage />} />
-              <Route path="/founder" element={<FounderPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </MainLayout>
-        </BrowserRouter>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider defaultTheme="light">
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <MainLayout>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/calculators" element={<CalculatorsPage />} />
+                <Route path="/calculator/:slug" element={<CalculatorPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                <Route path="/contact" element={<ContactUsPage />} />
+                <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+                <Route path="/founder" element={<FounderPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </MainLayout>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;

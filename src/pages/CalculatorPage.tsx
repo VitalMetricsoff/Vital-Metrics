@@ -10,7 +10,7 @@ import { BodyFatPercentageCalculator } from "@/components/calculators/body-fat-p
 import { LeanBodyMassCalculator } from "@/components/calculators/lean-body-mass";
 import { BMRCalculator } from "@/components/calculators/bmr-calculator";
 import { HeartRateZonesCalculator } from "@/components/calculators/heart-rate-zones";
-import { WaistToHipRatioCalculator } from "@/components/calculators/waist-to-hip-ratio"; 
+import { WaistToHipRatioCalculator } from "@/components/calculators/waist-to-hip-ratio";
 import { WaistToHeightRatioCalculator } from "@/components/calculators/waist-to-height-ratio";
 import { VO2MaxEstimator } from "@/components/calculators/vo2-max-estimator";
 import { OneRepMaxCalculator } from "@/components/calculators/one-rep-max-calculator";
@@ -54,6 +54,8 @@ import { BloodDonationEligibilityChecker } from "@/components/calculators/blood-
 import { HealthScoreIndex } from "@/components/calculators/health-score-index";
 import { CalculatorNavigation } from "@/components/calculator/calculator-navigation";
 import { toast } from "@/components/ui/use-toast";
+import { Breadcrumb } from '@/components/breadcrumb';
+import { Helmet } from 'react-helmet-async';
 
 type ActivityLevel = {
   sedentary: number;
@@ -120,6 +122,26 @@ export default function CalculatorPage() {
       </div>
     );
   }
+
+  const breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Calculators', href: '/calculators' },
+    { label: calculator.name, href: `/calculator/${calculator.slug}` }
+  ];
+
+  const calculatorSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": calculator.name,
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Any",
+    "description": calculator.description,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  };
 
   const renderCalculator = () => {
     switch (calculator.slug) {
@@ -247,21 +269,71 @@ export default function CalculatorPage() {
   };
 
   return (
-    <div className="container py-8">
-      <CalculatorNavigation />
-      
-      <div className="mb-8">
-        <div className="flex items-center gap-2 mb-2">
-          <span className={`inline-block px-2 py-1 text-xs rounded ${calculator.category ? `bg-${calculator.category}/10 text-${calculator.category}/80` : "bg-gray-200"}`}>
-            {calculator.category}
-          </span>
+    <>
+      <Helmet>
+        <title>{`${calculator.name} | VitalMetrics`}</title>
+        <meta name="description" content={calculator.description} />
+        <script type="application/ld+json">
+          {JSON.stringify(calculatorSchema)}
+        </script>
+      </Helmet>
+
+      <div className="container py-8 md:py-12">
+        <Breadcrumb items={breadcrumbItems} />
+        
+        <div className="mt-6">
+          <h1 className="text-3xl font-bold tracking-tighter md:text-4xl">
+            {calculator.name}
+          </h1>
+          <p className="mt-2 text-muted-foreground">
+            {calculator.description}
+          </p>
         </div>
-        <h1 className="text-3xl font-bold">{calculator.name}</h1>
-        <p className="text-muted-foreground mt-2">{calculator.description}</p>
+
+        {renderCalculator()}
+
+        {/* FAQ Section */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold mb-4">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            <div>
+              <h3 className="font-medium">How accurate is this calculator?</h3>
+              <p className="text-muted-foreground mt-1">
+                This calculator uses evidence-based formulas and is regularly updated with the latest medical research.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-medium">Can I use this for medical diagnosis?</h3>
+              <p className="text-muted-foreground mt-1">
+                This calculator is for informational purposes only and should not be used as a substitute for professional medical advice.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Related Calculators */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold mb-4">Related Calculators</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {calculators
+              .filter(c => c.category === calculator.category && c.id !== calculator.id)
+              .slice(0, 3)
+              .map(relatedCalculator => (
+                <a
+                  key={relatedCalculator.id}
+                  href={`/calculator/${relatedCalculator.slug}`}
+                  className="p-4 border rounded-lg hover:border-primary transition-colors"
+                >
+                  <h3 className="font-medium">{relatedCalculator.name}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {relatedCalculator.description}
+                  </p>
+                </a>
+              ))}
+          </div>
+        </div>
       </div>
-      
-      {renderCalculator()}
-    </div>
+    </>
   );
 }
 
