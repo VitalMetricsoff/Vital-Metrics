@@ -171,11 +171,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* New Founder Section */}
+      {/* Founder Section */}
       <section className="py-20 bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-grid-slate-200 dark:bg-grid-white/[0.02] bg-[size:30px_30px]" />
-        
         <div className="container px-4 md:px-6 relative">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -279,7 +276,7 @@ export default function HomePage() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </div>
                   <div>
-                    <h4 className="font-medium text-base dark:text-white">Evidence-Based Calculations</h4>
+                    <h3 className="font-medium text-base dark:text-white">Evidence-Based Calculations</h3>
                     <p className="text-sm text-muted-foreground dark:text-gray-300">All our health calculators are based on scientific formulas used by healthcare professionals.</p>
                   </div>
                 </li>
@@ -288,8 +285,8 @@ export default function HomePage() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </div>
                   <div>
-                    <h4 className="font-medium text-base dark:text-white">User Privacy Focused</h4>
-                    <p className="text-sm text-muted-foreground dark:text-gray-300">Your health data never leaves your device – all calculations are performed locally.</p>
+                    <h3 className="font-medium text-base dark:text-white">User-Friendly Interface</h3>
+                    <p className="text-sm text-muted-foreground dark:text-gray-300">Simple, intuitive design makes it easy to get accurate results quickly.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
@@ -297,8 +294,8 @@ export default function HomePage() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </div>
                   <div>
-                    <h4 className="font-medium text-base dark:text-white">Comprehensive & Informative</h4>
-                    <p className="text-sm text-muted-foreground dark:text-gray-300">Clear explanations help you understand what your results mean for your health.</p>
+                    <h3 className="font-medium text-base dark:text-white">Comprehensive Coverage</h3>
+                    <p className="text-sm text-muted-foreground dark:text-gray-300">From basic body metrics to complex medical calculations, we've got you covered.</p>
                   </div>
                 </li>
               </ul>
@@ -307,24 +304,24 @@ export default function HomePage() {
               <div className="space-y-4">
                 <div className="feature-card feature-blue-card bg-blue-50 p-6 rounded-xl shadow-sm dark:shadow-blue-900/10">
                   <Calculator className="h-8 w-8 text-blue-600 dark:text-blue-400 mb-4" />
-                  <h4 className="font-medium text-lg mb-2">Body Metrics</h4>
+                  <h3 className="font-medium text-lg mb-2">Body Metrics</h3>
                   <p className="text-sm text-muted-foreground">Calculate and track key body measurements and ratios.</p>
                 </div>
                 <div className="feature-card feature-orange-card bg-orange-50 p-6 rounded-xl shadow-sm dark:shadow-orange-900/10">
                   <Apple className="h-8 w-8 text-orange-600 dark:text-orange-400 mb-4" />
-                  <h4 className="font-medium text-lg mb-2">Nutrition Tools</h4>
+                  <h3 className="font-medium text-lg mb-2">Nutrition Tools</h3>
                   <p className="text-sm text-muted-foreground">Plan your diet and track nutritional needs.</p>
                 </div>
               </div>
               <div className="space-y-4 mt-8">
                 <div className="feature-card feature-green-card bg-green-50 p-6 rounded-xl shadow-sm dark:shadow-green-900/10">
                   <Activity className="h-8 w-8 text-green-600 dark:text-green-400 mb-4" />
-                  <h4 className="font-medium text-lg mb-2">Fitness Calculators</h4>
+                  <h3 className="font-medium text-lg mb-2">Fitness Calculators</h3>
                   <p className="text-sm text-muted-foreground">Optimize your workouts and monitor progress.</p>
                 </div>
                 <div className="feature-card feature-purple-card bg-purple-50 p-6 rounded-xl shadow-sm dark:shadow-purple-900/10">
                   <HeartPulse className="h-8 w-8 text-purple-600 dark:text-purple-400 mb-4" />
-                  <h4 className="font-medium text-lg mb-2">Heart Health</h4>
+                  <h3 className="font-medium text-lg mb-2">Heart Health</h3>
                   <p className="text-sm text-muted-foreground">Monitor vital cardiovascular metrics.</p>
                 </div>
               </div>

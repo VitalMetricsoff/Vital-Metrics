@@ -1,0 +1,132 @@
+/* Mobile First Approach */
+
+/* Base styles (mobile) */
+:root {
+  --container-padding: 1rem;
+  --section-spacing: 2rem;
+  --card-padding: 1rem;
+}
+
+/* Small tablets and large phones (640px and up) */
+@media (min-width: 640px) {
+  :root {
+    --container-padding: 1.5rem;
+    --section-spacing: 3rem;
+    --card-padding: 1.5rem;
+  }
+
+  .container {
+    max-width: 640px;
+  }
+}
+
+/* Tablets (768px and up) */
+@media (min-width: 768px) {
+  :root {
+    --container-padding: 2rem;
+    --section-spacing: 4rem;
+    --card-padding: 2rem;
+  }
+
+  .container {
+    max-width: 768px;
+  }
+
+  /* Calculator specific styles */
+  .calculator-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calculator-form {
+    max-width: 600px;
+  }
+}
+
+/* Laptops and desktops (1024px and up) */
+@media (min-width: 1024px) {
+  :root {
+    --container-padding: 2.5rem;
+    --section-spacing: 5rem;
+  }
+
+  .container {
+    max-width: 1024px;
+  }
+
+  /* Calculator specific styles */
+  .calculator-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .calculator-form {
+    max-width: 800px;
+  }
+}
+
+/* Large desktops (1280px and up) */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* Extra large desktops (1536px and up) */
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  body {
+    font-size: 12pt;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+/* Dark mode media query */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000;
+    --foreground: #fff;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --primary: #000;
+    --primary-foreground: #fff;
+  }
+}
+
+/* Touch device optimization */
+@media (hover: none) {
+  .hover-only {
+    display: none;
+  }
+} 

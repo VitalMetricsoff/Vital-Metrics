@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { calculators } from "@/data/calculators";
 import { Calculator } from "@/types/calculator";
 import { BMICalculator } from "@/components/calculators/bmi-calculator";
@@ -56,6 +56,10 @@ import { CalculatorNavigation } from "@/components/calculator/calculator-navigat
 import { toast } from "@/components/ui/use-toast";
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Helmet } from 'react-helmet-async';
+import { References } from "@/components/calculator/references";
+import { RelatedCalculators } from "@/components/calculator/related-calculators";
+import { FAQ } from "@/components/calculator/faq";
+import { generateStructuredData } from "@/sitemap";
 
 type ActivityLevel = {
   sedentary: number;
@@ -77,6 +81,7 @@ type CalculatorResultData = string | number | ActivityLevel | HeartRateZones;
 
 export default function CalculatorPage() {
   const { slug } = useParams<{ slug: string }>();
+  const location = useLocation();
   const [calculator, setCalculator] = useState<Calculator | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -142,6 +147,8 @@ export default function CalculatorPage() {
       "priceCurrency": "USD"
     }
   };
+
+  const siteLinksSchema = generateStructuredData(location.pathname);
 
   const renderCalculator = () => {
     switch (calculator.slug) {
@@ -273,63 +280,51 @@ export default function CalculatorPage() {
       <Helmet>
         <title>{`${calculator.name} | VitalMetrics`}</title>
         <meta name="description" content={calculator.description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script type="application/ld+json">
           {JSON.stringify(calculatorSchema)}
         </script>
+        {siteLinksSchema && (
+          <script type="application/ld+json">
+            {JSON.stringify(siteLinksSchema)}
+          </script>
+        )}
       </Helmet>
 
-      <div className="container py-8 md:py-12">
+      <div className="container py-6 md:py-10 px-4 sm:px-6 lg:px-8">
         <Breadcrumb items={breadcrumbItems} />
         
-        <div className="mt-6">
-          <h1 className="text-3xl font-bold tracking-tighter md:text-4xl">
-            {calculator.name}
-          </h1>
-          <p className="mt-2 text-muted-foreground">
-            {calculator.description}
-          </p>
-        </div>
-
-        {renderCalculator()}
-
-        {/* FAQ Section */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-semibold mb-4">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            <div>
-              <h3 className="font-medium">How accurate is this calculator?</h3>
-              <p className="text-muted-foreground mt-1">
-                This calculator uses evidence-based formulas and is regularly updated with the latest medical research.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-medium">Can I use this for medical diagnosis?</h3>
-              <p className="text-muted-foreground mt-1">
-                This calculator is for informational purposes only and should not be used as a substitute for professional medical advice.
-              </p>
-            </div>
+        <div className="max-w-4xl mx-auto mt-8">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl md:text-4xl font-heading font-bold tracking-tight gradient-heading mb-4">
+              {calculator.name}
+            </h1>
+            <p className="text-muted-foreground text-lg max-w-[700px] mx-auto">
+              {calculator.description}
+            </p>
           </div>
-        </div>
-
-        {/* Related Calculators */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-semibold mb-4">Related Calculators</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {calculators
-              .filter(c => c.category === calculator.category && c.id !== calculator.id)
-              .slice(0, 3)
-              .map(relatedCalculator => (
-                <a
-                  key={relatedCalculator.id}
-                  href={`/calculator/${relatedCalculator.slug}`}
-                  className="p-4 border rounded-lg hover:border-primary transition-colors"
-                >
-                  <h3 className="font-medium">{relatedCalculator.name}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {relatedCalculator.description}
-                  </p>
-                </a>
-              ))}
+          
+          <div className="professional-card p-6 md:p-8 mb-8">
+            {renderCalculator()}
+          </div>
+          
+          {calculator.faqs && calculator.faqs.length > 0 && (
+            <div className="professional-card p-6 md:p-8 mb-8">
+              <FAQ faqs={calculator.faqs} />
+            </div>
+          )}
+          
+          {calculator.references && calculator.references.length > 0 && (
+            <div className="glass-effect rounded-lg p-6 md:p-8 mb-8">
+              <References references={calculator.references} />
+            </div>
+          )}
+          
+          <div className="glass-effect rounded-lg p-6 md:p-8">
+            <RelatedCalculators
+              currentSlug={calculator.slug}
+              category={calculator.category}
+            />
           </div>
         </div>
       </div>

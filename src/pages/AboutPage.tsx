@@ -23,7 +23,7 @@ export default function AboutPage() {
         </section>
 
         {/* Features Section */}
-        <section className="space-y-4">
+        <section className="space-y-6">
           <h2 className="text-2xl font-semibold">Why Use VitalMetrics?</h2>
           <div className="grid gap-6 md:grid-cols-2">
             <div className="space-y-2">
@@ -54,18 +54,15 @@ export default function AboutPage() {
         </section>
 
         {/* Disclaimer Section */}
-        <section className="space-y-4 rounded-lg border p-6">
+        <section className="space-y-4">
           <h2 className="text-2xl font-semibold">Medical Disclaimer</h2>
-          <div className="space-y-4 text-sm text-muted-foreground">
-            <p>
-              VitalMetrics provides health calculators for informational and educational purposes only. Our tools are not 
-              intended to replace professional medical advice, diagnosis, or treatment. Always seek the advice of your 
-              physician or other qualified health provider with any questions you may have regarding a medical condition.
+          <div className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              While our calculators are based on evidence-based medical formulas, they are intended for informational 
+              purposes only. They should not be used as a substitute for professional medical advice, diagnosis, or treatment.
             </p>
-            <p>
-              Never disregard professional medical advice or delay in seeking it because of something you have read or 
-              calculated using our tools. If you think you may have a medical emergency, immediately call your doctor 
-              or dial emergency services.
+            <p className="text-sm text-muted-foreground">
+              Always consult with a qualified healthcare provider for any health-related decisions or concerns.
             </p>
           </div>
         </section>

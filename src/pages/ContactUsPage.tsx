@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,23 +8,6 @@ import { Mail } from "lucide-react";
 
 export default function ContactUsPage() {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Open default email client with pre-filled email
-    window.location.href = `mailto:doc.aravind.k@gmail.com?subject=VitalMetrics Contact: ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}\n\nFrom: ${encodeURIComponent(formData.email)}`;
-    
-    toast({
-      title: "Opening Email Client",
-      description: "Your default email client will open with a pre-filled message.",
-    });
-    setFormData({ name: "", email: "", message: "" });
-  };
 
   return (
     <div className="container py-8 md:py-12 max-w-4xl">
@@ -32,6 +16,7 @@ export default function ContactUsPage() {
         <div className="relative overflow-hidden rounded-2xl bg-slate-900 px-6 py-12 md:px-12 text-center">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-900/95 to-slate-900/90"></div>
           <div className="relative">
+            <h1 className="text-3xl font-bold text-white mb-6">Contact Us</h1>
             <blockquote className="mx-auto max-w-2xl text-white">
               <p className="font-serif text-lg md:text-xl italic">
                 "The good physician treats the disease; the great physician treats the patient who has the disease."
@@ -44,7 +29,7 @@ export default function ContactUsPage() {
         </div>
 
         {/* Contact Section */}
-        <div className="grid md:grid-cols-[1.2fr_2px_1fr] gap-8 items-start">
+        <div className="flex flex-col md:flex-row gap-8">
           {/* Founder Info */}
           <div className="space-y-8">
             <div className="flex flex-col items-center text-center">
@@ -82,25 +67,29 @@ export default function ContactUsPage() {
 
           {/* Mission Statement */}
           <div className="space-y-6">
-            <h3 className="text-xl font-semibold">Our Commitment</h3>
+            <h2 className="text-2xl font-semibold">Our Mission</h2>
+            <p className="text-muted-foreground">
+              At VitalMetrics, we're dedicated to empowering healthcare professionals with accurate, 
+              evidence-based calculation tools. Our goal is to make medical calculations more accessible 
+              and efficient, ultimately improving patient care.
+            </p>
             <div className="space-y-4">
-              <p className="text-base text-muted-foreground leading-relaxed">
-                VitalMetrics.in is dedicated to transforming medical calculations through technology. 
-                Our platform offers precise, evidence-based tools that streamline clinical workflows 
-                and enhance decision-making.
+              <h3 className="font-medium">Get in Touch</h3>
+              <p className="text-sm text-muted-foreground">
+                Whether you have questions about our calculators, suggestions for improvements, or 
+                would like to collaborate, we'd love to hear from you.
               </p>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                We continuously update our calculators based on the latest medical research and 
-                guidelines, ensuring healthcare professionals have access to reliable tools for 
-                optimal patient care.
-              </p>
-              <div className="pt-4">
-                <a 
-                  href="/founder"
-                  className="text-base text-primary hover:underline inline-flex items-center"
-                >
-                  Learn more about our mission →
-                </a>
+              <div className="flex flex-col gap-2">
+                <Button variant="outline" asChild>
+                  <a href="mailto:doc.aravind.k@gmail.com">
+                    Send us an Email
+                  </a>
+                </Button>
+                <Button variant="outline" asChild>
+                  <Link to="/about">
+                    Learn More About Us
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>

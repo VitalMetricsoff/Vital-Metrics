@@ -45,55 +45,59 @@ export default function FounderPage() {
                   loading="eager"
                 />
               </div>
-              <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-1">
+              <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-1">
                 Dr. Aravind Kumar Kalusivalingam
-              </h2>
+              </h1>
               <p className="text-slate-600 dark:text-slate-400 mb-4">
                 Founder of VitalMetrics.in
               </p>
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                  <GraduationCap className="h-5 w-5" />
-                  <span>MD General Physician</span>
-                </div>
-                <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                  <Stethoscope className="h-5 w-5" />
-                  <span>Physician Technologist</span>
-                </div>
-                <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                  <Code className="h-5 w-5" />
-                  <span>Healthcare Innovator</span>
-                </div>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  MD General Physician
+                </p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  Healthcare Technology Innovator
+                </p>
               </div>
             </div>
           </div>
 
           {/* Main Content */}
           <div className="space-y-8">
-            {/* Vision Section */}
+            {/* Introduction */}
             <section>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Vision</h3>
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                As a practicing physician, I recognized the need for quick, reliable medical calculations in daily practice. VitalMetrics was born from this vision - to create a platform that simplifies complex medical calculations while ensuring accuracy and efficiency. Our journey began with a simple idea: to make healthcare professionals' lives easier and enhance patient care through technology.
-              </p>
+              <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Introduction</h2>
+              <div className="prose dark:prose-invert max-w-none">
+                <p>
+                  As a medical professional with a passion for technology, I founded VitalMetrics to address 
+                  a critical need in healthcare: accessible, accurate medical calculations. My journey from 
+                  medical practice to healthcare technology has been driven by a simple yet powerful vision: 
+                  to make medical calculations more efficient and reliable for healthcare professionals worldwide.
+                </p>
+              </div>
             </section>
 
-            {/* Mission Section */}
+            {/* Background */}
             <section>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Mission</h3>
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                At VitalMetrics, our mission is to empower healthcare professionals with efficient, reliable tools that streamline their workflow. We understand the critical nature of medical calculations and the importance of having trustworthy resources at your fingertips. Our platform is designed to be your reliable companion in clinical practice, research, and medical education.
-              </p>
+              <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Background</h2>
+              <div className="prose dark:prose-invert max-w-none">
+                <p>
+                  With a background in general medicine and a deep understanding of healthcare workflows, 
+                  I recognized the challenges healthcare professionals face with manual calculations and 
+                  outdated tools. This insight led to the creation of VitalMetrics, a comprehensive suite 
+                  of medical calculators designed to streamline clinical decision-making.
+                </p>
+              </div>
             </section>
 
-            {/* Impact Section */}
+            {/* Impact */}
             <section>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Impact</h3>
+              <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Impact</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-slate-200 dark:border-slate-800/50">
                   <div className="flex items-center gap-3 mb-2">
                     <Stethoscope className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                    <h4 className="text-lg font-medium text-slate-900 dark:text-slate-50">Medical Calculators</h4>
+                    <h3 className="text-lg font-medium text-slate-900 dark:text-slate-50">Medical Calculators</h3>
                   </div>
                   <p className="text-slate-600 dark:text-slate-400">
                     Comprehensive collection of evidence-based medical calculators across various specialties
@@ -102,7 +106,7 @@ export default function FounderPage() {
                 <div className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-slate-200 dark:border-slate-800/50">
                   <div className="flex items-center gap-3 mb-2">
                     <Users className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                    <h4 className="text-lg font-medium text-slate-900 dark:text-slate-50">Growing Community</h4>
+                    <h3 className="text-lg font-medium text-slate-900 dark:text-slate-50">Growing Community</h3>
                   </div>
                   <p className="text-slate-600 dark:text-slate-400">
                     Supporting healthcare professionals worldwide with reliable tools
@@ -118,12 +122,16 @@ export default function FounderPage() {
               </Button>
             </section>
 
-            {/* Future Vision Section */}
+            {/* Future Vision */}
             <section>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Future Vision</h3>
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                We are committed to continuous improvement and innovation. Your feedback drives our development, and we're constantly working to expand our calculator collection, enhance user experience, and incorporate the latest medical evidence. Together, we're building a future where medical calculations are accessible, accurate, and efficient for all healthcare professionals.
-              </p>
+              <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Future Vision</h2>
+              <div className="prose dark:prose-invert max-w-none">
+                <p>
+                  Looking ahead, I envision VitalMetrics evolving into an even more comprehensive platform 
+                  that integrates with modern healthcare systems, providing seamless calculation tools that 
+                  enhance clinical workflows and improve patient care outcomes.
+                </p>
+              </div>
             </section>
           </div>
         </div>

@@ -9,6 +9,30 @@ export const calculators: Calculator[] = [
     description: "Calculate your Body Mass Index (BMI) to assess if you're at a healthy weight.",
     slug: "bmi-calculator",
     icon: "Scale",
+    formula: "BMI = weight (kg) / (height (m))²",
+    inputs: [],
+    faqs: [
+      {
+        question: "What is BMI?",
+        answer: "Body Mass Index (BMI) is a simple measure that uses your height and weight to work out if your weight is healthy. The BMI calculation divides an adult's weight in kilograms by their height in metres squared."
+      },
+      {
+        question: "What are the BMI ranges?",
+        answer: "• Underweight: BMI less than 18.5\n• Normal weight: BMI 18.5 to 24.9\n• Overweight: BMI 25 to 29.9\n• Obese: BMI 30 or greater"
+      },
+      {
+        question: "Is BMI accurate for everyone?",
+        answer: "BMI is not a perfect measure. It may overestimate body fat in athletes and others who have a muscular build, and it may underestimate body fat in older persons and others who have lost muscle mass."
+      },
+      {
+        question: "How often should I check my BMI?",
+        answer: "It's recommended to check your BMI whenever there are significant changes in your weight or every 6-12 months as part of your regular health check-up."
+      },
+      {
+        question: "What should I do if my BMI is outside the healthy range?",
+        answer: "If your BMI is outside the healthy range (18.5-24.9), it's recommended to consult with a healthcare provider. They can perform a more detailed assessment and provide personalized advice based on your individual health situation."
+      }
+    ]
   },
   {
     id: "body-fat-percentage",

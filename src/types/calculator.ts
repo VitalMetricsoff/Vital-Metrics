@@ -1,12 +1,27 @@
+export interface Reference {
+  title: string;
+  url: string;
+  source: string;
+  year?: string;
+}
 
-export type Calculator = {
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
+export interface Calculator {
   id: string;
   name: string;
   category: Category;
   description: string;
   slug: string;
   icon: string;
-};
+  formula: string;
+  inputs: Input[];
+  references?: Reference[];
+  faqs?: FAQ[];
+}
 
 export type Category = 
   | "body-metrics"
