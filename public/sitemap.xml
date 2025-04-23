@@ -1,78 +1,276 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Main Pages -->
   <url>
     <loc>https://vitalmetrics.in/</loc>
-    <lastmod>2024-03-21</lastmod>
+    <lastmod>2024-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://vitalmetrics.in/founder</loc>
-    <lastmod>2024-03-21</lastmod>
+    <lastmod>2024-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vitalmetrics.in/calculators</loc>
-    <lastmod>2024-03-21</lastmod>
+    <lastmod>2024-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/about</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/contact</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/privacy-policy</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/terms-of-service</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
 
   <!-- Calculator Category Pages -->
   <url>
     <loc>https://vitalmetrics.in/calculators/body-metrics</loc>
-    <lastmod>2024-03-21</lastmod>
+    <lastmod>2024-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vitalmetrics.in/calculators/fitness-metabolism</loc>
-    <lastmod>2024-03-21</lastmod>
+    <lastmod>2024-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vitalmetrics.in/calculators/cardio-vitals</loc>
-    <lastmod>2024-03-21</lastmod>
+    <lastmod>2024-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vitalmetrics.in/calculators/nutrition-metabolic</loc>
-    <lastmod>2024-03-21</lastmod>
+    <lastmod>2024-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vitalmetrics.in/calculators/diabetes-blood-sugar</loc>
-    <lastmod>2024-03-21</lastmod>
+    <lastmod>2024-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vitalmetrics.in/calculators/pregnancy-fertility</loc>
-    <lastmod>2024-03-21</lastmod>
+    <lastmod>2024-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- Individual Calculator Pages -->
+  <!-- Body Metrics Calculators -->
+  <url>
+    <loc>https://vitalmetrics.in/calculators/body-metrics/bmi-calculator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vitalmetrics.in/calculators/lungs-life-expectancy</loc>
-    <lastmod>2024-03-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://vitalmetrics.in/calculators/body-metrics/body-fat-percentage</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vitalmetrics.in/calculators/mental-sleep</loc>
-    <lastmod>2024-03-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://vitalmetrics.in/calculators/body-metrics/ideal-body-weight</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vitalmetrics.in/calculators/other-tools</loc>
-    <lastmod>2024-03-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://vitalmetrics.in/calculators/body-metrics/waist-to-hip-ratio</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
-</urlset> 
+  <url>
+    <loc>https://vitalmetrics.in/calculators/body-metrics/waist-to-height-ratio</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/body-metrics/body-surface-area</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/body-metrics/lean-body-mass</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Fitness & Metabolism Calculators -->
+  <url>
+    <loc>https://vitalmetrics.in/calculators/fitness-metabolism/bmr-calculator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/fitness-metabolism/tdee-calculator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/fitness-metabolism/heart-rate-zones</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/fitness-metabolism/vo2-max-estimator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/fitness-metabolism/one-rep-max-calculator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/fitness-metabolism/calories-burned-estimator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/fitness-metabolism/step-to-calorie-converter</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Cardio & Vitals Calculators -->
+  <url>
+    <loc>https://vitalmetrics.in/calculators/cardio-vitals/blood-pressure-analyzer</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/cardio-vitals/framingham-risk-score</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/cardio-vitals/cholesterol-ratio-calculator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/cardio-vitals/mean-arterial-pressure</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/cardio-vitals/pulse-pressure</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Nutrition & Metabolic Calculators -->
+  <url>
+    <loc>https://vitalmetrics.in/calculators/nutrition-metabolic/calorie-macro-calculator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/nutrition-metabolic/water-intake-calculator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/nutrition-metabolic/glycemic-load-estimator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/nutrition-metabolic/protein-intake-calculator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/nutrition-metabolic/carb-cycling-calculator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/nutrition-metabolic/alcohol-bac-calculator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Diabetes & Blood Sugar Calculators -->
+  <url>
+    <loc>https://vitalmetrics.in/calculators/diabetes-blood-sugar/hba1c-to-glucose</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/diabetes-blood-sugar/glucose-unit-converter</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/diabetes-blood-sugar/insulin-dosage-estimator</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Pregnancy & Fertility Calculators -->
+  <url>
+    <loc>https://vitalmetrics.in/calculators/pregnancy-fertility/pregnancy-due-date</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vitalmetrics.in/calculators/pregnancy-fertility/ovulation-tracker</loc>
+    <lastmod>2024-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
