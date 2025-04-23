@@ -6,11 +6,13 @@ Allow: /
 Sitemap: https://vitalmetrics.in/sitemap.xml
 
 # Crawl-delay
-Crawl-delay: 10
+Crawl-delay: 5
 
 # Disallow paths
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
-Disallow: /*.json$
-Disallow: /*?*
+
+# Allow calculator pages
+Allow: /calculators/
+Allow: /*.json$
