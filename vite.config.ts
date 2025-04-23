@@ -7,6 +7,12 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    // Handle SPA routing in development
+    historyApiFallback: true,
+  },
+  preview: {
+    // Handle SPA routing in preview
+    historyApiFallback: true,
   },
   plugins: [
     react(),
@@ -14,6 +20,16 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  build: {
+    // Generate a 404.html that redirects to index.html
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
     },
   },
 }));
