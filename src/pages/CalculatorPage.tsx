@@ -278,7 +278,7 @@ export default function CalculatorPage() {
   return (
     <>
       <Helmet>
-        <title>{`${calculator.name} | VitalMetrics`}</title>
+        <title>{`${calculator.name} Calculator | VitalMetrics Medical Tools`}</title>
         <meta name="description" content={calculator.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script type="application/ld+json">
