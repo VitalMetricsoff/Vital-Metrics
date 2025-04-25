@@ -1,14 +1,33 @@
 # https://www.robotstxt.org/robotstxt.html
 # Allow all web crawlers
+# VitalMetrics robots.txt
+
 User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://vitalmetrics.in/sitemap.xml
+
+# Optimize crawling
+Disallow: /api/
+Disallow: /admin/
+Disallow: /search
+Disallow: /*?*
+
+# Allow important directories
+Allow: /calculators/
+Allow: /blog/
+Allow: /about/
+Allow: /contact/
+
+# Crawl delay
+Crawl-delay: 1: *
 Allow: /
 
 # Disallow crawling of error pages
 Disallow: /404
 Disallow: /500
 
-# Sitemap location
-Sitemap: https://vitalmetrics.in/sitemap.xml
 
 # Crawl-delay for all bots
 Crawl-delay: 1

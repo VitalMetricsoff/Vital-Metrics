@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 
 interface SEOProps {
   title?: string;
@@ -15,6 +16,35 @@ interface SEOProps {
   };
 }
 
+// Define the structured data for sitelinks searchbox
+const siteLinksSearchBoxData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://vitalmetrics.in/",
+  "potentialAction": [{
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://vitalmetrics.in/search?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }]
+};
+
+// Define the organization data
+const organizationData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "VitalMetrics",
+  "url": "https://vitalmetrics.in",
+  "logo": "https://vitalmetrics.in/logo.png",
+  "sameAs": [
+    "https://twitter.com/vitalmetrics",
+    "https://facebook.com/vitalmetrics",
+    "https://linkedin.com/company/vitalmetrics"
+  ]
+};
+
 export function SEO({
   title = 'VitalMetrics - Health & Wellness Analytics',
   description = 'VitalMetrics helps you track and analyze your health metrics with advanced calculators for BMI, stress levels, and more. Get personalized insights for your wellness journey.',
@@ -24,23 +54,43 @@ export function SEO({
   type = 'website',
   article,
 }: SEOProps) {
-  const siteUrl = 'https://vitalmetrics.health'; // Replace with your actual domain
+  const siteUrl = 'https://vitalmetrics.in';
+  const formattedTitle = title.includes('VitalMetrics') ? title : `${title} | VitalMetrics`;
 
   return (
     <Helmet>
+      {/* Preload Critical Resources */}
+      <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      <link rel="preconnect" href="https://vitals.vercel-analytics.com" />
+      
+      {/* Basic Meta Tags with Enhanced Keywords */}
+      {/* Favicons */}
+      <link rel="icon" href="/favicon.ico" sizes="48x48" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96" />
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      <link rel="manifest" href="/manifest.json" />
+      
+      {/* PWA Icons */}
+      <link rel="icon" href="/web-app-manifest-192x192.png" type="image/png" sizes="192x192" />
+      <link rel="icon" href="/web-app-manifest-512x512.png" type="image/png" sizes="512x512" />
+
+      {/* Performance Optimizations */}
+      <meta httpEquiv="x-dns-prefetch-control" content="on" />
+      <link rel="dns-prefetch" href="https://vitals.vercel-analytics.com" />
+      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      
       {/* Basic Meta Tags */}
-      <title>{title}</title>
+      <title>{formattedTitle}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords.join(', ')} />
+      <link rel="canonical" href={canonical || `${siteUrl}${window.location.pathname}`} />
       
-      {/* Canonical URL */}
-      {canonical && <link rel="canonical" href={`${siteUrl}${canonical}`} />}
+      {/* Mobile Optimization */}
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <meta name="theme-color" content="#ffffff" />
       
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content={type} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+      {/* Open Graph Tags */}
       <meta property="og:url" content={siteUrl + (canonical || '')} />
       <meta property="og:site_name" content="VitalMetrics" />
       
@@ -49,6 +99,34 @@ export function SEO({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+      
+      {/* Structured Data for Search Results */}
+      <script type="application/ld+json">
+        {JSON.stringify(siteLinksSearchBoxData)}
+      </script>
+      <script type="application/ld+json">
+        {JSON.stringify(organizationData)}
+      </script>
+
+      {/* Additional Meta Tags for Search Results */}
+      <meta name="robots" content="index, follow" />
+      <meta name="googlebot" content="index, follow" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="theme-color" content="#2563EB" />
+      <meta name="msapplication-TileColor" content="#2563EB" />
+      <meta name="application-name" content="VitalMetrics" />
+      <meta name="apple-mobile-web-app-title" content="VitalMetrics" />
+
+      {/* Google Analytics */}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
+      <script>
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XXXXXXXXXX');
+        `}
+      </script>
       
       {/* Article Specific Meta Tags */}
       {type === 'article' && article && (

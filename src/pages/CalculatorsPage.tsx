@@ -45,7 +45,7 @@ export default function CalculatorsPage() {
   return (
     <>
       <Helmet>
-        <title>Medical Calculators | VitalMetrics Health Tools</title>
+        <title>Medical Calculators | VitalMetrics</title>
         <meta name="description" content="Browse our comprehensive collection of medical calculators and health tools. Find calculators for BMI, heart rate, nutrition, fitness, and more." />
       </Helmet>
       <div className="bg-background font-sans">

@@ -1,6 +1,5 @@
-
 import { Link } from "react-router-dom";
-import { Activity } from "lucide-react";
+import { Activity, Linkedin, Instagram } from "lucide-react";
 
 export function Footer() {
   return (
@@ -19,6 +18,14 @@ export function Footer() {
               Comprehensive health and wellness calculators to help you monitor,
               analyze, and improve your health.
             </p>
+            <div className="flex gap-3 mt-3">
+              <a href="https://linkedin.com/in/docaravi" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a href="https://www.instagram.com/docaravi" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                <Instagram className="h-5 w-5" />
+              </a>
+            </div>
           </div>
           <div>
             <h3 className="font-semibold text-base mb-2">Categories</h3>
@@ -97,6 +104,16 @@ export function Footer() {
                 <Link to="/contact" className="text-xs text-muted-foreground hover:text-primary transition-colors">
                   Contact Us
                 </Link>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener noreferrer" className="text-xs text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-2">
+                  <Linkedin className="h-4 w-4" /> LinkedIn
+                </a>
+              </li>
+              <li>
+                <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noopener noreferrer" className="text-xs text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-2">
+                  <Instagram className="h-4 w-4" /> Instagram
+                </a>
               </li>
             </ul>
           </div>
