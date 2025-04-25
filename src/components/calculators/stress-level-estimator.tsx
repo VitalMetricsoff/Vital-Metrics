@@ -29,11 +29,19 @@ const stressQuestions: Question[] = [
   { id: 10, text: "How often have you had trouble sleeping because of stress?" }
 ];
 
+type CategoryScores = {
+  'Perceived Stress': number;
+  'Emotional Response': number;
+  'Control & Coping': number;
+  'Physical Symptoms': number;
+};
+
 export function StressLevelEstimator() {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [result, setResult] = useState<number | null>(null);
   const [stressLevel, setStressLevel] = useState<string>("");
   const [showResults, setShowResults] = useState(false);
+  const [categoryScores, setCategoryScores] = useState<CategoryScores>({} as CategoryScores);
 
   const handleAnswerChange = (questionId: number, value: number) => {
     const existingAnswerIndex = answers.findIndex(a => a.questionId === questionId);
@@ -61,6 +69,15 @@ export function StressLevelEstimator() {
     }, 0);
 
     setResult(totalScore);
+
+    // Calculate category scores
+    const categories: CategoryScores = {
+      'Perceived Stress': (answers.find(a => a.questionId === 1)?.value || 0) + (answers.find(a => a.questionId === 2)?.value || 0),
+      'Emotional Response': (answers.find(a => a.questionId === 8)?.value || 0) + (answers.find(a => a.questionId === 9)?.value || 0),
+      'Control & Coping': (4 - (answers.find(a => a.questionId === 3)?.value || 0)) + (4 - (answers.find(a => a.questionId === 6)?.value || 0)),
+      'Physical Symptoms': (answers.find(a => a.questionId === 5)?.value || 0) + (answers.find(a => a.questionId === 10)?.value || 0)
+    };
+    setCategoryScores(categories);
 
     // Determine stress level
     if (totalScore <= 13) {

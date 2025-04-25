@@ -15,6 +15,8 @@ import ContactUsPage from "./pages/ContactUsPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import FounderPage from "./pages/FounderPage";
+import BlogPage from "./pages/BlogPage";
+import BlogPostPage from "./pages/BlogPostPage";
 import { ScrollToTop } from "@/components/scroll-to-top";
 
 const queryClient = new QueryClient();
@@ -38,6 +40,8 @@ const App = () => (
                 <Route path="/contact" element={<ContactUsPage />} />
                 <Route path="/terms-of-service" element={<TermsOfServicePage />} />
                 <Route path="/founder" element={<FounderPage />} />
+                <Route path="/blog" element={<BlogPage />} />
+                <Route path="/blog/:id" element={<BlogPostPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </MainLayout>
