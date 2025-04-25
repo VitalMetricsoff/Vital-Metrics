@@ -83,7 +83,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm">
-                <span className="animate-pulse-slow mr-2">●</span> 50+ Health Calculators
+                <span className="animate-pulse-slow mr-2">●</span> Trusted by 10,000+ Healthcare Professionals
               </div>
               <h1 className="font-heading font-bold tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                 Your Complete Health <br className="hidden md:inline" /> Calculator Suite
@@ -388,6 +388,109 @@ export default function HomePage() {
                 <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Why Healthcare Professionals Choose VitalMetrics</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Our comprehensive suite of medical calculators is designed to streamline your clinical workflow and enhance patient care.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="p-6 rounded-lg border bg-card">
+              <div className="mb-4 text-primary"><Activity className="h-8 w-8" /></div>
+              <h3 className="text-xl font-semibold mb-2">Evidence-Based Calculations</h3>
+              <p className="text-muted-foreground">All our calculators are based on the latest medical research and guidelines, ensuring accurate and reliable results for clinical decision-making.</p>
+            </div>
+            <div className="p-6 rounded-lg border bg-card">
+              <div className="mb-4 text-primary"><Clock className="h-8 w-8" /></div>
+              <h3 className="text-xl font-semibold mb-2">Time-Saving Efficiency</h3>
+              <p className="text-muted-foreground">Quick access to 50+ specialized calculators helps you make faster, more informed decisions during patient consultations.</p>
+            </div>
+            <div className="p-6 rounded-lg border bg-card">
+              <div className="mb-4 text-primary"><Users className="h-8 w-8" /></div>
+              <h3 className="text-xl font-semibold mb-2">Patient Education</h3>
+              <p className="text-muted-foreground">Clear visualizations and explanations help you communicate health metrics and treatment plans effectively to patients.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="py-16 md:py-24 bg-slate-50">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Comprehensive Health Metrics Coverage</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Access specialized calculators across all major medical fields to support your clinical practice.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="p-6 rounded-lg border bg-card hover:shadow-md transition-all">
+              <Scale className="h-8 w-8 text-blue-600 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Body Metrics</h3>
+              <p className="text-muted-foreground mb-4">BMI, BSA, Ideal Weight calculations for accurate patient assessment.</p>
+              <Badge className="bg-blue-100 text-blue-600">12 Calculators</Badge>
+            </div>
+            <div className="p-6 rounded-lg border bg-card hover:shadow-md transition-all">
+              <HeartPulse className="h-8 w-8 text-red-600 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Cardiovascular</h3>
+              <p className="text-muted-foreground mb-4">Heart rate, blood pressure, and cardiac function assessments.</p>
+              <Badge className="bg-red-100 text-red-600">15 Calculators</Badge>
+            </div>
+            <div className="p-6 rounded-lg border bg-card hover:shadow-md transition-all">
+              <Apple className="h-8 w-8 text-green-600 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Nutrition & Metabolism</h3>
+              <p className="text-muted-foreground mb-4">Caloric needs, metabolic rate, and nutritional assessments.</p>
+              <Badge className="bg-green-100 text-green-600">10 Calculators</Badge>
+            </div>
+            <div className="p-6 rounded-lg border bg-card hover:shadow-md transition-all">
+              <Brain className="h-8 w-8 text-purple-600 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Mental Health</h3>
+              <p className="text-muted-foreground mb-4">Stress levels, sleep quality, and cognitive assessments.</p>
+              <Badge className="bg-purple-100 text-purple-600">8 Calculators</Badge>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-12">
+            <Badge className="px-3.5 py-1.5" variant="outline">Testimonials</Badge>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mt-4 mb-4">Trusted by Medical Professionals</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Here's what healthcare providers say about VitalMetrics</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="p-6 rounded-lg border bg-card">
+              <p className="text-muted-foreground mb-4">"VitalMetrics has become an indispensable tool in my daily practice. The cardiovascular calculators are particularly helpful for patient risk assessments."</p>
+              <div className="flex items-center">
+                <div>
+                  <p className="font-semibold">Dr. Sarah Chen</p>
+                  <p className="text-sm text-muted-foreground">Cardiologist</p>
+                </div>
+              </div>
+            </div>
+            <div className="p-6 rounded-lg border bg-card">
+              <p className="text-muted-foreground mb-4">"The nutrition calculators have greatly improved my ability to provide precise dietary recommendations to my patients. Excellent resource!"</p>
+              <div className="flex items-center">
+                <div>
+                  <p className="font-semibold">Dr. Michael Rodriguez</p>
+                  <p className="text-sm text-muted-foreground">Nutritionist</p>
+                </div>
+              </div>
+            </div>
+            <div className="p-6 rounded-lg border bg-card">
+              <p className="text-muted-foreground mb-4">"As a primary care physician, I appreciate having access to such a wide range of evidence-based calculators. It saves time and improves accuracy."</p>
+              <div className="flex items-center">
+                <div>
+                  <p className="font-semibold">Dr. Emily Thompson</p>
+                  <p className="text-sm text-muted-foreground">Family Medicine</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

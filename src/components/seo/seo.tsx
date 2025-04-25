@@ -61,7 +61,12 @@ export function SEO({
     <Helmet>
       {/* Preload Critical Resources */}
       <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-      <link rel="preconnect" href="https://vitals.vercel-analytics.com" />
+      <link rel="preconnect" href="https://vitals.vercel-analytics.com" crossOrigin="anonymous" />
+      <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+      
+      {/* Preload Critical Images */}
+      <link rel="preload" as="image" href="/favicon.svg" type="image/svg+xml" />
+      <link rel="modulepreload" href="/src/main.tsx" />
       
       {/* Basic Meta Tags with Enhanced Keywords */}
       {/* Favicons */}
@@ -117,14 +122,15 @@ export function SEO({
       <meta name="application-name" content="VitalMetrics" />
       <meta name="apple-mobile-web-app-title" content="VitalMetrics" />
 
-      {/* Google Analytics */}
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
+      {/* Google Analytics - Optimized Loading */}
+      <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
       <script>
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-XXXXXXXXXX');
+          gtag('config', 'G-XXXXXXXXXX', { 'send_page_view': false });
+          gtag('event', 'page_view');
         `}
       </script>
       
@@ -145,11 +151,6 @@ export function SEO({
       )}
 
       {/* Additional SEO Optimization */}
-      <meta name="robots" content="index, follow" />
-      <meta name="googlebot" content="index, follow" />
-      <meta name="theme-color" content="#ffffff" />
-      <meta name="msapplication-TileColor" content="#ffffff" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       
