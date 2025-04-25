@@ -610,6 +610,7 @@ const BlogPostPage: React.FC = (): JSX.Element => {
         title="Blog Post Not Found - VitalMetrics"
         description="The requested blog post could not be found. Browse our other health and wellness articles."
         type="website"
+        hideHeader
       >
         <div className="container max-w-4xl px-4 md:px-6 py-10 md:py-16">
           <h1 className="text-2xl font-bold mb-4">Blog Post Not Found</h1>
@@ -632,25 +633,22 @@ const BlogPostPage: React.FC = (): JSX.Element => {
       keywords={[...post.tags || [], 'health', 'wellness', 'fitness', post.category.toLowerCase()]}
       ogImage={post.imageUrl}
       type="article"
+      hideHeader
       article={{
         publishedTime: new Date(post.date).toISOString(),
         authors: [post.author],
         tags: post.tags
       }}
     >
-      <div className="min-h-screen bg-background">
-        <header className="border-b">
-          <div className="container flex items-center h-16 px-4">
-            <Link to="/blog">
-              <Button variant="ghost" size="sm">
-                <ArrowLeft className="mr-2" size={16} />
-                Back to Blog
-              </Button>
-            </Link>
-          </div>
-        </header>
+      <div className="min-h-screen bg-background py-6">
+        <div className="container max-w-4xl px-4 md:px-6">
+          <Link to="/blog">
+            <Button variant="ghost" size="sm" className="-ml-2 mb-6">
+              <ArrowLeft className="mr-2" size={16} />
+              Back to Blog
+            </Button>
+          </Link>
 
-        <div className="container max-w-4xl px-4 md:px-6 py-10 md:py-16">
           <div className="mb-8">
             <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
             <div className="flex flex-wrap gap-4 text-gray-600 mb-4">

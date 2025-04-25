@@ -15,6 +15,7 @@ type MainLayoutProps = {
   keywords?: string[];
   ogImage?: string;
   type?: 'website' | 'article';
+  hideHeader?: boolean;
   article?: {
     publishedTime?: string;
     modifiedTime?: string;
@@ -30,6 +31,7 @@ export function MainLayout({
   keywords,
   ogImage,
   type,
+  hideHeader,
   article
 }: MainLayoutProps) {
   const isMobile = useIsMobile();
@@ -46,7 +48,7 @@ export function MainLayout({
         type={type}
         article={article}
       />
-      <Header />
+      {!hideHeader && <Header />}
       <main className="flex-1">
         {children}
       </main>
