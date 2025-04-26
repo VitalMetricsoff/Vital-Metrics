@@ -1,5 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
+import { ResourceHints } from './resource-hints';
+
+const SOCIAL_MEDIA = {
+  twitter: 'https://twitter.com/vitalmetrics',
+  facebook: 'https://facebook.com/vitalmetrics',
+  linkedin: 'https://linkedin.com/company/vitalmetrics',
+  instagram: 'https://instagram.com/vitalmetrics.health'
+};
 
 interface SEOProps {
   title?: string;
@@ -141,6 +149,7 @@ export function SEO({
   faqSchema,
   article,
 }: SEOProps) {
+  const { pathname } = useLocation();
   const siteUrl = 'https://vitalmetrics.in';
   const formattedTitle = title.includes('VitalMetrics') ? title : `${title} | VitalMetrics`;
 
@@ -174,44 +183,30 @@ export function SEO({
       <link rel="icon" href="/web-app-manifest-192x192.png" type="image/png" sizes="192x192" />
       <link rel="icon" href="/web-app-manifest-512x512.png" type="image/png" sizes="512x512" />
 
-      {/* Performance Optimizations */}
-      <meta httpEquiv="x-dns-prefetch-control" content="on" />
-      <link rel="dns-prefetch" href="https://vitals.vercel-analytics.com" />
-      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-      
-      {/* Basic Meta Tags */}
-      <title>{formattedTitle}</title>
-      <meta name="description" content={description} />
-      <meta name="keywords" content={keywords.join(', ')} />
-      <link rel="canonical" href={canonical || `${siteUrl}${window.location.pathname}`} />
-      
-      {/* Mobile Optimization */}
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <meta name="theme-color" content="#ffffff" />
-      
-      {/* Open Graph Tags */}
-      <meta property="og:url" content={siteUrl + (canonical || '')} />
-      <meta property="og:site_name" content="VitalMetrics" />
-      
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
-      
-      {/* Structured Data for Search Results */}
-      <script type="application/ld+json">
-        {JSON.stringify(siteLinksSearchBoxData)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(organizationData)}
-      </script>
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content={type} />
+        <meta property="og:url" content={`${siteUrl}${canonical || pathname}`} />
+        <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+        <meta property="og:site_name" content="VitalMetrics" />
+        <meta property="og:locale" content="en_US" />
 
-      {/* Enhanced Meta Tags for Search Results */}
-      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-      <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-      <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-      <meta name="format-detection" content="telephone=no" />
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@vitalmetrics" />
+        <meta name="twitter:creator" content="@vitalmetrics" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+        
+        {/* Social Media Verification */}
+        <meta name="facebook-domain-verification" content="your-verification-code" />
+        
+        {/* Social Media Links */}
+        {Object.entries(SOCIAL_MEDIA).map(([platform, url]) => (
+          <link key={platform} rel="me" href={url} />
+        ))}
       <meta name="theme-color" content="#2563EB" />
       <meta name="msapplication-TileColor" content="#2563EB" />
       <meta name="application-name" content="VitalMetrics" />
