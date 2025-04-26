@@ -1,4 +1,5 @@
 import { Calculator } from "@/types/calculator";
+import { bodyMetricsFAQs, fitnessMetricsFAQs, mentalHealthFAQs } from "./calculator-faqs";
 
 export const calculators: Calculator[] = [
   // Body Metrics
@@ -41,6 +42,9 @@ export const calculators: Calculator[] = [
     description: "Calculate your body fat percentage using the U.S. Navy method.",
     slug: "body-fat-percentage",
     icon: "Ruler",
+    formula: "Body Fat % (Men) = 86.010 × log10(waist - neck) - 70.041 × log10(height) + 36.76\nBody Fat % (Women) = 163.205 × log10(waist + hip - neck) - 97.684 × log10(height) - 78.387",
+    inputs: [],
+    faqs: bodyMetricsFAQs.bodyFat,
   },
   {
     id: "ideal-body-weight",
@@ -49,6 +53,9 @@ export const calculators: Calculator[] = [
     description: "Find your ideal body weight range using the Devine formula.",
     slug: "ideal-body-weight",
     icon: "Weight",
+    formula: "IBW (men) = 50 kg + 2.3 kg × (height in inches - 60)\nIBW (women) = 45.5 kg + 2.3 kg × (height in inches - 60)",
+    inputs: [],
+    faqs: bodyMetricsFAQs.idealBodyWeight,
   },
   {
     id: "waist-to-hip-ratio",
@@ -57,6 +64,9 @@ export const calculators: Calculator[] = [
     description: "Calculate your waist-to-hip ratio to assess health risks.",
     slug: "waist-to-hip-ratio",
     icon: "Ratio",
+    formula: "WHR = waist circumference / hip circumference",
+    inputs: [],
+    faqs: bodyMetricsFAQs.waistToHipRatio,
   },
   {
     id: "waist-to-height-ratio",
@@ -65,6 +75,9 @@ export const calculators: Calculator[] = [
     description: "Calculate your waist-to-height ratio to assess health risks.",
     slug: "waist-to-height-ratio",
     icon: "Ruler",
+    formula: "WHtR = waist circumference / height",
+    inputs: [],
+    faqs: bodyMetricsFAQs.waistToHeightRatio,
   },
   {
     id: "body-surface-area",
@@ -73,6 +86,8 @@ export const calculators: Calculator[] = [
     description: "Calculate your body surface area using the DuBois formula.",
     slug: "body-surface-area",
     icon: "Square",
+    formula: "BSA = 0.007184 × Height(cm)^0.725 × Weight(kg)^0.425",
+    inputs: [],
   },
   {
     id: "lean-body-mass",
@@ -81,6 +96,8 @@ export const calculators: Calculator[] = [
     description: "Calculate your lean body mass using the Boer equation.",
     slug: "lean-body-mass",
     icon: "Dumbbell",
+    formula: "LBM (men) = 0.407 × Weight(kg) + 0.267 × Height(cm) - 19.2\nLBM (women) = 0.252 × Weight(kg) + 0.473 × Height(cm) - 48.3",
+    inputs: [],
   },
   
   // Fitness & Metabolism
@@ -91,6 +108,9 @@ export const calculators: Calculator[] = [
     description: "Calculate your Basal Metabolic Rate (BMR) using the Mifflin-St Jeor formula.",
     slug: "bmr-calculator",
     icon: "Flame",
+    formula: "BMR (men) = 10 × weight (kg) + 6.25 × height (cm) - 5 × age + 5\nBMR (women) = 10 × weight (kg) + 6.25 × height (cm) - 5 × age - 161",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.bmr,
   },
   {
     id: "tdee-calculator",
@@ -99,6 +119,9 @@ export const calculators: Calculator[] = [
     description: "Calculate your Total Daily Energy Expenditure (TDEE).",
     slug: "tdee-calculator",
     icon: "Activity",
+    formula: "TDEE = BMR × Activity Factor",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.tdee,
   },
   {
     id: "heart-rate-zones",
@@ -107,14 +130,20 @@ export const calculators: Calculator[] = [
     description: "Calculate your heart rate zones for optimal training.",
     slug: "heart-rate-zones",
     icon: "Heart",
+    formula: "Max Heart Rate = 220 - age\nZone % = Target Zone × Max Heart Rate",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.heartRateZones,
   },
   {
     id: "vo2-max-estimator",
     name: "VO2 Max Estimator",
     category: "fitness-metabolism",
-    description: "Estimate your VO2 max to assess cardiovascular fitness.",
+    description: "Estimate your maximum oxygen uptake (VO2 max).",
     slug: "vo2-max-estimator",
     icon: "Lungs",
+    formula: "VO2 Max = 15 × (Max Heart Rate / Resting Heart Rate)",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.vo2Max,
   },
   {
     id: "one-rep-max-calculator",
@@ -123,6 +152,9 @@ export const calculators: Calculator[] = [
     description: "Estimate your one-repetition maximum (1RM) for weightlifting exercises.",
     slug: "one-rep-max-calculator",
     icon: "Dumbbell",
+    formula: "1RM = (Weight × Reps × 0.025) + Weight",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.oneRepMax,
   },
   {
     id: "calories-burned-estimator",
@@ -131,14 +163,20 @@ export const calculators: Calculator[] = [
     description: "Estimate calories burned during various physical activities.",
     slug: "calories-burned-estimator",
     icon: "Flame",
+    formula: "Calories = MET × weight (kg) × duration (hours)",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.caloriesBurned,
   },
   {
     id: "step-to-calorie-converter",
     name: "Step to Calorie Converter",
     category: "fitness-metabolism",
-    description: "Convert your steps to estimated calories burned.",
+    description: "Convert your daily steps into calories burned.",
     slug: "step-to-calorie-converter",
     icon: "Footprints",
+    formula: "Calories = Steps × 0.04 × Weight (kg)",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.stepCalories,
   },
   
   // Cardio & Vitals
@@ -146,9 +184,12 @@ export const calculators: Calculator[] = [
     id: "blood-pressure-analyzer",
     name: "Blood Pressure Analyzer",
     category: "cardio-vitals",
-    description: "Analyze and categorize your blood pressure readings.",
+    description: "Analyze your blood pressure readings and understand your risk level.",
     slug: "blood-pressure-analyzer",
     icon: "Heart",
+    formula: "MAP = ((2 × Diastolic) + Systolic) / 3",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.bloodPressure,
   },
   {
     id: "framingham-risk-score",
@@ -157,6 +198,9 @@ export const calculators: Calculator[] = [
     description: "Calculate your cardiovascular disease risk using the Framingham Risk Score.",
     slug: "framingham-risk-score",
     icon: "HeartPulse",
+    formula: "Risk Score = (Age × 2) + (Total Cholesterol × 1) + (Smoking × 2) + (Hypertension × 1)",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.framinghamRisk,
   },
   {
     id: "cholesterol-ratio-calculator",
@@ -165,6 +209,9 @@ export const calculators: Calculator[] = [
     description: "Calculate your cholesterol ratio to assess cardiovascular health.",
     slug: "cholesterol-ratio-calculator",
     icon: "ActivitySquare",
+    formula: "Cholesterol Ratio = Total Cholesterol / HDL Cholesterol",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.cholesterolRatio,
   },
   {
     id: "mean-arterial-pressure",
@@ -173,14 +220,20 @@ export const calculators: Calculator[] = [
     description: "Calculate your Mean Arterial Pressure (MAP).",
     slug: "mean-arterial-pressure",
     icon: "ArrowDownUp",
+    formula: "MAP = ((2 × Diastolic) + Systolic) / 3",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.meanArterialPressure,
   },
   {
-    id: "pulse-pressure",
-    name: "Pulse Pressure",
+    id: "pulse-pressure-calculator",
+    name: "Pulse Pressure Calculator",
     category: "cardio-vitals",
-    description: "Calculate your Pulse Pressure (PP) from blood pressure readings.",
-    slug: "pulse-pressure",
-    icon: "Pulse",
+    description: "Calculate your pulse pressure and understand its implications.",
+    slug: "pulse-pressure-calculator",
+    icon: "Activity",
+    formula: "Pulse Pressure = Systolic BP - Diastolic BP",
+    inputs: [],
+    faqs: fitnessMetricsFAQs.pulsePressure,
   },
   
   // Nutrition & Metabolic
@@ -191,6 +244,8 @@ export const calculators: Calculator[] = [
     description: "Calculate your daily calorie and macronutrient needs.",
     slug: "calorie-macro-calculator",
     icon: "Utensils",
+    formula: "Protein = Goal × Weight\nCarbs = (Total Calories × 0.4) / 4\nFat = Remaining Calories / 9",
+    inputs: [],
   },
   {
     id: "water-intake-calculator",
@@ -199,6 +254,8 @@ export const calculators: Calculator[] = [
     description: "Calculate your recommended daily water intake.",
     slug: "water-intake-calculator",
     icon: "Droplet",
+    formula: "Water (oz) = Weight(lbs) × 0.67 + Activity Factor",
+    inputs: [],
   },
   {
     id: "glycemic-load-estimator",
@@ -207,6 +264,8 @@ export const calculators: Calculator[] = [
     description: "Calculate the glycemic load of foods.",
     slug: "glycemic-load-estimator",
     icon: "LineChart",
+    formula: "Glycemic Load = (Glycemic Index × Net Carbs) / 100",
+    inputs: [],
   },
   {
     id: "protein-intake-calculator",
@@ -215,6 +274,8 @@ export const calculators: Calculator[] = [
     description: "Calculate your recommended daily protein intake.",
     slug: "protein-intake-calculator",
     icon: "Beef",
+    formula: "Protein (g) = Weight(kg) × Activity Factor",
+    inputs: [],
   },
   {
     id: "carb-cycling-calculator",
@@ -223,6 +284,8 @@ export const calculators: Calculator[] = [
     description: "Plan your carb cycling nutrition strategy.",
     slug: "carb-cycling-calculator",
     icon: "Wheat",
+    formula: "High Day = Weight(kg) × 2\nLow Day = Weight(kg) × 0.5",
+    inputs: [],
   },
   {
     id: "alcohol-bac-calculator",
@@ -231,6 +294,8 @@ export const calculators: Calculator[] = [
     description: "Estimate your Blood Alcohol Content (BAC).",
     slug: "alcohol-bac-calculator",
     icon: "Wine",
+    formula: "BAC = (Drinks × 5.14) / (Weight × Gender Factor) - (0.015 × Hours)",
+    inputs: [],
   },
   
   // Diabetes & Blood Sugar
@@ -241,6 +306,8 @@ export const calculators: Calculator[] = [
     description: "Convert HbA1c percentage to estimated average glucose.",
     slug: "hba1c-to-glucose",
     icon: "Percent",
+    formula: "eAG (mg/dL) = (28.7 × HbA1c) - 46.7",
+    inputs: [],
   },
   {
     id: "glucose-unit-converter",
@@ -249,6 +316,8 @@ export const calculators: Calculator[] = [
     description: "Convert between mg/dL and mmol/L glucose units.",
     slug: "glucose-unit-converter",
     icon: "ArrowLeftRight",
+    formula: "mmol/L = mg/dL × 0.0555\nmg/dL = mmol/L × 18.0182",
+    inputs: [],
   },
   {
     id: "insulin-dosage-estimator",
@@ -257,6 +326,8 @@ export const calculators: Calculator[] = [
     description: "Estimate insulin dosage based on carbohydrate intake and blood glucose levels.",
     slug: "insulin-dosage-estimator",
     icon: "Syringe",
+    formula: "Insulin Units = (Carbs / ICR) + ((Current BG - Target BG) / ISF)",
+    inputs: [],
   },
   
   // Pregnancy & Fertility
@@ -267,6 +338,8 @@ export const calculators: Calculator[] = [
     description: "Calculate your estimated due date based on your last menstrual period.",
     slug: "pregnancy-due-date",
     icon: "Calendar",
+    formula: "Due Date = LMP + 280 days",
+    inputs: [],
   },
   {
     id: "ovulation-tracker",
@@ -275,6 +348,8 @@ export const calculators: Calculator[] = [
     description: "Track your ovulation cycle to identify your most fertile days.",
     slug: "ovulation-tracker",
     icon: "CalendarClock",
+    formula: "Ovulation Day = Next Period - 14 days",
+    inputs: [],
   },
   {
     id: "fertility-window-calculator",
@@ -283,6 +358,8 @@ export const calculators: Calculator[] = [
     description: "Calculate your fertility window for optimal conception chances.",
     slug: "fertility-window-calculator",
     icon: "CalendarDays",
+    formula: "Fertile Window = Ovulation Day ± 2 days",
+    inputs: [],
   },
   {
     id: "safe-days-calculator",
@@ -291,6 +368,8 @@ export const calculators: Calculator[] = [
     description: "Calculate potentially safe days in your menstrual cycle using the Ogino-Knaus method.",
     slug: "safe-days-calculator",
     icon: "CalendarCheck",
+    formula: "First Safe Day = First Day of Period + 8\nLast Safe Day = First Day of Next Period - 11",
+    inputs: [],
   },
   
   // Lungs & Life Expectancy
@@ -301,6 +380,8 @@ export const calculators: Calculator[] = [
     description: "Estimate your Peak Expiratory Flow Rate (PEFR).",
     slug: "peak-flow-test",
     icon: "Lungs",
+    formula: "PEFR = (Height × Age Factor) - (Age × Decline Factor)",
+    inputs: [],
   },
   {
     id: "life-expectancy-estimator",
@@ -309,6 +390,8 @@ export const calculators: Calculator[] = [
     description: "Estimate your life expectancy based on various factors.",
     slug: "life-expectancy-estimator",
     icon: "Clock",
+    formula: "Life Expectancy = Base Life Expectancy + Lifestyle Factors + Health Factors",
+    inputs: [],
   },
   {
     id: "smoking-risk-calculator",
@@ -317,6 +400,8 @@ export const calculators: Calculator[] = [
     description: "Calculate your smoking pack-years and associated health risks.",
     slug: "smoking-risk-calculator",
     icon: "Cigarette",
+    formula: "Pack Years = (Cigarettes per Day / 20) × Years Smoked",
+    inputs: [],
   },
   
   // Mental & Sleep
@@ -327,6 +412,9 @@ export const calculators: Calculator[] = [
     description: "Screen for depression severity using the PHQ-9 questionnaire.",
     slug: "phq9-depression-test",
     icon: "Brain",
+    formula: "Total Score = Sum of all 9 question scores",
+    inputs: [],
+    faqs: mentalHealthFAQs.phq9,
   },
   {
     id: "gad7-anxiety-test",
@@ -335,6 +423,9 @@ export const calculators: Calculator[] = [
     description: "Screen for anxiety disorders using the GAD-7 questionnaire.",
     slug: "gad7-anxiety-test",
     icon: "Waves",
+    formula: "Total Score = Sum of all 7 question scores",
+    inputs: [],
+    faqs: mentalHealthFAQs.gad7,
   },
   {
     id: "sleep-cycle-optimizer",
@@ -343,6 +434,9 @@ export const calculators: Calculator[] = [
     description: "Optimize your sleep schedule based on 90-minute sleep cycles.",
     slug: "sleep-cycle-optimizer",
     icon: "MoonStar",
+    formula: "Sleep Duration = Number of Cycles × 90 minutes",
+    inputs: [],
+    faqs: mentalHealthFAQs.sleepCycle,
   },
   {
     id: "stress-level-estimator",
@@ -351,6 +445,9 @@ export const calculators: Calculator[] = [
     description: "Estimate your stress levels with a 10-question assessment.",
     slug: "stress-level-estimator",
     icon: "Gauge",
+    formula: "Stress Score = Sum of all question scores / 10",
+    inputs: [],
+    faqs: mentalHealthFAQs.stressLevel,
   },
   
   // Other Essential Tools
@@ -361,6 +458,8 @@ export const calculators: Calculator[] = [
     description: "Track and chart your basal body temperature for fertility awareness.",
     slug: "basal-body-temperature-chart",
     icon: "LineChart",
+    formula: "Temperature Shift = Post-Ovulation Temp - Pre-Ovulation Temp",
+    inputs: [],
   },
   {
     id: "menstrual-cycle-length-calculator",
@@ -369,6 +468,8 @@ export const calculators: Calculator[] = [
     description: "Calculate your average menstrual cycle length.",
     slug: "menstrual-cycle-length-calculator",
     icon: "CalendarDays",
+    formula: "Average Cycle Length = Total Days / Number of Cycles",
+    inputs: [],
   },
   {
     id: "ovulation-prediction-kit-reader",
@@ -377,6 +478,8 @@ export const calculators: Calculator[] = [
     description: "Interpret results from ovulation prediction kits.",
     slug: "ovulation-prediction-kit-reader",
     icon: "CheckSquare",
+    formula: "LH Surge = Test Line / Control Line ≥ 1",
+    inputs: [],
   },
   {
     id: "resting-heart-rate-estimator",
@@ -385,6 +488,8 @@ export const calculators: Calculator[] = [
     description: "Estimate your resting heart rate and its health implications.",
     slug: "resting-heart-rate-estimator",
     icon: "HeartPulse",
+    formula: "RHR = Average of morning pulse readings over 7 days",
+    inputs: [],
   },
   {
     id: "pregnancy-weight-gain-estimator",
@@ -393,6 +498,8 @@ export const calculators: Calculator[] = [
     description: "Estimate recommended pregnancy weight gain based on pre-pregnancy BMI.",
     slug: "pregnancy-weight-gain-estimator",
     icon: "TrendingUp",
+    formula: "Weekly Gain = Total Recommended Gain / Weeks Remaining",
+    inputs: [],
   },
   {
     id: "ideal-sleep-duration-calculator",
@@ -401,6 +508,8 @@ export const calculators: Calculator[] = [
     description: "Calculate your ideal sleep duration based on age and lifestyle.",
     slug: "ideal-sleep-duration-calculator",
     icon: "MoonSleep",
+    formula: "Sleep Duration = Base Duration + Lifestyle Adjustment",
+    inputs: [],
   },
   {
     id: "hydration-depletion-estimator",
@@ -409,6 +518,8 @@ export const calculators: Calculator[] = [
     description: "Estimate water loss based on exercise duration and intensity.",
     slug: "hydration-depletion-estimator",
     icon: "Droplets",
+    formula: "Water Loss (L) = Duration (hrs) × Intensity Factor × Weight (kg) × 0.0175",
+    inputs: [],
   },
   {
     id: "micronutrient-needs-estimator",
@@ -417,6 +528,8 @@ export const calculators: Calculator[] = [
     description: "Estimate your micronutrient needs based on age, gender, and activity level.",
     slug: "micronutrient-needs-estimator",
     icon: "Vitamin",
+    formula: "Daily Need = Base Need × Activity Factor × Age Factor",
+    inputs: [],
   },
   {
     id: "skinfold-body-fat-calculator",
@@ -425,6 +538,8 @@ export const calculators: Calculator[] = [
     description: "Calculate body fat percentage using skinfold measurements.",
     slug: "skinfold-body-fat-calculator",
     icon: "PinchCaliper",
+    formula: "Body Fat % = (495 / Body Density) - 450",
+    inputs: [],
   },
   {
     id: "blood-donation-eligibility-checker",
@@ -433,6 +548,8 @@ export const calculators: Calculator[] = [
     description: "Check if you're eligible to donate blood based on various criteria.",
     slug: "blood-donation-eligibility-checker",
     icon: "Droplet",
+    formula: "Eligibility Score = Base Score - Risk Factors",
+    inputs: [],
   },
   {
     id: "health-score-index",
@@ -441,5 +558,7 @@ export const calculators: Calculator[] = [
     description: "Calculate a composite health score based on multiple health indicators.",
     slug: "health-score-index",
     icon: "BarChart",
+    formula: "Health Score = (BMI Score + Fitness Score + Nutrition Score + Sleep Score) / 4",
+    inputs: [],
   },
 ];

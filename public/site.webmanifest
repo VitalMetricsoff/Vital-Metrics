@@ -1,0 +1,22 @@
+{
+  "name": "VitalMetrics - Medical Calculators",
+  "short_name": "VitalMetrics",
+  "description": "Free access to 50+ evidence-based medical calculators & health tools",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563EB",
+  "icons": [
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,42 +1,41 @@
-# https://www.robotstxt.org/robotstxt.html
-# Allow all web crawlers
-# VitalMetrics robots.txt
+# VitalMetrics.in robots.txt
+# Last updated: 2025-04-26
 
 User-agent: *
-Allow: /
 
-# Sitemap
-Sitemap: https://vitalmetrics.in/sitemap.xml
-
-# Optimize crawling
-Disallow: /api/
-Disallow: /admin/
-Disallow: /search
-Disallow: /*?*
-
-# Allow important directories
+# Allow crawling of important sections
 Allow: /calculators/
 Allow: /blog/
+Allow: /categories/
 Allow: /about/
-Allow: /contact/
 
-# Crawl delay
-Crawl-delay: 1: *
-Allow: /
-
-# Disallow crawling of error pages
-Disallow: /404
-Disallow: /500
-
-
-# Crawl-delay for all bots
-Crawl-delay: 1
-
-# Disallow paths
+# Optimize crawling efficiency
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
+Disallow: /search
+Disallow: /*?*
+Disallow: /404
+Disallow: /500
+Disallow: /*.php$
 
-# Allow calculator pages
-Allow: /calculators/
+# Allow static assets
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.svg$
 Allow: /*.json$
+
+# Crawl-delay setting
+Crawl-delay: 2
+
+# Special rules for high-traffic bots
+User-agent: Googlebot
+Crawl-delay: 1
+
+User-agent: bingbot
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://vitalmetrics.in/sitemap.xml
