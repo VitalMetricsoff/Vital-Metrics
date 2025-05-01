@@ -1,13 +1,21 @@
-# VitalMetrics.in robots.txt
-# Last updated: 2025-04-26
+# VitalMetrics.health robots.txt
+# Last updated: 2025-05-01
 
 User-agent: *
 
-# Allow crawling of important sections
+# Allow crawling of all important sections
+Allow: /symptom-checker/
 Allow: /calculators/
+Allow: /medical-tools/
+Allow: /health-resources/
 Allow: /blog/
-Allow: /categories/
 Allow: /about/
+
+# Sitemap location
+Sitemap: https://vitalmetrics.health/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1
 
 # Optimize crawling efficiency
 Disallow: /api/

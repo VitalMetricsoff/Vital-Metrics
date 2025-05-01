@@ -17,6 +17,8 @@ import NotFoundPage from "./pages/NotFoundPage";
 import FounderPage from "./pages/FounderPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
+import SymptomCheckerPage from "./pages/SymptomCheckerPage";
+
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -36,6 +38,7 @@ const App = () => (
                 <Route path="/" element={<HomePage />} />
                 <Route path="/calculators" element={<CalculatorsPage />} />
                 <Route path="/calculator/:slug" element={<CalculatorPage />} />
+
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
                 <Route path="/contact" element={<ContactUsPage />} />
@@ -43,6 +46,7 @@ const App = () => (
                 <Route path="/founder" element={<FounderPage />} />
                 <Route path="/blog" element={<BlogPage />} />
                 <Route path="/blog/:id" element={<BlogPostPage />} />
+                <Route path="/symptom-checker" element={<SymptomCheckerPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </MainLayout>

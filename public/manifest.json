@@ -1,11 +1,28 @@
 {
-  "name": "VitalMetrics",
-  "short_name": "VitalMetrics",
-  "description": "Professional medical calculators for healthcare professionals",
+  "name": "Vital Metrics - Medical Calculators & Symptom Checker",
+  "short_name": "Vital Metrics",
+  "description": "Free online medical calculators and AI-powered symptom checker. Get instant health insights, diagnoses, and find nearby healthcare providers.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563EB",
+  "categories": ["medical", "health", "utilities"],
+  "screenshots": [
+    {
+      "src": "/screenshots/symptom-checker.png",
+      "type": "image/png",
+      "sizes": "1280x720",
+      "form_factor": "wide",
+      "label": "Symptom Checker Interface"
+    },
+    {
+      "src": "/screenshots/medical-calculators.png",
+      "type": "image/png",
+      "sizes": "1280x720",
+      "form_factor": "wide",
+      "label": "Medical Calculators Dashboard"
+    }
+  ],
   "icons": [
     {
       "src": "/favicon.ico",

@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Search, Menu, X, Activity } from "lucide-react";
+import { Search, Menu, X, Activity, Stethoscope } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -54,6 +54,13 @@ export function Header() {
             Calculators
           </Link>
           <Link
+            to="/symptom-checker"
+            className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-1"
+          >
+            <Stethoscope className="h-4 w-4" />
+            Symptom Checker
+          </Link>
+          <Link
             to="/about"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
@@ -94,6 +101,14 @@ export function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Calculators
+              </Link>
+              <Link
+                to="/symptom-checker"
+                className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-1"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Stethoscope className="h-4 w-4" />
+                Symptom Checker
               </Link>
               <Link
                 to="/about"

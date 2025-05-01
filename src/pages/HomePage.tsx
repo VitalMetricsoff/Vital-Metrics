@@ -214,6 +214,7 @@ export default function HomePage() {
         </div>
       </section>
 
+
       {/* Founder Section */}
       <section className="py-20 bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
         <div className="container px-4 md:px-6 relative">
