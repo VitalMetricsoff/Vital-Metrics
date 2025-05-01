@@ -18,6 +18,12 @@ export const generateSiteLinks = () => {
       children: []
     },
     {
+      name: "Symptom Checker",
+      url: "/symptom-checker",
+      priority: 0.9,
+      children: []
+    },
+    {
       name: "All Calculators",
       url: "/calculators",
       priority: 0.9,
@@ -34,6 +40,12 @@ export const generateSiteLinks = () => {
             children: []
           }))
       }))
+    },
+    {
+      name: "Health Resources",
+      url: "/resources",
+      priority: 0.8,
+      children: []
     },
     {
       name: "About",

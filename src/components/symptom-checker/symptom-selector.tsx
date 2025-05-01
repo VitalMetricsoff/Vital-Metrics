@@ -54,12 +54,12 @@ export function SymptomSelector({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Selected Symptoms */}
       {selectedSymptoms.length > 0 && (
-        <Card className="bg-muted/50">
-          <CardContent className="pt-6">
-            <div className="flex flex-wrap gap-2">
+        <Card className="bg-muted/50 overflow-hidden">
+          <CardContent className="pt-4 sm:pt-6">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 px-1 sm:px-2">
               {selectedSymptoms.map((symptom) => (
                 <Badge
                   key={symptom.id}
@@ -77,14 +77,15 @@ export function SymptomSelector({
       {/* Suggested Symptoms */}
       {suggestedSymptoms.length > 0 && (
         <Card>
-          <CardContent className="pt-6">
+          <CardContent className="pt-4 sm:pt-6">
             <h3 className="font-medium mb-4">Suggested Related Symptoms</h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 px-1 sm:px-2">
               {suggestedSymptoms.map((symptom) => (
                 <Button
                   key={symptom.id}
                   variant="outline"
                   size="sm"
+                  className="rounded-md h-9 sm:h-10"
                   onClick={() => handleSymptomClick(symptom)}
                 >
                   {symptom.name}
@@ -97,12 +98,12 @@ export function SymptomSelector({
 
       {/* Symptoms by Body Region */}
       <Tabs defaultValue={patientInfo.bodyRegions[0]} className="w-full">
-        <TabsList className="w-full justify-start flex-wrap h-auto gap-2 bg-transparent p-0">
+        <TabsList className="w-full justify-start flex-wrap h-auto gap-1.5 sm:gap-2 bg-transparent p-1 sm:p-2 mb-2 sm:mb-0 rounded-lg border border-border/50">
           {patientInfo.bodyRegions.map((region) => (
             <TabsTrigger
               key={region}
               value={region}
-              className="data-[state=active]:bg-primary"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-md text-sm sm:text-base px-3 py-1.5"
             >
               {bodyRegionLabels[region]}
             </TabsTrigger>
@@ -110,15 +111,16 @@ export function SymptomSelector({
         </TabsList>
 
         {patientInfo.bodyRegions.map((region) => (
-          <TabsContent key={region} value={region} className="mt-6">
+          <TabsContent key={region} value={region} className="mt-4 sm:mt-6">
             <Card>
-              <CardContent className="pt-6">
-                <div className="flex flex-wrap gap-2">
+              <CardContent className="pt-4 sm:pt-6">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 px-1 sm:px-2">
                   {symptomsByRegion[region]?.map((symptom) => (
                     <Button
                       key={symptom.id}
                       variant="outline"
                       size="sm"
+                      className="rounded-md h-9 sm:h-10"
                       onClick={() => handleSymptomClick(symptom)}
                     >
                       {symptom.name}
@@ -131,10 +133,11 @@ export function SymptomSelector({
         ))}
       </Tabs>
 
-      <div className="flex justify-end">
+      <div className="flex justify-center sm:justify-end">
         <Button 
           onClick={onFinish}
           disabled={selectedSymptoms.length === 0}
+          className="w-full sm:w-auto h-11 text-base font-medium"
         >
           Continue
         </Button>

@@ -215,6 +215,89 @@ export default function HomePage() {
       </section>
 
 
+      {/* Symptom Checker Announcement */}
+      <section className="py-14 md:py-20 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 relative overflow-hidden">
+        <div className="container px-4 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300">
+                <Stethoscope className="h-4 w-4 mr-2" />
+                New Feature
+              </div>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight dark:text-white">
+                Discover Our New Smart Symptom Checker
+              </h2>
+              <p className="text-lg text-muted-foreground dark:text-slate-300">
+                Get instant insights about your symptoms and potential conditions using our evidence-based medical analysis tool. Make more informed decisions about your health.
+              </p>
+              <div className="space-y-4 text-sm text-muted-foreground dark:text-slate-400">
+                <div className="flex items-start gap-2">
+                  <div className="bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full p-1 mt-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <p>Quick and easy symptom assessment</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <div className="bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full p-1 mt-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <p>Evidence-based medical analysis</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <div className="bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full p-1 mt-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <p>Detailed health insights and recommendations</p>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/symptom-checker">
+                  <Button size="lg" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-600 dark:hover:bg-blue-700">
+                    Try Symptom Checker
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="flex justify-center mt-8 lg:mt-0">
+              <div className="relative bg-white dark:bg-slate-800 p-4 sm:p-6 rounded-2xl shadow-xl max-w-md w-full">
+                <div className="absolute -top-6 -right-6 hidden lg:block">
+                  <div className="w-12 h-12 bg-blue-600 dark:bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                    <Stethoscope className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4 text-sm">
+                    <Badge variant="outline" className="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800">
+                      Step 1
+                    </Badge>
+                    <span className="text-muted-foreground dark:text-slate-400">Select your symptoms</span>
+                  </div>
+                  <div className="flex items-center gap-4 text-sm">
+                    <Badge variant="outline" className="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800">
+                      Step 2
+                    </Badge>
+                    <span className="text-muted-foreground dark:text-slate-400">Specify symptom duration</span>
+                  </div>
+                  <div className="flex items-center gap-4 text-sm">
+                    <Badge variant="outline" className="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800">
+                      Step 3
+                    </Badge>
+                    <span className="text-muted-foreground dark:text-slate-400">Get expert medical insights</span>
+                  </div>
+                </div>
+                <div className="mt-6 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm">
+                  <p className="font-medium mb-2 text-slate-900 dark:text-white">Important Disclaimer</p>
+                  <p className="text-muted-foreground dark:text-slate-400 text-xs leading-relaxed">
+                    This tool is for informational purposes only and should not be used as a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Founder Section */}
       <section className="py-20 bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
         <div className="container px-4 md:px-6 relative">
@@ -374,25 +457,81 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-14 md:py-20 bg-primary text-primary-foreground">
+      {/* Interactive Features Section */}
+      <section className="py-14 md:py-20 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950 dark:to-blue-950">
         <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-6 text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm">
-              <span className="animate-pulse-slow mr-2">●</span> Start Your Health Journey
-            </div>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
-              Track, Monitor, and Improve Your Wellness
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4">Interactive Tools</Badge>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight dark:text-white mb-4">
+              Your Complete Health Toolkit
             </h2>
-            <p className="text-lg text-white/80 max-w-[700px]">
-              Access all 50+ health calculators to gain valuable insights into your health metrics and make informed decisions.
+            <p className="text-lg text-muted-foreground dark:text-slate-400 max-w-[800px] mx-auto">
+              Explore our comprehensive suite of health assessment tools designed to help you make informed decisions about your wellbeing.
             </p>
-            <Link to="/calculators">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                Explore All Calculators
-                <ChevronRight className="ml-1 h-4 w-4" />
-              </Button>
-            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="group hover:shadow-lg transition-all duration-300 dark:hover:border-blue-500/30">
+              <CardContent className="p-6">
+                <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg w-fit">
+                  <Calculator className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 dark:text-white">Health Calculators</h3>
+                <p className="text-muted-foreground dark:text-slate-400 mb-4">50+ professional medical calculators for precise health metrics.</p>
+                <Link to="/calculators" className="text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 inline-flex items-center">
+                  Try Calculators <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-lg transition-all duration-300 dark:hover:border-green-500/30">
+              <CardContent className="p-6">
+                <div className="mb-4 p-3 bg-green-50 dark:bg-green-900/30 rounded-lg w-fit">
+                  <Stethoscope className="h-6 w-6 text-green-600 dark:text-green-400" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 dark:text-white">Symptom Checker</h3>
+                <p className="text-muted-foreground dark:text-slate-400 mb-4">Evidence-based analysis of your symptoms and potential conditions.</p>
+                <Link to="/symptom-checker" className="text-green-600 dark:text-green-400 group-hover:text-green-700 dark:group-hover:text-green-300 inline-flex items-center">
+                  Check Symptoms <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-lg transition-all duration-300 dark:hover:border-purple-500/30">
+              <CardContent className="p-6">
+                <div className="mb-4 p-3 bg-purple-50 dark:bg-purple-900/30 rounded-lg w-fit">
+                  <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 dark:text-white">Health Resources</h3>
+                <p className="text-muted-foreground dark:text-slate-400 mb-4">Educational content and guides for better health understanding.</p>
+                <Link to="/resources" className="text-purple-600 dark:text-purple-400 group-hover:text-purple-700 dark:group-hover:text-purple-300 inline-flex items-center">
+                  View Resources <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="py-14 md:py-20 bg-white dark:bg-slate-900">
+        <div className="container px-4 md:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            <div className="text-center space-y-2">
+              <div className="text-4xl md:text-5xl font-bold text-primary">50+</div>
+              <p className="text-muted-foreground dark:text-slate-400">Medical Calculators</p>
+            </div>
+            <div className="text-center space-y-2">
+              <div className="text-4xl md:text-5xl font-bold text-primary">100+</div>
+              <p className="text-muted-foreground dark:text-slate-400">Health Conditions</p>
+            </div>
+            <div className="text-center space-y-2">
+              <div className="text-4xl md:text-5xl font-bold text-primary">24/7</div>
+              <p className="text-muted-foreground dark:text-slate-400">Available Online</p>
+            </div>
+            <div className="text-center space-y-2">
+              <div className="text-4xl md:text-5xl font-bold text-primary">10K+</div>
+              <p className="text-muted-foreground dark:text-slate-400">Daily Users</p>
+            </div>
           </div>
         </div>
       </section>

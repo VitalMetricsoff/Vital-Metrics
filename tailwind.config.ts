@@ -1,7 +1,8 @@
 
 import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
-export default {
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -135,5 +136,7 @@ export default {
       }
     }
   },
-  plugins: [require("tailwindcss-animate"), require('tailwind-scrollbar')],
-} satisfies Config;
+  plugins: [require("tailwindcss-animate"), typography, require('tailwind-scrollbar')],
+}
+
+export default config;

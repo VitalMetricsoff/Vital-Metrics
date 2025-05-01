@@ -45,9 +45,9 @@ export function PatientInfoForm({ onSubmit }: PatientInfoFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+      <div className="space-y-3 sm:space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="age">Age</Label>
             <Input
@@ -58,6 +58,7 @@ export function PatientInfoForm({ onSubmit }: PatientInfoFormProps) {
               value={age || ''}
               onChange={(e) => setAge(parseInt(e.target.value) || 0)}
               required
+              className="h-10 sm:h-11 text-base"
             />
           </div>
 
@@ -66,7 +67,7 @@ export function PatientInfoForm({ onSubmit }: PatientInfoFormProps) {
             <RadioGroup
               value={gender}
               onValueChange={(value) => setGender(value as Gender)}
-              className="flex gap-4"
+              className="flex flex-col sm:flex-row gap-2 sm:gap-4"
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="male" id="male" />
@@ -86,7 +87,7 @@ export function PatientInfoForm({ onSubmit }: PatientInfoFormProps) {
 
         <div className="space-y-2">
           <Label>Affected Body Regions</Label>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4">
             {(Object.entries(bodyRegions) as [BodyRegion, string][]).map(([key, label]) => (
               <div key={key} className="flex items-center space-x-2">
                 <Checkbox
@@ -102,7 +103,7 @@ export function PatientInfoForm({ onSubmit }: PatientInfoFormProps) {
 
         <div className="space-y-2">
           <Label>Risk Factors</Label>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             {riskFactors.map(factor => (
               <div key={factor.id} className="flex items-start space-x-2">
                 <Checkbox
@@ -122,7 +123,7 @@ export function PatientInfoForm({ onSubmit }: PatientInfoFormProps) {
         </div>
       </div>
 
-      <Button type="submit" className="w-full">
+      <Button type="submit" className="w-full h-11 text-base font-medium">
         Continue
       </Button>
     </form>

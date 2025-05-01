@@ -143,22 +143,23 @@ export function SymptomChecker() {
           __html: JSON.stringify(generateSymptomCheckerSchema())
         }}
       />
-    <Card className="w-full max-w-4xl mx-auto">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-primary">Free Online Symptom Checker</CardTitle>
-        <CardDescription>
-          Get instant, AI-powered health insights by answering a few simple questions about your symptoms. Free, accurate, and confidential.
+    <Card className="w-full max-w-4xl mx-auto shadow-lg overflow-hidden">
+      <div className="px-4 sm:px-6 py-6 md:py-12">
+        <CardTitle className="text-xl sm:text-2xl font-bold text-primary">Free Online Symptom Checker</CardTitle>
+        <CardDescription className="text-sm sm:text-base mt-2">
+          Get instant health insights by answering a few simple questions about your symptoms. Free, accurate, and confidential.
         </CardDescription>
-      </CardHeader>
-      <CardContent className="p-6">
-        <Progress value={progress} className="mb-4" />
+      </div>
+      <CardContent className="p-3 sm:p-6 overflow-x-hidden">
+        <div className="max-w-full overflow-x-auto">
+        <Progress value={progress} className="mb-2 sm:mb-4" />
         <Breadcrumbs currentStep={currentStep} />
-        <Tabs value={currentStep} className="w-full">
-          <TabsContent value="patient-info">
+        <Tabs value={currentStep} className="w-full overflow-hidden">
+          <TabsContent value="patient-info" className="overflow-hidden">
             <PatientInfoForm onSubmit={handlePatientInfoSubmit} />
           </TabsContent>
 
-          <TabsContent value="symptoms" className="mt-0 border-none">
+          <TabsContent value="symptoms" className="mt-0 border-none overflow-hidden">
             <SymptomSelector
               selectedSymptoms={selectedSymptoms}
               onSymptomAdd={handleSymptomAdd}
@@ -167,7 +168,7 @@ export function SymptomChecker() {
             />
           </TabsContent>
 
-          <TabsContent value="duration" className="mt-0 border-none">
+          <TabsContent value="duration" className="mt-0 border-none overflow-hidden">
             <DurationSelector
               symptoms={selectedSymptoms}
               onUpdateSymptom={handleUpdateSymptomDuration}
@@ -175,7 +176,7 @@ export function SymptomChecker() {
             />
           </TabsContent>
 
-          <TabsContent value="results" className="mt-0 border-none">
+          <TabsContent value="results" className="mt-0 border-none overflow-hidden">
             <DiagnosisResults
               results={diagnosisResults}
               symptoms={selectedSymptoms}
@@ -183,6 +184,7 @@ export function SymptomChecker() {
             />
           </TabsContent>
         </Tabs>
+        </div>
       </CardContent>
     </Card>
     </>
