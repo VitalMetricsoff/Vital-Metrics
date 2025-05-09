@@ -1,8 +1,8 @@
-import { 
-  Heart, Brain, Apple, Dumbbell, Stethoscope, Baby, Pill, 
-  Sun, Bug, Cigarette, Droplet, Eye, Bone, Thermometer, 
-  Bed, Users, ShieldCheck, Syringe, Salad, Smile, 
-  HeartPulse, Activity, Dna, Scale, Wind, Milk, 
+import {
+  Heart, Brain, Apple, Dumbbell, Stethoscope, Baby, Pill,
+  Sun, Bug, Cigarette, Droplet, Eye, Bone, Thermometer,
+  Bed, Users, ShieldCheck, Syringe, Salad, Smile,
+  HeartPulse, Activity, Dna, Scale, Wind, Milk,
   Tablets, Sunset, Shield, Flower2,
   Soup, Footprints, Microscope, Egg, Bandage, Waves,
   Zap, Leaf, Moon, Bath, Flame, Sandwich, Glasses,
@@ -29,9 +29,8 @@ export interface HealthResource {
   description: string;
   icon: any; // LucideIcon type
   slug: string;
-  readTime: string;
   category: HealthCategory;
-  content: string;
+  pages: string[];
 }
 
 export const healthResources: HealthResource[] = [
@@ -41,9 +40,9 @@ export const healthResources: HealthResource[] = [
     description: "Understanding and managing blood pressure for heart health.",
     icon: HeartPulse,
     slug: "blood-pressure-management",
-    readTime: "10 min",
+
     category: "Cardiovascular",
-    content: `# Blood Pressure Management
+    pages: [`# Blood Pressure Management
 
 ## Understanding Blood Pressure
 - Normal ranges
@@ -62,16 +61,18 @@ export const healthResources: HealthResource[] = [
 - Risk assessment
 - Treatment options
 - Emergency response
-    `
+    `,
+    ],
   },
   {
     title: "Cholesterol Control",
     description: "Managing cholesterol levels for cardiovascular health.",
     icon: Activity,
     slug: "cholesterol-control",
-    readTime: "8 min",
+
     category: "Cardiovascular",
-    content: `# Cholesterol Control
+    pages: [
+      `# Cholesterol Control
 
 ## Types of Cholesterol
 - HDL (good)
@@ -90,7 +91,8 @@ export const healthResources: HealthResource[] = [
 - Risk factors
 - Treatment guidelines
 - Prevention strategies
-    `
+    `,
+    ],
   },
 
   // Mental Health Resources
@@ -99,9 +101,9 @@ export const healthResources: HealthResource[] = [
     description: "Techniques and strategies for managing anxiety.",
     icon: Brain,
     slug: "anxiety-management",
-    readTime: "12 min",
+
     category: "Mental Health",
-    content: `# Anxiety Management
+    pages: [`# Anxiety Management
 
 ## Understanding Anxiety
 - Types of anxiety
@@ -120,16 +122,17 @@ export const healthResources: HealthResource[] = [
 - Treatment options
 - Support resources
 - Crisis management
-    `
+    `,
+    ],
   },
   {
     title: "Depression Support",
     description: "Understanding and managing depression with professional guidance.",
     icon: Moon,
     slug: "depression-support",
-    readTime: "15 min",
     category: "Mental Health",
-    content: `# Depression Support
+    pages: [
+      `# Depression Support
 
 ## Understanding Depression
 - Signs and symptoms
@@ -148,7 +151,8 @@ export const healthResources: HealthResource[] = [
 - Treatment protocols
 - Support systems
 - Prevention strategies
-    `
+    `,
+    ],
   },
 
   // Nutrition Resources
@@ -157,9 +161,9 @@ export const healthResources: HealthResource[] = [
     description: "Creating nutritionally balanced meal plans for optimal health.",
     icon: Apple,
     slug: "balanced-diet-planning",
-    readTime: "10 min",
     category: "Nutrition",
-    content: `# Balanced Diet Planning
+    pages: [
+      `# Balanced Diet Planning
 
 ## Nutrition Basics
 - Food groups
@@ -178,16 +182,17 @@ export const healthResources: HealthResource[] = [
 - Nutritional goals
 - Special populations
 - Food safety
-    `
+    `,
+    ],
   },
   {
     title: "Healthy Cooking Methods",
     description: "Learn healthy cooking techniques for better nutrition.",
     icon: Flame,
     slug: "healthy-cooking-methods",
-    readTime: "8 min",
     category: "Nutrition",
-    content: `# Healthy Cooking Methods
+    pages: [
+      `# Healthy Cooking Methods
 
 ## Cooking Techniques
 - Steaming
@@ -206,7 +211,8 @@ export const healthResources: HealthResource[] = [
 - Nutrient preservation
 - Safety guidelines
 - Equipment use
-    `
+    `,
+    ],
   },
 
   // Fitness Resources
@@ -215,9 +221,9 @@ export const healthResources: HealthResource[] = [
     description: "Effective exercises you can do at home without equipment.",
     icon: Dumbbell,
     slug: "home-workout-guide",
-    readTime: "12 min",
     category: "Fitness",
-    content: `# Home Workout Guide
+    pages: [
+      `# Home Workout Guide
 
 ## Exercise Types
 - Bodyweight exercises
@@ -236,16 +242,17 @@ export const healthResources: HealthResource[] = [
 - Progression tips
 - Form guidance
 - Injury prevention
-    `
+    `,
+    ],
   },
   {
     title: "Cardio Training",
     description: "Cardiovascular exercise guidelines for better fitness.",
     icon: Activity,
     slug: "cardio-training",
-    readTime: "10 min",
     category: "Fitness",
-    content: `# Cardio Training
+    pages: [
+      `# Cardio Training
 
 ## Training Basics
 - Types of cardio
@@ -264,7 +271,8 @@ export const healthResources: HealthResource[] = [
 - Safety guidelines
 - Health benefits
 - Risk management
-    `
+    `,
+    ],
   },
 
   // Respiratory Resources
@@ -273,9 +281,9 @@ export const healthResources: HealthResource[] = [
     description: "Managing asthma effectively with proper care and prevention.",
     icon: Wind,
     slug: "asthma-care-guide",
-    readTime: "12 min",
     category: "Respiratory",
-    content: `# Asthma Care Guide
+    pages: [
+      `# Asthma Care Guide
 
 ## Understanding Asthma
 - Triggers and symptoms
@@ -294,16 +302,17 @@ export const healthResources: HealthResource[] = [
 - Emergency response
 - Prevention strategies
 - Support resources
-    `
+    `,
+    ],
   },
   {
     title: "Respiratory Infections",
     description: "Prevention and management of common respiratory infections.",
     icon: Shield,
     slug: "respiratory-infections",
-    readTime: "10 min",
     category: "Respiratory",
-    content: `# Respiratory Infections
+    pages: [
+      `# Respiratory Infections
 
 ## Common Infections
 - Upper respiratory
@@ -322,7 +331,8 @@ export const healthResources: HealthResource[] = [
 - Prevention measures
 - Risk assessment
 - When to seek help
-    `
+    `,
+    ],
   },
 
   // Maternal Health Resources
@@ -331,9 +341,9 @@ export const healthResources: HealthResource[] = [
     description: "Essential information for a healthy pregnancy.",
     icon: Baby,
     slug: "prenatal-care-basics",
-    readTime: "15 min",
     category: "Maternal Health",
-    content: `# Prenatal Care Basics
+    pages: [
+      `# Prenatal Care Basics
 
 ## Pregnancy Care
 - Regular check-ups
@@ -352,16 +362,17 @@ export const healthResources: HealthResource[] = [
 - Risk assessment
 - Screening tests
 - Emergency signs
-    `
+    `,
+    ],
   },
   {
     title: "Postpartum Recovery",
     description: "Guide to recovery and care after childbirth.",
     icon: Heart,
     slug: "postpartum-recovery",
-    readTime: "12 min",
     category: "Maternal Health",
-    content: `# Postpartum Recovery
+    pages: [
+      `# Postpartum Recovery
 
 ## Recovery Basics
 - Physical healing
@@ -380,7 +391,8 @@ export const healthResources: HealthResource[] = [
 - Warning signs
 - Support services
 - Mental health
-    `
+    `,
+    ],
   },
 
   // Infectious Diseases Resources
@@ -389,9 +401,9 @@ export const healthResources: HealthResource[] = [
     description: "Essential guidelines for preventing infectious diseases.",
     icon: Shield,
     slug: "infection-prevention",
-    readTime: "10 min",
     category: "Infectious Diseases",
-    content: `# Infection Prevention
+    pages: [
+      `# Infection Prevention
 
 ## Basic Prevention
 - Hand hygiene
@@ -410,16 +422,17 @@ export const healthResources: HealthResource[] = [
 - Risk assessment
 - Global standards
 - Emergency response
-    `
+    `,
+    ],
   },
   {
     title: "Pandemic Preparedness",
     description: "How to prepare for and respond to disease outbreaks.",
     icon: Bug,
     slug: "pandemic-preparedness",
-    readTime: "15 min",
     category: "Infectious Diseases",
-    content: `# Pandemic Preparedness
+    pages: [
+      `# Pandemic Preparedness
 
 ## Understanding Pandemics
 - Definition
@@ -438,7 +451,8 @@ export const healthResources: HealthResource[] = [
 - Safety measures
 - Community action
 - Resource management
-    `
+    `,
+    ],
   },
 
   // Lifestyle Resources
@@ -447,9 +461,9 @@ export const healthResources: HealthResource[] = [
     description: "Maintaining a healthy balance between work and personal life.",
     icon: Sun,
     slug: "work-life-balance",
-    readTime: "10 min",
     category: "Lifestyle",
-    content: `# Work-Life Balance
+    pages: [
+      `# Work-Life Balance
 
 ## Understanding Balance
 - Time management
@@ -468,16 +482,17 @@ export const healthResources: HealthResource[] = [
 - Physical health
 - Social well-being
 - Workplace health
-    `
+    `,
+    ],
   },
   {
     title: "Digital Wellness",
     description: "Managing technology use for better health and well-being.",
     icon: Monitor,
     slug: "digital-wellness",
-    readTime: "8 min",
     category: "Lifestyle",
-    content: `# Digital Wellness
+    pages: [
+      `# Digital Wellness
 
 ## Screen Time
 - Usage patterns
@@ -496,7 +511,8 @@ export const healthResources: HealthResource[] = [
 - Health protection
 - Risk management
 - Best practices
-    `
+    `,
+    ],
   },
 
   // Prevention Resources
@@ -505,9 +521,9 @@ export const healthResources: HealthResource[] = [
     description: "Understanding important cancer screening guidelines and schedules.",
     icon: Microscope,
     slug: "cancer-screening",
-    readTime: "12 min",
     category: "Prevention",
-    content: `# Cancer Screening
+    pages: [
+      `# Cancer Screening
 
 ## Screening Types
 - Breast cancer
@@ -526,16 +542,17 @@ export const healthResources: HealthResource[] = [
 - Risk assessment
 - Follow-up care
 - Support services
-    `
+    `,
+    ],
   },
   {
     title: "Preventive Health Checks",
     description: "Regular health screenings and check-ups for disease prevention.",
     icon: ShieldCheck,
     slug: "preventive-health-checks",
-    readTime: "10 min",
     category: "Prevention",
-    content: `# Preventive Health Checks
+    pages: [
+      `# Preventive Health Checks
 
 ## Regular Screenings
 - Blood pressure
@@ -554,7 +571,8 @@ export const healthResources: HealthResource[] = [
 - Priority tests
 - Age guidelines
 - Risk factors
-    `
+    `,
+    ],
   },
 
   // Medication Resources
@@ -563,9 +581,9 @@ export const healthResources: HealthResource[] = [
     description: "Guidelines for safe medication use and storage.",
     icon: Pill,
     slug: "medication-safety",
-    readTime: "10 min",
     category: "Medications",
-    content: `# Medication Safety
+    pages: [
+      `# Medication Safety
 
 ## Safe Use
 - Prescription guidelines
@@ -576,24 +594,25 @@ export const healthResources: HealthResource[] = [
 ## Special Considerations
 1. Elderly patients
 2. Children
-3. Pregnancy
-4. Chronic conditions
+3. Chronic conditions
+4. Multiple medications
 
 ## WHO Guidelines
 - Safety standards
 - Documentation
 - Emergency contacts
 - Disposal methods
-    `
+    `,
+    ],
   },
   {
     title: "Antibiotic Awareness",
     description: "Understanding proper antibiotic use and resistance prevention.",
     icon: Bug,
     slug: "antibiotic-awareness",
-    readTime: "8 min",
     category: "Medications",
-    content: `# Antibiotic Awareness
+    pages: [
+      `# Antibiotic Awareness
 
 ## Proper Use
 - When needed
@@ -612,17 +631,17 @@ export const healthResources: HealthResource[] = [
 - Usage protocols
 - Global impact
 - Future concerns
-    `
+    `,
+    ],
   },
   {
     title: "Heart Health Essentials",
     description: "Learn about cardiovascular health, risk factors, and prevention strategies recommended by WHO.",
     icon: Heart,
     slug: "heart-health-essentials",
-    readTime: "8 min",
     category: "Cardiovascular",
-    content: `
-# Heart Health Essentials
+    pages: [
+      `# Heart Health Essentials
 
 ## Understanding Cardiovascular Health
 
@@ -674,17 +693,17 @@ The World Health Organization recommends:
 5. Managing stress effectively
 
 Remember: Prevention is better than cure. Start taking care of your heart health today.
-    `
+    `,
+    ],
   },
   {
     title: "Mental Wellness Guide",
     description: "Expert guidance on maintaining mental health, managing stress, and building resilience.",
     icon: Brain,
     slug: "mental-wellness-guide",
-    readTime: "10 min",
     category: "Mental Health",
-    content: `
-# Mental Wellness Guide
+    pages: [
+      `# Mental Wellness Guide
 
 ## Understanding Mental Health
 
@@ -743,17 +762,73 @@ Seek professional help if you experience:
 - Major changes in eating or sleeping habits
 
 Remember: Mental health is as important as physical health. Don't hesitate to seek support.
-    `
+    `,
+    `# Real-World Examples and Coping Strategies
+
+## Case Study 1: Anxiety Management
+Alex's Story:
+
+1. Initial Challenges
+   - Panic attacks
+   - Work stress
+   - Social anxiety
+
+2. Treatment Approach
+   - Therapy sessions
+   - Mindfulness practice
+   - Exercise routine
+
+3. Outcomes
+   - Reduced anxiety
+   - Better coping
+   - Improved relationships
+
+## Case Study 2: Depression Recovery
+Samantha's Journey:
+
+1. Starting Point
+   - Major depression
+   - Isolation
+   - Low motivation
+
+2. Recovery Steps
+   - Professional help
+   - Support network
+   - Daily structure
+
+3. Progress
+   - Mood improvement
+   - Social reengagement
+   - Work return
+
+## Practical Strategies
+
+1. Daily Routine
+   - Morning ritual
+   - Activity scheduling
+   - Sleep hygiene
+
+2. Coping Tools
+   - Grounding techniques
+   - Breathing exercises
+   - Journaling
+
+3. Support System
+   - Professional help
+   - Peer support
+   - Family education
+
+Remember: Recovery is possible with the right support.`
+    ],
   },
   {
     title: "Nutrition & Diet Basics",
     description: "Essential information about balanced nutrition, healthy eating habits, and dietary guidelines.",
     icon: Apple,
     slug: "nutrition-diet-basics",
-    readTime: "12 min",
     category: "Nutrition",
-    content: `
-# Nutrition & Diet Basics
+    pages: [
+      `# Nutrition & Diet Basics
 
 ## Understanding Balanced Nutrition
 
@@ -812,17 +887,73 @@ A balanced diet provides your body with the nutrients it needs to function prope
    - Limited sugary drinks
 
 Remember: Good nutrition is the foundation of good health. Start making healthy choices today.
-    `
+    `,
+    `# Case Studies and Practical Examples
+
+## Case Study 1: Weight Loss Journey
+Sarah's Story:
+
+1. Initial Situation
+   - Overweight
+   - Unhealthy diet
+   - Sedentary lifestyle
+
+2. Changes Made
+   - Balanced diet
+   - Regular exercise
+   - Portion control
+
+3. Results
+   - Significant weight loss
+   - Improved overall health
+   - Increased energy
+
+## Case Study 2: Managing Chronic Conditions
+Mark's Experience:
+
+1. Background
+   - Diabetes
+   - High blood pressure
+   - Unhealthy diet
+
+2. Dietary Changes
+   - Balanced meals
+   - Limited sugar intake
+   - Regular hydration
+
+3. Outcomes
+   - Improved blood sugar control
+   - Normalized blood pressure
+   - Better overall health
+
+## Practical Tips
+
+1. **Meal Planning**
+   - Creating a meal schedule
+   - Grocery shopping
+   - Healthy cooking methods
+
+2. **Snacking**
+   - Healthy snack options
+   - Portion control
+   - Mindful eating
+
+3. **Eating Out**
+   - Healthy restaurant choices
+   - Menu planning
+   - Moderation
+
+Remember: Small dietary changes lead to significant health improvements.`
+    ],
   },
   {
     title: "Physical Activity Guide",
     description: "WHO recommendations for physical activity, exercise tips, and fitness guidelines for all ages.",
     icon: Dumbbell,
     slug: "physical-activity-guide",
-    readTime: "9 min",
     category: "Fitness",
-    content: `
-# Physical Activity Guide
+    pages: [
+      `# Physical Activity Guide
 
 ## WHO Physical Activity Recommendations
 
@@ -870,16 +1001,73 @@ Regular physical activity is crucial for health and well-being. The World Health
    - Hydration
 
 Remember: Any physical activity is better than none. Find activities you enjoy and make them part of your routine.
-    `
+    `,
+    `# Case Studies and Fitness Examples
+
+## Case Study 1: Fitness Journey
+John's Story:
+
+1. Initial Situation
+   - Sedentary lifestyle
+   - Overweight
+   - Low motivation
+
+2. Changes Made
+   - Regular exercise routine
+   - Balanced diet
+   - Progress tracking
+
+3. Results
+   - Significant weight loss
+   - Improved overall health
+   - Increased energy
+
+## Case Study 2: Injury Recovery
+Emily's Experience:
+
+1. Background
+   - Sports injury
+   - Rehabilitation program
+   - Modified exercises
+
+2. Recovery Process
+   - Physical therapy
+   - Pain management
+   - Gradual progression
+
+3. Outcomes
+   - Full recovery
+   - Improved strength and flexibility
+   - Return to sports
+
+## Practical Tips
+
+1. **Finding Motivation**
+   - Setting goals
+   - Finding a workout buddy
+   - Tracking progress
+
+2. **Creating a Routine**
+   - Scheduling workouts
+   - Variety in exercises
+   - Rest and recovery
+
+3. **Staying Safe**
+   - Proper equipment
+   - Warm-up and cool-down
+   - Listening to your body
+
+Remember: Consistency is key to fitness success.`
+    ],
   },
   {
     title: "Respiratory Health Guide",
     description: "Understanding respiratory health, common conditions, and prevention strategies.",
     icon: Stethoscope,
     slug: "respiratory-health-guide",
-    readTime: "10 min",
     category: "Respiratory",
-    content: `# Respiratory Health Guide
+    pages: [
+      `# Respiratory Health Guide
 
 ## Understanding Respiratory Health
 
@@ -916,16 +1104,74 @@ Respiratory health is crucial for overall well-being. The WHO emphasizes the imp
 3. Environmental measures
 4. Occupational safety
 
-Remember: Early detection and proper management are key to respiratory health.`
+Remember: Early detection and proper management are key to respiratory health.
+    `,
+    `# Case Studies and Examples
+
+## Case Study 1: Asthma Management
+John, a 35-year-old office worker, struggled with asthma triggered by seasonal allergies. Here's how he managed his condition:
+
+1. Identified triggers
+   - Pollen
+   - Dust
+   - Cold air
+
+2. Created an action plan
+   - Regular peak flow monitoring
+   - Preventive inhaler use
+   - Emergency inhaler always available
+
+3. Results
+   - 70% reduction in asthma attacks
+   - Improved quality of life
+   - Better sleep quality
+
+## Case Study 2: COPD Management
+Mary, 60, was diagnosed with COPD. Her success story includes:
+
+1. Lifestyle changes
+   - Quit smoking
+   - Regular exercise
+   - Breathing exercises
+
+2. Environmental modifications
+   - Air purifier installation
+   - Regular house cleaning
+   - Humidity control
+
+3. Outcomes
+   - Increased exercise tolerance
+   - Fewer hospitalizations
+   - Better breathing control
+
+## Practical Tips
+
+1. Daily Breathing Exercises
+   - Pursed lip breathing
+   - Diaphragmatic breathing
+   - Counted breathing
+
+2. Home Environment
+   - Regular cleaning schedule
+   - Proper ventilation
+   - Allergen control
+
+3. Exercise Routine
+   - Walking program
+   - Strength training
+   - Flexibility exercises
+
+Remember: Consistency in management leads to better outcomes.`
+    ],
   },
   {
     title: "Maternal and Child Health",
     description: "Essential information for maternal health, pregnancy, and childcare.",
     icon: Baby,
     slug: "maternal-child-health",
-    readTime: "15 min",
     category: "Maternal Health",
-    content: `# Maternal and Child Health
+    pages: [
+      `# Maternal and Child Health
 
 ## Pregnancy Care
 
@@ -959,16 +1205,74 @@ Remember: Early detection and proper management are key to respiratory health.`
 3. Newborn care standards
 4. Child development monitoring
 
-Remember: Regular prenatal care is crucial for both mother and child health.`
+Remember: Regular prenatal care is crucial for both mother and child health.
+    `,
+    `# Practical Examples and Case Studies
+
+## Case Study 1: First-Time Mother
+Sarah's Journey Through Pregnancy:
+
+1. First Trimester
+   - Morning sickness management
+   - Nutrition planning
+   - Exercise routine
+
+2. Second Trimester
+   - Prenatal yoga
+   - Birth plan preparation
+   - Genetic screening
+
+3. Third Trimester
+   - Birth preparation classes
+   - Hospital bag checklist
+   - Labor positions practice
+
+## Case Study 2: High-Risk Pregnancy
+Emily's Success Story:
+
+1. Risk Factors
+   - Advanced maternal age
+   - Gestational diabetes
+   - Previous miscarriage
+
+2. Management Plan
+   - Frequent monitoring
+   - Dietary control
+   - Activity modification
+
+3. Outcomes
+   - Successful delivery
+   - Healthy baby
+   - Quick recovery
+
+## Practical Guidelines
+
+1. Nutrition Tips
+   - Meal planning examples
+   - Healthy snack ideas
+   - Hydration schedule
+
+2. Exercise Routines
+   - Safe activities
+   - Modified exercises
+   - Warning signs
+
+3. Mental Health
+   - Stress management
+   - Support groups
+   - Partner involvement
+
+Remember: Each pregnancy is unique, but preparation is key.`
+    ],
   },
   {
     title: "Medication Safety Guide",
     description: "Guidelines for safe medication use, storage, and common interactions.",
     icon: Pill,
     slug: "medication-safety-guide",
-    readTime: "8 min",
     category: "Medications",
-    content: `# Medication Safety Guide
+    pages: [
+      `# Medication Safety Guide
 
 ## Safe Medication Use
 
@@ -991,16 +1295,74 @@ Remember: Regular prenatal care is crucial for both mother and child health.`
 3. Documentation
 4. Emergency contacts
 
-Remember: Always consult healthcare providers about medication changes.`
+Remember: Always consult healthcare providers about medication changes.
+    `,
+    `# Real-World Examples and Best Practices
+
+## Case Study 1: Multiple Medications
+Robert's Story:
+
+1. Initial Situation
+   - 5 different medications
+   - Confusion about timing
+   - Side effects concerns
+
+2. Solutions Implemented
+   - Pill organizer system
+   - Medication schedule chart
+   - Mobile app reminders
+
+3. Results
+   - Better compliance
+   - Reduced confusion
+   - Improved outcomes
+
+## Case Study 2: Elderly Care
+Mrs. Johnson's Experience:
+
+1. Challenges
+   - Vision problems
+   - Memory issues
+   - Multiple prescriptions
+
+2. Management Strategy
+   - Large print labels
+   - Family involvement
+   - Pharmacy coordination
+
+3. Improvements
+   - No missed doses
+   - Better organization
+   - Reduced anxiety
+
+## Practical Solutions
+
+1. Organization Tools
+   - Medication charts
+   - Pill containers
+   - Digital reminders
+
+2. Safety Measures
+   - Storage solutions
+   - Temperature control
+   - Expiration tracking
+
+3. Communication Tips
+   - Doctor discussions
+   - Pharmacy coordination
+   - Family involvement
+
+Remember: Good organization prevents medication errors.`
+    ],
   },
   {
     title: "Infectious Disease Prevention",
     description: "Essential information about preventing and managing infectious diseases.",
     icon: Bug,
     slug: "infectious-disease-prevention",
-    readTime: "12 min",
     category: "Infectious Diseases",
-    content: `# Infectious Disease Prevention
+    pages: [
+      `# Infectious Disease Prevention
 
 ## Understanding Transmission
 
@@ -1023,16 +1385,74 @@ Remember: Always consult healthcare providers about medication changes.`
 3. Environmental measures
 4. Travel precautions
 
-Remember: Prevention is better than cure in infectious diseases.`
+Remember: Prevention is better than cure in infectious diseases.
+    `,
+    `# Case Studies and Prevention Examples
+
+## Case Study 1: Workplace Prevention
+Tech Company Success:
+
+1. Implementation
+   - Hand sanitizer stations
+   - Regular cleaning schedule
+   - Air filtration systems
+
+2. Employee Education
+   - Hygiene workshops
+   - Prevention protocols
+   - Sick leave policies
+
+3. Results
+   - 50% reduction in sick days
+   - Improved productivity
+   - Better workplace health
+
+## Case Study 2: School Prevention
+Elementary School Program:
+
+1. Measures Taken
+   - Hand washing stations
+   - Regular sanitization
+   - Health education
+
+2. Student Engagement
+   - Fun hygiene activities
+   - Educational games
+   - Parent involvement
+
+3. Outcomes
+   - Reduced absenteeism
+   - Fewer outbreaks
+   - Healthier environment
+
+## Practical Guidelines
+
+1. Personal Protection
+   - Proper mask usage
+   - Hand hygiene steps
+   - Social distancing
+
+2. Environmental Control
+   - Ventilation tips
+   - Surface cleaning
+   - Waste management
+
+3. Travel Safety
+   - Pre-travel checklist
+   - During-travel precautions
+   - Post-travel monitoring
+
+Remember: Small prevention steps lead to significant protection.`
+    ],
   },
   {
     title: "Tobacco Cessation Guide",
     description: "Comprehensive guide to quit smoking and maintain a tobacco-free life.",
     icon: Cigarette,
     slug: "tobacco-cessation-guide",
-    readTime: "10 min",
     category: "Lifestyle",
-    content: `# Tobacco Cessation Guide
+    pages: [
+      `# Tobacco Cessation Guide
 
 ## Quitting Smoking
 
@@ -1055,16 +1475,74 @@ Remember: Prevention is better than cure in infectious diseases.`
 3. Health benefits
 4. Long-term strategies
 
-Remember: It's never too late to quit smoking.`
+Remember: It's never too late to quit smoking.
+    `,
+    `# Success Stories and Practical Strategies
+
+## Case Study 1: Young Professional
+Mike's Quit Journey:
+
+1. Initial Situation
+   - 10-year smoking history
+   - Pack a day habit
+   - Multiple quit attempts
+
+2. Quit Strategy
+   - Nicotine replacement
+   - Exercise program
+   - Support group
+
+3. Results
+   - Smoke-free for 2 years
+   - Improved health
+   - Money savings
+
+## Case Study 2: Long-Term Smoker
+Linda's Success Story:
+
+1. Background
+   - 30-year habit
+   - Health concerns
+   - Family motivation
+
+2. Approach
+   - Medical support
+   - Behavioral therapy
+   - Lifestyle changes
+
+3. Achievements
+   - Quit after 6 months
+   - Better breathing
+   - Inspired others
+
+## Practical Tips
+
+1. Trigger Management
+   - Identifying triggers
+   - Alternative activities
+   - Stress management
+
+2. Support Systems
+   - Family involvement
+   - Professional help
+   - Support groups
+
+3. Health Benefits
+   - Timeline of improvements
+   - Physical changes
+   - Mental benefits
+
+Remember: Every quit attempt brings you closer to success.`
+    ],
   },
   {
     title: "Diabetes Management",
     description: "Comprehensive guide for understanding and managing diabetes.",
     icon: Droplet,
     slug: "diabetes-management",
-    readTime: "15 min",
     category: "Prevention",
-    content: `# Diabetes Management
+    pages: [
+      `# Diabetes Management
 
 ## Understanding Diabetes
 
@@ -1087,16 +1565,18 @@ Remember: It's never too late to quit smoking.`
 3. Complication prevention
 4. Support systems
 
-Remember: Proper management can prevent complications.`
+Remember: Proper management can prevent complications.
+    `,
+    ],
   },
   {
     title: "Eye Health Care",
     description: "Guidelines for maintaining good eye health and preventing vision problems.",
     icon: Eye,
     slug: "eye-health-care",
-    readTime: "8 min",
     category: "Prevention",
-    content: `# Eye Health Care
+    pages: [
+      `# Eye Health Care
 
 ## Vision Care
 
@@ -1114,21 +1594,23 @@ Remember: Proper management can prevent complications.`
 
 ## WHO Recommendations
 
-1. Screening schedule
-2. Protective measures
-3. Workplace safety
+1. Screening schedule,
+2. Protective measures,
+3. Workplace safety,
 4. Emergency care
 
-Remember: Regular eye exams are crucial for vision health.`
+Remember: Regular eye exams are crucial for vision health.
+    `,
+    ],
   },
   {
     title: "Bone and Joint Health",
     description: "Essential information about maintaining strong bones and healthy joints.",
     icon: Bone,
     slug: "bone-joint-health",
-    readTime: "10 min",
     category: "Prevention",
-    content: `# Bone and Joint Health
+    pages: [
+      `# Bone and Joint Health
 
 ## Maintaining Strong Bones
 
@@ -1146,21 +1628,23 @@ Remember: Regular eye exams are crucial for vision health.`
 
 ## WHO Guidelines
 
-1. Nutrition recommendations
-2. Physical activity
-3. Screening tests
+1. Nutrition recommendations,
+2. Physical activity,
+3. Screening tests,
 4. Treatment options
 
-Remember: Prevention starts early in life.`
+Remember: Prevention starts early in life.
+    `,
+    ],
   },
   {
     title: "Fever Management",
     description: "Guide to understanding and managing fever in different age groups.",
     icon: Thermometer,
     slug: "fever-management",
-    readTime: "8 min",
     category: "Prevention",
-    content: `# Fever Management
+    pages: [
+      `# Fever Management
 
 ## Understanding Fever
 
@@ -1183,16 +1667,18 @@ Remember: Prevention starts early in life.`
 3. Warning signs
 4. Emergency care
 
-Remember: Not all fevers need medication.`
+Remember: Not all fevers need medication.
+    `,
+    ],
   },
   {
     title: "Sleep Hygiene Guide",
     description: "Tips and strategies for better sleep quality and habits.",
     icon: Bed,
     slug: "sleep-hygiene-guide",
-    readTime: "10 min",
     category: "Lifestyle",
-    content: `# Sleep Hygiene Guide
+    pages: [
+      `# Sleep Hygiene Guide
 
 ## Better Sleep Habits
 
@@ -1215,16 +1701,18 @@ Remember: Not all fevers need medication.`
 3. Problem solutions
 4. When to seek help
 
-Remember: Good sleep is essential for health.`
+Remember: Good sleep is essential for health.
+    `,
+    ],
   },
   {
     title: "Social Health and Relationships",
     description: "Understanding the importance of social connections for health.",
     icon: Users,
     slug: "social-health-relationships",
-    readTime: "12 min",
     category: "Mental Health",
-    content: `# Social Health and Relationships
+    pages: [
+      `# Social Health and Relationships
 
 ## Social Connections
 
@@ -1247,16 +1735,18 @@ Remember: Good sleep is essential for health.`
 3. Mental health
 4. Crisis resources
 
-Remember: Strong social connections improve health.`
+Remember: Strong social connections improve health.
+    `,
+    ],
   },
   {
     title: "Immunization Guide",
     description: "Comprehensive information about vaccines and immunization schedules.",
     icon: ShieldCheck,
     slug: "immunization-guide",
-    readTime: "15 min",
     category: "Prevention",
-    content: `# Immunization Guide
+    pages: [
+      `# Immunization Guide
 
 ## Vaccination Basics
 
@@ -1279,16 +1769,18 @@ Remember: Strong social connections improve health.`
 3. Documentation
 4. Travel requirements
 
-Remember: Vaccines save lives.`
+Remember: Vaccines save lives.
+    `,
+    ],
   },
   {
     title: "Allergy Management",
     description: "Guide to understanding, preventing, and managing allergies.",
     icon: Syringe,
     slug: "allergy-management",
-    readTime: "10 min",
     category: "Prevention",
-    content: `# Allergy Management
+    pages: [
+      `# Allergy Management
 
 ## Understanding Allergies
 
@@ -1311,16 +1803,18 @@ Remember: Vaccines save lives.`
 3. Prevention strategies
 4. Emergency care
 
-Remember: Know your triggers and be prepared.`
+Remember: Know your triggers and be prepared.
+    `,
+    ],
   },
   {
     title: "Food Safety Guidelines",
     description: "Essential information about food safety and preventing foodborne illness.",
     icon: Salad,
     slug: "food-safety-guidelines",
-    readTime: "8 min",
     category: "Prevention",
-    content: `# Food Safety Guidelines
+    pages: [
+      `# Food Safety Guidelines
 
 ## Safe Food Handling
 
@@ -1344,15 +1838,16 @@ Remember: Know your triggers and be prepared.`
 4. Special populations
 
 Remember: Clean, separate, cook, and chill.`
+    ],
   },
   {
     title: "Stress Management",
     description: "Effective strategies for managing stress and promoting mental well-being.",
     icon: Smile,
     slug: "stress-management",
-    readTime: "12 min",
+
     category: "Mental Health",
-    content: `# Stress Management
+    pages: [`# Stress Management
 
 ## Understanding Stress
 
@@ -1376,7 +1871,8 @@ Remember: Clean, separate, cook, and chill.`
 4. Professional help
 
 Remember: Stress management is essential for health.`
-  }
+    ],
+  },
 ];
 
 

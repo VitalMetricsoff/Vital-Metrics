@@ -12,6 +12,7 @@ export type Severity = 'low' | 'medium' | 'high';
 export type Gender = 'male' | 'female' | 'other';
 
 export type SymptomDuration = 
+  | 'minutes'
   | 'hours'
   | 'days'
   | 'weeks'
@@ -33,6 +34,17 @@ export type Symptom = {
   duration?: SymptomDuration;
 };
 
+export type AdditionalResource = {
+  name: string;
+  url: string;
+  type: 'organization' | 'research' | 'education';
+};
+
+export type RiskAssessment = {
+  highRisk: string[];
+  moderateRisk: string[];
+};
+
 export type Disease = {
   id: string;
   name: string;
@@ -41,6 +53,15 @@ export type Disease = {
   severity: Severity;
   description?: string;
   redFlags?: string[];
+  commonDurations?: SymptomDuration[];
+  riskFactors?: string[];
+  treatment?: string;
+  whenToSeekCare?: string;
+  preventiveMeasures?: string[];
+  commonTriggers?: string[];
+  additionalResources?: AdditionalResource[];
+  riskAssessment?: RiskAssessment;
+  emergencySteps?: string[];
 };
 
 export type DiagnosisResult = {

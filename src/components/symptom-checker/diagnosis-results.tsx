@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/components/ui/use-toast';
 import { PatientInfo, Symptom, DiagnosisResult } from '@/types/symptom-checker';
-import { AlertTriangle, Download, Copy, Share2, ExternalLink, MapPin } from 'lucide-react';
+import { AlertTriangle, Download, Copy, Share2, ExternalLink, MapPin, Clock, ShieldAlert, Stethoscope, Shield, Link } from 'lucide-react';
 import { format } from 'date-fns';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -164,11 +164,12 @@ Disclaimer: This is not medical advice. Please consult a healthcare professional
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold">Diagnosis Results</h3>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleCopyToClipboard}
+                  className="w-full sm:w-auto"
                 >
                   <Copy className="h-4 w-4 mr-2" />
                   Copy
@@ -178,6 +179,7 @@ Disclaimer: This is not medical advice. Please consult a healthcare professional
                   size="sm"
                   onClick={generatePDF}
                   disabled={isGeneratingPDF}
+                  className="w-full sm:w-auto"
                 >
                   <Download className="h-4 w-4 mr-2" />
                   {isGeneratingPDF ? "Generating..." : "Download PDF"}
@@ -186,6 +188,7 @@ Disclaimer: This is not medical advice. Please consult a healthcare professional
                   variant="default"
                   size="sm"
                   onClick={() => setShowHospitalFinder(true)}
+                  className="w-full sm:w-auto"
                 >
                   <MapPin className="h-4 w-4 mr-2" />
                   Find Hospitals
@@ -254,10 +257,128 @@ Disclaimer: This is not medical advice. Please consult a healthcare professional
                       className="h-2"
                     />
 
+                    <div className="mt-6 space-y-6">
+                      {/* Duration and Risk Level */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {result.disease.commonDurations && (
+                          <div className="bg-muted/50 p-4 rounded-lg">
+                            <h5 className="font-semibold mb-2 flex items-center gap-2">
+                              <Clock className="h-4 w-4" />
+                              Common Duration
+                            </h5>
+                            <div className="flex flex-wrap gap-2">
+                              {result.disease.commonDurations.map(duration => (
+                                <Badge key={duration} variant="outline">
+                                  {duration}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {result.disease.riskAssessment && (
+                          <div className="bg-muted/50 p-4 rounded-lg">
+                            <h5 className="font-semibold mb-2 flex items-center gap-2">
+                              <AlertTriangle className="h-4 w-4" />
+                              Risk Assessment
+                            </h5>
+                            <div className="space-y-2">
+                              {result.disease.riskAssessment.highRisk && (
+                                <div>
+                                  <Badge variant="destructive" className="mb-1">High Risk</Badge>
+                                  <ul className="text-sm list-disc list-inside">
+                                    {result.disease.riskAssessment.highRisk.map(risk => (
+                                      <li key={risk}>{risk}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Risk Factors */}
+                      {result.disease.riskFactors && result.disease.riskFactors.length > 0 && (
+                        <div className="bg-muted/50 p-4 rounded-lg">
+                          <h5 className="font-semibold mb-3 flex items-center gap-2">
+                            <ShieldAlert className="h-4 w-4" />
+                            Risk Factors
+                          </h5>
+                          <div className="flex flex-wrap gap-2">
+                            {result.disease.riskFactors.map(factor => (
+                              <Badge key={factor} variant="secondary">
+                                {factor.replace(/-/g, ' ')}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Treatment */}
+                      {result.disease.treatment && (
+                        <div className="bg-muted/50 p-4 rounded-lg">
+                          <h5 className="font-semibold mb-3 flex items-center gap-2">
+                            <Stethoscope className="h-4 w-4" />
+                            Treatment Plan
+                          </h5>
+                          <div className="prose prose-sm dark:prose-invert max-w-none">
+                            {result.disease.treatment.split('\n').map((line, index) => (
+                              <p key={index} className="my-1">{line}</p>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Prevention */}
+                      {result.disease.preventiveMeasures && (
+                        <div className="bg-muted/50 p-4 rounded-lg">
+                          <h5 className="font-semibold mb-3 flex items-center gap-2">
+                            <Shield className="h-4 w-4" />
+                            Preventive Measures
+                          </h5>
+                          <ul className="list-disc list-inside space-y-1 text-sm">
+                            {result.disease.preventiveMeasures.map((measure, index) => (
+                              <li key={index}>{measure}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Additional Resources */}
+                      {result.disease.additionalResources && (
+                        <div className="bg-muted/50 p-4 rounded-lg">
+                          <h5 className="font-semibold mb-3 flex items-center gap-2">
+                            <Link className="h-4 w-4" />
+                            Additional Resources
+                          </h5>
+                          <div className="grid gap-2">
+                            {result.disease.additionalResources.map((resource, index) => (
+                              <a
+                                key={index}
+                                href={resource.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-sm text-primary hover:underline"
+                              >
+                                <ExternalLink className="h-3 w-3" />
+                                {resource.name}
+                                <Badge variant="outline" className="text-xs">
+                                  {resource.type}
+                                </Badge>
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
                     {result.requiresUrgentCare && (
                       <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-md flex items-center gap-2">
                         <AlertTriangle className="h-4 w-4" />
-                        <p className="text-sm">This condition may require urgent medical attention</p>
+                        <p className="text-sm">
+                          {result.disease.whenToSeekCare || 'This condition may require urgent medical attention'}
+                        </p>
                       </div>
                     )}
                   </CardContent>

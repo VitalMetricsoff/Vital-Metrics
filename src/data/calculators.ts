@@ -181,6 +181,16 @@ export const calculators: Calculator[] = [
   
   // Cardio & Vitals
   {
+    id: "pulse-pressure-calculator",
+    name: "Pulse Pressure Calculator",
+    category: "cardio-vitals",
+    description: "Calculate and analyze your pulse pressure (difference between systolic and diastolic blood pressure).",
+    slug: "pulse-pressure-calculator",
+    icon: "HeartPulse",
+    formula: "Pulse Pressure = Systolic BP - Diastolic BP",
+    inputs: [],
+  },
+  {
     id: "blood-pressure-analyzer",
     name: "Blood Pressure Analyzer",
     category: "cardio-vitals",

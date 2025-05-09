@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useMemo } from "react";
-import { ArrowRight, Clock, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,7 +12,7 @@ interface BlogPost {
   title: string;
   excerpt: string;
   category: string;
-  readTime: string;
+
   imageUrl: string;
   content?: {
     introduction: string;
@@ -38,7 +38,7 @@ const allBlogPosts: BlogPost[] = [
     title: "Understanding BMI: Beyond the Numbers",
     excerpt: "Discover why BMI is just one piece of the health puzzle. Learn about body composition, muscle mass impact, and how factors like age, gender, and ethnicity affect BMI interpretation. Get practical tips for a holistic health assessment.",
     category: "Health Insights",
-    readTime: "5 min read",
+
     imageUrl: import.meta.env.BASE_URL + 'blog/bmi-understanding.jpg',
     author: "Dr. Sarah Johnson",
     authorCredentials: "MD, PhD in Endocrinology, Certified Nutrition Specialist",
@@ -85,7 +85,7 @@ const allBlogPosts: BlogPost[] = [
     title: "The Science of Heart Rate Zones",
     excerpt: "Master the science of heart rate training zones. Understand aerobic vs. anaerobic exercise, calculate your target zones, and learn how to optimize workouts for fat burning, endurance, and cardiovascular health.",
     category: "Fitness",
-    readTime: "7 min read",
+
     imageUrl: import.meta.env.BASE_URL + 'blog/heart-rate-zones.jpg',
     author: "Dr. Michael Chen",
     authorCredentials: "MD, Sports Medicine Specialist, Exercise Physiologist",
@@ -137,7 +137,7 @@ const allBlogPosts: BlogPost[] = [
     title: "Nutrition Myths Debunked",
     excerpt: "Debunk popular nutrition myths with evidence-based research. From carbs and fats to superfoods and supplements, learn what scientific studies really say about diet, metabolism, and sustainable eating habits.",
     category: "Nutrition",
-    readTime: "6 min read",
+
     imageUrl: import.meta.env.BASE_URL + 'blog/nutrition-myths.jpg',
     author: "Dr. Emily White",
     date: "April 15, 2025",
@@ -148,7 +148,7 @@ const allBlogPosts: BlogPost[] = [
     title: "Sleep Quality and Mental Health",
     excerpt: "Explore the intricate relationship between sleep and mental health. Learn about sleep cycles, circadian rhythms, and how quality rest impacts mood, cognitive function, and emotional resilience. Get practical tips for better sleep hygiene.",
     category: "Mental Health",
-    readTime: "8 min read",
+
     imageUrl: import.meta.env.BASE_URL + 'blog/stress-management.jpg',
     author: "Dr. James Wilson",
     date: "April 12, 2025"
@@ -158,7 +158,7 @@ const allBlogPosts: BlogPost[] = [
     title: "Understanding Blood Pressure Readings",
     excerpt: "Master the essentials of blood pressure monitoring. Understand systolic and diastolic readings, learn about factors affecting blood pressure, and discover lifestyle modifications for maintaining optimal cardiovascular health.",
     category: "Heart Health",
-    readTime: "7 min read",
+
     imageUrl: import.meta.env.BASE_URL + 'blog/blood-pressure.jpg',
     author: "Dr. Patricia Martinez",
     date: "April 10, 2025"
@@ -168,7 +168,7 @@ const allBlogPosts: BlogPost[] = [
     title: "The Role of Hydration in Health",
     excerpt: "Dive deep into the science of hydration. Learn how water balance affects organ function, athletic performance, and cognitive ability. Get practical guidelines for daily intake and recognize signs of dehydration.",
     category: "Wellness",
-    readTime: "6 min read",
+
     imageUrl: import.meta.env.BASE_URL + 'blog/hydration.jpg',
     author: "Dr. Maria Rodriguez",
     date: "April 8, 2025"
@@ -178,7 +178,7 @@ const allBlogPosts: BlogPost[] = [
     title: "Stress Management Techniques",
     excerpt: "Discover scientifically-proven techniques for stress management. From mindfulness and meditation to exercise and cognitive behavioral strategies, learn how to build resilience and maintain emotional balance.",
     category: "Mental Health",
-    readTime: "7 min read",
+
     imageUrl: import.meta.env.BASE_URL + 'blog/stress-management.jpg',
     author: "Dr. David Lee",
     date: "April 6, 2025"
@@ -188,7 +188,7 @@ const allBlogPosts: BlogPost[] = [
     title: "Diabetes Management Essentials",
     excerpt: "Comprehensive guide to diabetes management. Learn about blood glucose monitoring, medication management, diet planning, and lifestyle modifications. Understand how to prevent complications and maintain optimal health with diabetes.",
     category: "Diabetes Care",
-    readTime: "9 min read",
+
     imageUrl: import.meta.env.BASE_URL + 'blog/sleep-quality.jpg',
     author: "Dr. Thomas Brown",
     authorCredentials: "MD, Endocrinologist, Certified Diabetes Educator",
@@ -239,7 +239,7 @@ const allBlogPosts: BlogPost[] = [
     title: "Understanding Cholesterol Levels",
     excerpt: "Master cholesterol management with our in-depth guide. Understand HDL vs. LDL, triglycerides, and how diet, exercise, and genetics affect your lipid profile. Learn evidence-based strategies for heart health.",
     category: "Heart Health",
-    readTime: "7 min read",
+
     imageUrl: import.meta.env.BASE_URL + 'blog/cholesterol.jpg',
     author: "Dr. Robert Kim",
     date: "April 2, 2025"
@@ -249,7 +249,7 @@ const allBlogPosts: BlogPost[] = [
     title: "The Benefits of Regular Exercise",
     excerpt: "Explore the science behind exercise benefits. From strength training to cardio, learn how different workout types affect muscle growth, bone density, metabolism, and mental health. Get tips for creating a balanced fitness routine.",
     category: "Fitness",
-    readTime: "8 min read",
+
     imageUrl: import.meta.env.BASE_URL + 'blog/exercise-benefits.jpg',
     author: "Dr. Sarah Thompson",
     date: "March 31, 2025"
@@ -259,7 +259,7 @@ const allBlogPosts: BlogPost[] = [
     title: "Mental Health and Physical Wellness",
     excerpt: "Understand the powerful mind-body connection. Explore how mental health affects physical well-being and vice versa. Learn about psychosomatic responses, stress impact on health, and holistic wellness strategies.",
     category: "Mental Health",
-    readTime: "7 min read",
+
     imageUrl: import.meta.env.BASE_URL + 'blog/mental-physical.jpg',
     author: "Dr. Lisa Anderson",
     date: "March 29, 2025"
@@ -291,10 +291,7 @@ const BlogCard = ({ post }: { post: BlogPost }) => {
             <Badge variant="secondary" className="font-medium text-xs sm:text-sm">
               {post.category}
             </Badge>
-            <div className="flex items-center text-xs sm:text-sm text-muted-foreground gap-1">
-              <Clock className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-              <span>{post.readTime}</span>
-            </div>
+
           </div>
           <h2 className="font-medium text-base sm:text-lg mb-2 group-hover:text-primary transition-colors line-clamp-2">
             {post.title}

@@ -7,11 +7,10 @@ interface ResourceCardProps {
   description: string;
   icon: React.ReactNode;
   slug: string;
-  readTime: string;
   category: string;
 }
 
-export function ResourceCard({ title, description, icon, slug, readTime, category }: ResourceCardProps) {
+export function ResourceCard({ title, description, icon, slug, category }: ResourceCardProps) {
   return (
     <Link to={`/resources/${slug}`}>
       <Card className="group h-full transition-all duration-200 hover:shadow-lg dark:hover:shadow-blue-900/20">
@@ -20,7 +19,6 @@ export function ResourceCard({ title, description, icon, slug, readTime, categor
             <span className="bg-primary/10 dark:bg-primary/20 text-primary px-2 py-1 rounded-full text-xs">
               {category}
             </span>
-            <span className="text-xs">{readTime} read</span>
           </div>
           <div className="flex items-start gap-4">
             <div className="mt-1 p-2 rounded-lg bg-primary/10 dark:bg-primary/20">

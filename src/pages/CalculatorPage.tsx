@@ -193,7 +193,7 @@ export default function CalculatorPage() {
         return <CholesterolRatioCalculator />;
       case "mean-arterial-pressure":
         return <MeanArterialPressure />;
-      case "pulse-pressure":
+      case "pulse-pressure-calculator":
         return <PulsePressure />;
         
       // Nutrition & Metabolic

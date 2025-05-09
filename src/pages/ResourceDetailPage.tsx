@@ -1,22 +1,35 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { healthResources } from "@/data/resources";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Clock, Share2 } from "lucide-react";
+import { ArrowLeft, Share2, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
 import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
 
 export default function ResourceDetailPage() {
   const { slug } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get('page') || '1';
+  const currentPage = parseInt(page);
+  
   const resource = healthResources.find(r => r.slug === slug);
+  const pages = resource?.pages || [];
+  const totalPages = pages.length;
+  const currentContent = pages[currentPage - 1];
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [page]);
+
+  const handlePageChange = (newPage: number) => {
+    setSearchParams({ page: newPage.toString() });
+  };
 
   if (!resource) {
     return (
@@ -74,15 +87,32 @@ export default function ResourceDetailPage() {
           </div>
 
           <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8">
-            <div className="flex items-center">
-              <Clock className="mr-2 h-4 w-4" />
-              {resource.readTime} read
-            </div>
             <Button variant="ghost" size="sm" className="gap-2">
               <Share2 className="h-4 w-4" />
               Share
             </Button>
           </div>
+
+          {totalPages > 1 && (
+            <div className="mb-8">
+              <Tabs value={currentPage.toString()} onValueChange={(value) => handlePageChange(parseInt(value))}>
+                <TabsList className="w-full justify-start h-auto flex-wrap gap-2 bg-transparent p-0">
+                  {pages.map((_, index) => (
+                    <TabsTrigger
+                      key={index + 1}
+                      value={(index + 1).toString()}
+                      className={cn(
+                        "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
+                        "border border-input"
+                      )}
+                    >
+                      Page {index + 1}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+            </div>
+          )}
         </div>
 
         <div className={cn(
@@ -96,7 +126,31 @@ export default function ResourceDetailPage() {
           "prose-img:rounded-lg prose-img:border prose-img:border-muted",
           "prose-a:text-primary prose-a:no-underline hover:prose-a:underline"
         )}>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{resource.content}</ReactMarkdown>
+          {currentContent && <ReactMarkdown remarkPlugins={[remarkGfm]}>{currentContent}</ReactMarkdown>}
+
+          {totalPages > 1 && (
+            <div className="flex justify-between items-center mt-8 pt-6 border-t">
+              <Button
+                variant="outline"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft className="h-4 w-4 mr-2" />
+                Previous Page
+              </Button>
+              <span className="text-sm text-muted-foreground">
+                Page {currentPage} of {totalPages}
+              </span>
+              <Button
+                variant="outline"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next Page
+                <ChevronRight className="h-4 w-4 ml-2" />
+              </Button>
+            </div>
+          )}
         </div>
 
         <div className="mt-12 pt-6 border-t">

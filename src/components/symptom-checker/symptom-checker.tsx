@@ -10,7 +10,8 @@ import { SymptomSelector } from '@/components/symptom-checker/symptom-selector';
 import { DiagnosisResults } from '@/components/symptom-checker/diagnosis-results';
 import { DurationSelector } from '@/components/symptom-checker/duration-selector';
 import { PatientInfo, Symptom, DiagnosisResult, SymptomDuration, Severity } from '@/types/symptom-checker';
-import { symptoms, diseases, redFlagCombinations } from '@/data/symptom-data';
+import { symptoms } from '@/data/symptom-data';
+import { diseases, getDiseasesBySymptoms, checkRedFlags } from '@/data/disease-data';
 import { AlertTriangle } from 'lucide-react';
 import { SEO } from '@/components/seo';
 import { generateSymptomCheckerSchema } from '@/lib/schema';
@@ -28,28 +29,39 @@ export function SymptomChecker() {
 
   const progress = steps.indexOf(currentStep) / (steps.length - 1) * 100;
 
-  const checkRedFlags = (symptoms: Symptom[]) => {
+  const handleRedFlags = (symptoms: Symptom[]) => {
     const symptomIds = symptoms.map(s => s.id);
-    const redFlags = redFlagCombinations.find(combo => 
-      combo.symptoms.every(s => symptomIds.includes(s))
-    );
-
-    if (redFlags) {
+    const warnings = checkRedFlags(symptomIds);
+    
+    warnings.forEach(warning => {
       toast({
         variant: "destructive",
         title: "⚠️ Warning",
-        description: redFlags.message,
+        description: warning,
       });
-    }
+    });
   };
 
   const generateDiagnosis = (symptoms: Symptom[]): DiagnosisResult[] => {
     if (!symptoms.length) return [];
     const symptomIds = symptoms.map(s => s.id);
     
-    return diseases.map(disease => {
+    // Get diseases that match any of our symptoms
+    const matchingDiseases = getDiseasesBySymptoms(symptomIds);
+    
+    return matchingDiseases.map(disease => {
+      // Calculate confidence based on symptom matches and durations
       const matchedSymptoms = disease.symptoms.filter(s => symptomIds.includes(s));
-      const confidence = (matchedSymptoms.length / disease.symptoms.length) * 100;
+      let confidence = (matchedSymptoms.length / disease.symptoms.length) * 100;
+      
+      // Adjust confidence based on duration match
+      const symptomsWithDuration = symptoms.filter(s => s.duration && disease.commonDurations?.includes(s.duration));
+      if (symptomsWithDuration.length > 0) {
+        confidence += 10; // Boost confidence if duration matches
+      }
+      
+      // Cap confidence at 100%
+      confidence = Math.min(confidence, 100);
       
       const severity: Severity = disease.severity;
 
@@ -72,7 +84,7 @@ export function SymptomChecker() {
 
   const handleSymptomAdd = (symptom: Symptom) => {
     setSelectedSymptoms(prev => [...prev, { ...symptom, duration: undefined }]);
-    checkRedFlags([...selectedSymptoms, symptom]);
+    handleRedFlags([...selectedSymptoms, symptom]);
     toast({
       title: "Symptom added",
       description: "What other symptoms do you have?",
