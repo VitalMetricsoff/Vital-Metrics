@@ -6,12 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { CalculatorIcon } from "./calculator-icon";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
-import { OptimizedImage } from '@/components/ui/optimized-image';
 
 interface CalculatorCardProps {
   calculator: Calculator;
   className?: string;
-  priority?: boolean;
 }
 
 // Memoize category color classes to avoid recalculation on every render
@@ -25,30 +23,14 @@ const getCategoryColorClasses = (category: string) => {
   };
 };
 
-const CalculatorCardBase = ({ calculator, className, priority = false }: CalculatorCardProps) => {
-  // Memoize color classes and link
+const CalculatorCardBase = ({ calculator, className }: CalculatorCardProps) => {
+  // Memoize color classes
   const colorClasses = React.useMemo(
     () => getCategoryColorClasses(calculator.category),
     [calculator.category]
   );
-
-  const calculatorPath = React.useMemo(
-    () => `/calculators/${calculator.slug}`,
-    [calculator.slug]
-  );
-
   return (
-    <Link
-      to={calculatorPath}
-      className={cn(
-        'block p-4 rounded-lg transition-all duration-200',
-        'hover:shadow-lg hover:-translate-y-1',
-        'focus:outline-none focus:ring-2 focus:ring-primary',
-        'will-change-transform',
-        colorClasses.bg,
-        className
-      )}
-    >
+    <Link to={`/calculator/${calculator.slug}`} className="block group">
       <Card 
         className={cn(
           "h-full transition-all duration-300 hover:shadow-lg border-l-4 relative", 
@@ -60,30 +42,49 @@ const CalculatorCardBase = ({ calculator, className, priority = false }: Calcula
         )}
       >
         <CardContent className="p-4">
-          <div className="flex items-start justify-between gap-4">
-            {calculator.icon && (
-              <OptimizedImage
-                src={calculator.icon}
-                alt={`${calculator.name} icon`}
-                width={48}
-                height={48}
-                className="flex-shrink-0 rounded-md"
-                priority={priority}
-                loading={priority ? 'eager' : 'lazy'}
+          <div className="flex items-start gap-3 mb-3">
+            <div className={cn(
+              "p-2 rounded-md flex-shrink-0", 
+              categoryColors[calculator.category].replace("text-white", "bg-opacity-10"),
+              "dark:bg-opacity-20 dark:border dark:border-slate-700",
+              colorClasses.bg
+            )}>
+              <CalculatorIcon 
+                calculator={calculator} 
+                size={20} 
+                className={cn(
+                  "calculator-icon transition-colors", 
+                  categoryColors[calculator.category].replace("bg-", "text-").replace("text-white", ""),
+                  "dark:text-opacity-100",
+                  colorClasses.text
+                )} 
               />
-            )}
-            <div className="flex-1 min-w-0">
-              <h3 className={cn('text-lg font-semibold mb-1 truncate', colorClasses.text)}>
+            </div>
+            <div>
+              <h3 className="font-medium text-base leading-tight group-hover:text-primary dark:text-white dark:group-hover:text-primary transition-colors font-heading">
                 {calculator.name}
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
-                {calculator.description}
-              </p>
+              <Badge 
+                variant="outline" 
+                className={cn(
+                  "text-xs mt-1.5", 
+                  categoryColors[calculator.category],
+                  "dark:bg-opacity-20 dark:border-slate-700",
+                  colorClasses.badge
+                )}
+              >
+                {calculator.category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+              </Badge>
             </div>
-            <div className="flex items-center text-xs text-primary dark:text-primary font-medium group-hover:text-primary-foreground">
-              <span>Use Calculator</span>
-              <ArrowRight className="h-3 w-3 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-            </div>
+          </div>
+          
+          <p className="text-xs text-muted-foreground dark:text-slate-400 mb-3">
+            {calculator.description}
+          </p>
+          
+          <div className="flex items-center text-xs text-primary dark:text-primary font-medium group-hover:text-primary-foreground">
+            <span>Use Calculator</span>
+            <ArrowRight className="h-3 w-3 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
           </div>
         </CardContent>
       </Card>
