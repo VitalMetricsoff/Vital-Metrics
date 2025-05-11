@@ -17,12 +17,7 @@ export const generateSiteLinks = () => {
       priority: 1.0,
       children: []
     },
-    {
-      name: "Symptom Checker",
-      url: "/symptom-checker",
-      priority: 0.9,
-      children: []
-    },
+
     {
       name: "All Calculators",
       url: "/calculators",

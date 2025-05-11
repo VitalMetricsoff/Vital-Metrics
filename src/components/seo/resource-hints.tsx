@@ -25,16 +25,18 @@ export function ResourceHints({
       {preconnectUrls.map(url => (
         <link key={`dns-${url}`} rel="dns-prefetch" href={url} />
       ))}
+      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
       {/* Preconnect */}
       {preconnectUrls.map(url => (
         <link key={`preconnect-${url}`} rel="preconnect" href={url} crossOrigin="anonymous" />
       ))}
-
-      {/* Prefetch */}
-      {prefetchUrls.map(url => (
-        <link key={`prefetch-${url}`} rel="prefetch" href={url} />
-      ))}
+      <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
 
       {/* Preload Fonts */}
       {preloadFonts.map(font => (

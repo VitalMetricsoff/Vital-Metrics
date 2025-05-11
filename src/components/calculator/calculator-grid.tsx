@@ -2,7 +2,7 @@
 import { CalculatorCard } from "./calculator-card";
 import { calculators } from "@/data/calculators";
 import { Category } from "@/types/calculator";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface CalculatorGridProps {
@@ -10,29 +10,49 @@ interface CalculatorGridProps {
   search?: string;
 }
 
-export function CalculatorGrid({ filter, search }: CalculatorGridProps) {
-  const [filteredCalculators, setFilteredCalculators] = useState(calculators);
-  const isMobile = useIsMobile();
+// Custom hook for debounced search
+const useDebounce = (value: string | undefined, delay: number) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
-    let filtered = calculators;
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
 
-    if (filter) {
-      filtered = filtered.filter((calc) => calc.category === filter);
-    }
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
 
-    if (search && search.trim() !== "") {
-      const searchTerms = search.toLowerCase().trim().split(" ");
-      filtered = filtered.filter((calc) => 
-        searchTerms.every(term => 
-          calc.name.toLowerCase().includes(term) || 
-          calc.description.toLowerCase().includes(term)
-        )
-      );
-    }
+  return debouncedValue;
+};
 
-    setFilteredCalculators(filtered);
-  }, [filter, search]);
+export function CalculatorGrid({ filter, search }: CalculatorGridProps) {
+  const isMobile = useIsMobile();
+  const debouncedSearch = useDebounce(search, 300); // 300ms debounce
+
+  // Memoize filtered calculators by category
+  const categoryFiltered = useMemo(() => {
+    if (!filter) return calculators;
+    return calculators.filter((calc) => calc.category === filter);
+  }, [filter]);
+
+  // Memoize search function
+  const searchCalculators = useCallback((items: typeof calculators, searchTerm: string) => {
+    if (!searchTerm || searchTerm.trim() === "") return items;
+    const searchTerms = searchTerm.toLowerCase().trim().split(" ");
+    return items.filter((calc) => 
+      searchTerms.every(term => 
+        calc.name.toLowerCase().includes(term) || 
+        calc.description.toLowerCase().includes(term)
+      )
+    );
+  }, []);
+
+  // Final filtered results
+  const filteredCalculators = useMemo(() => {
+    return searchCalculators(categoryFiltered, debouncedSearch || "");
+  }, [categoryFiltered, debouncedSearch, searchCalculators]);
 
   if (filteredCalculators.length === 0) {
     return (
