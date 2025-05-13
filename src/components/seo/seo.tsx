@@ -58,6 +58,9 @@ const siteLinksSearchBoxData = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "url": "https://vitalmetrics.in/",
+  "name": "VitalMetrics - Medical Calculators",
+  "alternateName": "VitalMetrics",
+  "description": "Free medical calculators and health assessment tools. Calculate BMI, BMR, body fat, heart rate zones and more. Evidence-based tools for healthcare professionals.",
   "potentialAction": [{
     "@type": "SearchAction",
     "target": {
@@ -65,6 +68,27 @@ const siteLinksSearchBoxData = {
       "urlTemplate": "https://vitalmetrics.in/search?q={search_term_string}"
     },
     "query-input": "required name=search_term_string"
+  }],
+  "mainEntity": [{
+    "@type": "WebPage",
+    "@id": "https://vitalmetrics.in/login",
+    "name": "Login to VitalMetrics",
+    "description": "Log into VitalMetrics to access your saved calculations and personalized health tools."
+  }, {
+    "@type": "WebPage",
+    "@id": "https://vitalmetrics.in/calculators",
+    "name": "Medical Calculators",
+    "description": "Access 50+ medical calculators for healthcare professionals. BMI, BMR, and more."
+  }, {
+    "@type": "WebPage",
+    "@id": "https://vitalmetrics.in/register",
+    "name": "Join VitalMetrics",
+    "description": "Create an account to save your calculations and access premium features."
+  }, {
+    "@type": "WebPage",
+    "@id": "https://vitalmetrics.in/about",
+    "name": "About VitalMetrics",
+    "description": "Learn about our evidence-based medical calculators and health assessment tools."
   }]
 };
 
@@ -120,17 +144,31 @@ const organizationData = {
   "@type": "Organization",
   "name": "VitalMetrics",
   "url": "https://vitalmetrics.in",
-  "logo": "https://vitalmetrics.in/logo.png",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://vitalmetrics.in/logo.png",
+    "width": "512",
+    "height": "512"
+  },
+  "description": "VitalMetrics provides evidence-based medical calculators and health assessment tools for healthcare professionals worldwide",
   "sameAs": [
     "https://twitter.com/vitalmetrics",
     "https://facebook.com/vitalmetrics",
-    "https://linkedin.com/company/vitalmetrics"
-  ]
+    "https://linkedin.com/company/vitalmetrics",
+    "https://instagram.com/vitalmetrics.health"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "support@vitalmetrics.in"
+  },
+  "foundingDate": "2023",
+  "award": "Trusted by 100,000+ Healthcare Professionals"
 };
 
 export function SEO({
-  title = 'Free Medical Calculators (50+) | Evidence-Based Tools for Healthcare',
-  description = 'Free access to 50+ evidence-based medical calculators & health tools. Used by 100,000+ healthcare professionals worldwide. Get instant, accurate clinical calculations with detailed interpretations. BMI, BMR, Body Fat, Heart Rate, Blood Pressure & more.',
+  title = 'VitalMetrics - Medical Calculators',
+  description = 'Create an account or log into VitalMetrics. Access 50+ medical calculators and health assessment tools. Save your calculations and get personalized recommendations.',
   keywords = [
     'medical calculator', 'clinical calculator', 'healthcare tools', 'medical equations',
     'BMI calculator', 'body fat calculator', 'BMR calculator', 'TDEE calculator',
