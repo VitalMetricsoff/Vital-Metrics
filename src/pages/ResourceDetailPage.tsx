@@ -50,14 +50,14 @@ export default function ResourceDetailPage() {
   return (
     <>
       <Helmet>
-        <title>{resource.title} | VitalMetrics Health Resources</title>
+        <title>{resource.title} | VitalMetrics Resources</title>
         <meta name="description" content={resource.description} />
         <meta
           name="keywords"
           content={`${resource.category}, health resources, WHO guidelines, ${resource.title.toLowerCase()}, health information`}
         />
         <link rel="canonical" href={`https://vitalmetrics.in/resources/${slug}`} />
-        <meta property="og:title" content={`${resource.title} | VitalMetrics Health Resources`} />
+        <meta property="og:title" content={`${resource.title} | VitalMetrics Resources`} />
         <meta property="og:description" content={resource.description} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://vitalmetrics.in/resources/${slug}`} />

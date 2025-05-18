@@ -40,9 +40,9 @@ export const siteMetadata = {
     creator: '@vitalmetrics'
   },
   alternates: {
-    canonical: 'https://vitalmetrics.health',
+    canonical: 'https://vitalmetrics.in',
     languages: {
-      'en-US': 'https://vitalmetrics.health',
+      'en-US': 'https://vitalmetrics.in',
     }
   }
 };

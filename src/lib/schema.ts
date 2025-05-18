@@ -16,7 +16,7 @@ export const generateSymptomCheckerSchema = () => ({
   provider: {
     '@type': 'Organization',
     name: 'Vital Metrics',
-    url: 'https://vitalmetrics.health'
+    url: 'https://vitalmetrics.in'
   },
   mainEntity: {
     '@type': 'WebApplication',

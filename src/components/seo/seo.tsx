@@ -2,11 +2,18 @@ import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { ResourceHints } from './resource-hints';
 
-const SOCIAL_MEDIA = {
+export const socialLinks = {
   twitter: 'https://twitter.com/vitalmetrics',
   facebook: 'https://facebook.com/vitalmetrics',
   linkedin: 'https://linkedin.com/company/vitalmetrics',
-  instagram: 'https://instagram.com/vitalmetrics.health'
+  instagram: 'https://instagram.com/vitalmetrics.in',
+  youtube: 'https://youtube.com/@vitalmetrics'
+};
+
+// AddThis social sharing configuration
+const addThisConfig = {
+  pubid: 'ra-vitalmetrics', // Replace with your AddThis public ID
+  async: true
 };
 
 interface SEOProps {
@@ -152,10 +159,11 @@ const organizationData = {
   },
   "description": "VitalMetrics provides evidence-based medical calculators and health assessment tools for healthcare professionals worldwide",
   "sameAs": [
-    "https://twitter.com/vitalmetrics",
-    "https://facebook.com/vitalmetrics",
-    "https://linkedin.com/company/vitalmetrics",
-    "https://instagram.com/vitalmetrics.health"
+    socialLinks.twitter,
+    socialLinks.facebook,
+    socialLinks.linkedin,
+    socialLinks.instagram,
+    socialLinks.youtube
   ],
   "contactPoint": {
     "@type": "ContactPoint",
@@ -242,7 +250,7 @@ export function SEO({
         <meta name="facebook-domain-verification" content="your-verification-code" />
         
         {/* Social Media Links */}
-        {Object.entries(SOCIAL_MEDIA).map(([platform, url]) => (
+        {Object.entries(socialLinks).map(([platform, url]) => (
           <link key={platform} rel="me" href={url} />
         ))}
       <meta name="theme-color" content="#2563EB" />
